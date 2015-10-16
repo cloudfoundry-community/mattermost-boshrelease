@@ -16,8 +16,6 @@ blobstore:
     secret_access_key: ${aws_secret_access_key}
 EOF
 
-cd boshrelease
-
 # bosh -n upload blobs
 #
 # if [[ -z "$(git config --global user.name)" ]]
