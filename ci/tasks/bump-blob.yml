@@ -1,0 +1,16 @@
+---
+platform: linux
+image: docker:///concourse/concourse-ci
+
+inputs:
+- name: boshrelease
+  path: .
+- name: mattermost-platform
+  path: tmp/mattermost-platform
+
+params:
+  aws_access_key_id:
+  aws_secret_access_key:
+
+run:
+  path: boshrelease/ci/tasks/bump-blob.sh

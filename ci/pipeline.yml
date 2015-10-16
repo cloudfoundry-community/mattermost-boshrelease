@@ -1,0 +1,133 @@
+---
+jobs:
+- name: bump
+  public: true
+  plan:
+    - {get: mattermost-platform, trigger: true}
+    - {get: boshrelease}
+  - task: bump-blob
+    file: boshrelease/ci/tasks/bump-blob.yml
+    config:
+      params:
+        aws_access_key_id: {{blobstore-aws-accesss}}
+        aws_secret_access_key: {{blobstore-aws-secret}}
+  - put: boshrelease
+    params: {repository: bump-blob/boshrelease, rebase: true}
+
+- name: testflight
+  public: true
+  serial: true
+  plan:
+  - aggregate:
+    - {get: boshrelease, passed: [bump]}
+  - task: upload-dev-release
+    file: boshrelease/ci/tasks/upload-dev-release.yml
+    config:
+      params:
+        bosh_target: {{bosh-lite-target}}
+        bosh_username: {{bosh-lite-username}}
+        bosh_password: {{bosh-lite-password}}
+
+- name: shipit
+  public: true
+  serial: true
+  plan:
+  - get: boshrelease
+    passed: [testflight]
+  - task: create-final-release
+    file: boshrelease/ci/tasks/create-final-release.yml
+    config:
+      params:
+        aws_access_key_id: {{blobstore-aws-accesss}}
+        aws_secret_access_key: {{blobstore-aws-secret}}
+        bosh_target: {{bosh-lite-target}}
+        bosh_username: {{bosh-lite-username}}
+        bosh_password: {{bosh-lite-password}}
+  - put: boshrelease
+    params:
+      repository: create-final-release/boshrelease
+      rebase: true
+
+resources:
+- name: boshrelease
+  type: git
+  source:
+    uri: git@github.com:cloudfoundry-community/postgresql-docker-boshrelease.git
+    branch: {{pipeline-branch}}
+    private_key: {{github-key}}
+
+- name: mattermost-platform
+  type: github-release
+  source:
+    user: mattermost
+    repository: platform
+
+- name: boshrelease-image-pg94
+  type: git
+  source:
+    uri: git@github.com:cloudfoundry-community/postgresql-docker-boshrelease.git
+    branch: {{pipeline-branch}}
+    private_key: {{github-key}}
+    paths: [images/postgresql94/*]
+
+- name: boshrelease-image-pg95
+  type: git
+  source:
+    uri: git@github.com:cloudfoundry-community/postgresql-docker-boshrelease.git
+    branch: {{pipeline-branch}}
+    private_key: {{github-key}}
+    paths: [images/postgresql95/*]
+
+- name: docker-image-pg93-base
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: cfcommunity/postgresql-base
+    tag: "9.3"
+
+- name: docker-image-pg94-base
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: cfcommunity/postgresql-base
+    tag: "9.4"
+
+- name: docker-image-pg95-base
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: cfcommunity/postgresql-base
+    tag: "9.5"
+
+- name: docker-image-pg93
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: cfcommunity/postgresql
+    tag: "9.3"
+
+- name: docker-image-pg94
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: cfcommunity/postgresql
+    tag: "9.4"
+
+- name: docker-image-pg95
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: cfcommunity/postgresql
+    tag: "9.5"
