@@ -3,6 +3,7 @@ jobs:
 - name: bump
   public: true
   plan:
+  - aggregate:
     - {get: mattermost-platform, trigger: true}
     - {get: boshrelease}
   - task: bump-blob
