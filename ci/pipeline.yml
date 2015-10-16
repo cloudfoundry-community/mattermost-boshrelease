@@ -52,7 +52,7 @@ resources:
 - name: boshrelease
   type: git
   source:
-    uri: git@github.com:cloudfoundry-community/postgresql-docker-boshrelease.git
+    uri: git@github.com:drnic/mattermost-platform-boshrelease.git
     branch: {{pipeline-branch}}
     private_key: {{github-key}}
 
