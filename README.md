@@ -1,5 +1,5 @@
-BOSH Release for mattermost
-===========================
+Mattermost BOSH release
+=======================
 
 [Mattermost](http://www.mattermost.com/) is a self-hosted Slack-alternative - a modern communication, behind your firewall, running on BOSH in AWS, vSphere, GCE, Azure, OpenStack and more.
 
