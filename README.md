@@ -1,7 +1,7 @@
 BOSH Release for mattermost-platform
 ====================================
 
-Self-hosted Slack-alternative - a modern communication, behind your firewall, running on BOSH in AWS, vSphere, GCE, Azure, OpenStack and more.
+[Mattermost](http://www.mattermost.com/) is a self-hosted Slack-alternative - a modern communication, behind your firewall, running on BOSH in AWS, vSphere, GCE, Azure, OpenStack and more.
 
 ![sample1](https://raw.githubusercontent.com/drnic/mattermost-platform-boshrelease/master/docs/images/mattermost-sample1.jpg)
 
