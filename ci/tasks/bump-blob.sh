@@ -17,6 +17,8 @@ EOF
 
 set -x # print commands
 
+ls -ral tmp/mattermost-platform/*
+
 # bosh -n upload blobs
 #
 # if [[ -z "$(git config --global user.name)" ]]
