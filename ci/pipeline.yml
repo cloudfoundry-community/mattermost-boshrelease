@@ -25,7 +25,6 @@ jobs:
     params: {repository: bump-blob, rebase: true}
 
 - name: testflight
-  public: true
   serial: true
   plan:
   - aggregate:
