@@ -19,6 +19,7 @@ service_key_info=$(cf curl "/v2/spaces/$(cat ~/.cf/config.json| jq -r .SpaceFiel
 db_uri=$(cf curl ${service_key_info} | jq -r ".resources[0].entity.credentials.uri")
 db_max_conns=$(cf curl ${service_key_info} | jq -r ".resources[0].entity.credentials.max_conns")
 
+mkdir -p tmp
 cat > tmp/testconfig.yml << EOF
 jobs:
   - name: mattermost
