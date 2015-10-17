@@ -1,0 +1,94 @@
+{
+    "ServiceSettings": {
+        "ListenAddress": ":8065",
+        "MaximumLoginAttempts": 10,
+        "SegmentDeveloperKey": "",
+        "GoogleDeveloperKey": "",
+        "EnableOAuthServiceProvider": false,
+        "EnableIncomingWebhooks": true,
+        "EnablePostUsernameOverride": false,
+        "EnablePostIconOverride": false,
+        "EnableTesting": false,
+        "EnableSecurityFixAlert": true
+    },
+    "TeamSettings": {
+        "SiteName": "TimeSettings.SiteName",
+        "MaxUsersPerTeam": 50,
+        "EnableTeamCreation": true,
+        "EnableUserCreation": true,
+        "RestrictCreationToDomains": ""
+    },
+    <% if_p("mattermost.sql.driver_name", "mattermost.sql.url", "mattermost.sql.max_connections", "mattermost.sql.at_rest_encrypt_key") do |drive_name, url, max_connections, key| %>
+    "SqlSettings": {
+        "DriverName": "<%= driver_name %>",
+        "DataSource": "<%= url %> %>
+        "DataSourceReplicas": [],
+        "MaxIdleConns": <%= max_connections %>,
+        "MaxOpenConns": <%= max_connections %>,
+        "Trace": false,
+        "AtRestEncryptKey": "<%= key %>"
+    },
+    <% end %>
+    "LogSettings": {
+        "EnableConsole": true,
+        "ConsoleLevel": "DEBUG",
+        "EnableFile": true,
+        "FileLevel": "INFO",
+        "FileFormat": "",
+        "FileLocation": "/var/vcap/sys/log/platform/mattermost.log"
+    },
+    "FileSettings": {
+        "DriverName": "local",
+        "Directory": "/var/vcap/store/platform/",
+        "EnablePublicLink": true,
+        "PublicLinkSalt": "A705AklYF8MFDOfcwh3I488G8vtLlVip",
+        "ThumbnailWidth": 120,
+        "ThumbnailHeight": 100,
+        "PreviewWidth": 1024,
+        "PreviewHeight": 0,
+        "ProfileWidth": 128,
+        "ProfileHeight": 128,
+        "InitialFont": "luximbi.ttf",
+        "AmazonS3AccessKeyId": "",
+        "AmazonS3SecretAccessKey": "",
+        "AmazonS3Bucket": "",
+        "AmazonS3Region": ""
+    },
+    "EmailSettings": {
+        "EnableSignUpWithEmail": true,
+        "SendEmailNotifications": false,
+        "RequireEmailVerification": false,
+        "FeedbackName": "",
+        "FeedbackEmail": "",
+        "SMTPUsername": "",
+        "SMTPPassword": "",
+        "SMTPServer": "",
+        "SMTPPort": "",
+        "ConnectionSecurity": "",
+        "InviteSalt": "bjlSR4QqkXFBr7TP4oDzlfZmcNuH9YoS",
+        "PasswordResetSalt": "vZ4DcKyVVRlKHHJpexcuXzojkE5PZ5eL",
+        "ApplePushServer": "",
+        "ApplePushCertPublic": "",
+        "ApplePushCertPrivate": ""
+    },
+    "RateLimitSettings": {
+        "EnableRateLimiter": true,
+        "PerSec": 10,
+        "MemoryStoreSize": 10000,
+        "VaryByRemoteAddr": true,
+        "VaryByHeader": ""
+    },
+    "PrivacySettings": {
+        "ShowEmailAddress": true,
+        "ShowFullName": true
+    },
+    "GitLabSettings": {
+        "Enable": false,
+        "Secret": "",
+        "Id": "",
+        "Scope": "",
+        "AuthEndpoint": "",
+        "TokenEndpoint": "",
+        "UserApiEndpoint": ""
+    }
+}

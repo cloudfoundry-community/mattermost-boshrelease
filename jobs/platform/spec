@@ -1,0 +1,23 @@
+---
+name: platform
+packages:
+- platform
+templates:
+  bin/ctl: bin/ctl
+  bin/monit_debugger: bin/monit_debugger
+  config/config.json.erb: config/config.json
+  data/properties.sh.erb: data/properties.sh
+  helpers/ctl_setup.sh: helpers/ctl_setup.sh
+  helpers/ctl_utils.sh: helpers/ctl_utils.sh
+properties:
+  mattermost.sql.driver_name:
+    description: Either 'postgres' or 'mysql'
+    default: postgres
+  mattermost.sql.url:
+    description: DB URL, e.g postgres://mmuser:mmuser_password@10.10.10.1:5432/mattermost?sslmode=disable&connect_timeout=10
+  mattermost.sql.max_connections:
+    description: Max Idle & Max Open Connections
+    default: 10
+  mattermost.sql.at_rest_encrypt_key:
+    description: At rest encrypt key. Must be 32 chars.
+    default: asjeirkslqpf3hHGy7KQ)itb2rKLT4r
