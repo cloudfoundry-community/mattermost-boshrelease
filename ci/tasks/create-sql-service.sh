@@ -30,5 +30,3 @@ jobs:
           max_connections: ${db_max_conns}
           url: ${db_uri}
 EOF
-
-cat tmp/testconfig.yml
