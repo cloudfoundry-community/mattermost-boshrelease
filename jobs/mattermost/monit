@@ -1,0 +1,5 @@
+check process mattermost
+  with pidfile /var/vcap/sys/run/mattermost/mattermost.pid
+  start program "/var/vcap/jobs/mattermost/bin/monit_debugger ctl '/var/vcap/jobs/mattermost/bin/ctl start'"
+  stop program "/var/vcap/jobs/mattermost/bin/monit_debugger ctl '/var/vcap/jobs/mattermost/bin/ctl stop'"
+  group vcap

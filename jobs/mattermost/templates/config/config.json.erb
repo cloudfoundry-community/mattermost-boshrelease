@@ -18,28 +18,28 @@
         "EnableUserCreation": true,
         "RestrictCreationToDomains": ""
     },
-    <% if_p("mattermost.sql.driver_name", "mattermost.sql.url", "mattermost.sql.max_connections", "mattermost.sql.at_rest_encrypt_key") do |drive_name, url, max_connections, key| %>
     "SqlSettings": {
+      <% if_p("mattermost.sql.driver_name", "mattermost.sql.url", "mattermost.sql.max_connections", "mattermost.sql.at_rest_encrypt_key") do |driver_name, url, max_connections, key| %>
         "DriverName": "<%= driver_name %>",
-        "DataSource": "<%= url %> %>
+        "DataSource": "<%= url %>",
         "DataSourceReplicas": [],
         "MaxIdleConns": <%= max_connections %>,
         "MaxOpenConns": <%= max_connections %>,
         "Trace": false,
         "AtRestEncryptKey": "<%= key %>"
+      <% end %>
     },
-    <% end %>
     "LogSettings": {
         "EnableConsole": true,
         "ConsoleLevel": "DEBUG",
         "EnableFile": true,
         "FileLevel": "INFO",
         "FileFormat": "",
-        "FileLocation": "/var/vcap/sys/log/platform/mattermost.log"
+        "FileLocation": "/var/vcap/sys/log/mattermost/mattermost.log"
     },
     "FileSettings": {
         "DriverName": "local",
-        "Directory": "/var/vcap/store/platform/",
+        "Directory": "/var/vcap/store/mattermost/",
         "EnablePublicLink": true,
         "PublicLinkSalt": "A705AklYF8MFDOfcwh3I488G8vtLlVip",
         "ThumbnailWidth": 120,

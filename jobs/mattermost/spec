@@ -1,5 +1,5 @@
 ---
-name: platform
+name: mattermost
 packages:
 - platform
 templates:
@@ -20,4 +20,4 @@ properties:
     default: 10
   mattermost.sql.at_rest_encrypt_key:
     description: At rest encrypt key. Must be 32 chars.
-    default: asjeirkslqpf3hHGy7KQ)itb2rKLT4r
+    default: 7rAh6iwQCkV4cA1Gsg3fgGOXJAQ43QVg

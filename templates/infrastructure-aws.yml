@@ -5,11 +5,11 @@ meta:
   persistent_disk: 4096
 
   stemcell:
-    name: bosh-aws-xen-ubuntu
+    name: bosh-aws-xen-hvm-ubuntu-trusty-go_agent
     version: latest
 
 jobs:
-  - name: just_install_packages
+  - name: mattermost
     networks:
       - name: mattermost_platform1
     persistent_disk: (( meta.persistent_disk ))
