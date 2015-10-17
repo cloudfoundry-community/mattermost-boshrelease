@@ -8,8 +8,9 @@ set -x # print commands
 
 cf ds -f ${cf_service_name}
 cf cs elephantsql turtle ${cf_service_name}
+cf create-service-key ${cf_service_name} ${cf_service_name}-key
 
-service_key_info=$(cf curl "/v2/spaces/$(cat ~/.cf/config.json| jq -r .SpaceFields.Guid)/service_instances?q=name:${cf_service_name}" | jq -r ".resources[0].entity.service_keys_url")
+service_key_info=$(cf curl "/v2/spaces/$(cat ~/.cf/config.json| jq -r .SpaceFields.Guid)/service_instances?q=name:${cf_service_name}-key" | jq -r ".resources[0].entity.service_keys_url")
 db_uri=$(cf curl ${service_key_info} | jq -r ".resources[0].entity.credentials.uri")
 db_max_conns=$(cf curl ${service_key_info} | jq -r ".resources[0].entity.credentials.max_conns")
 
