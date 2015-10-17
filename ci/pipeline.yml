@@ -1,4 +1,10 @@
 ---
+groups:
+- name: build
+  jobs: [bump, testflight, shipit]
+- name: image
+  jobs: [task-image]
+
 jobs:
 - name: bump
   public: true
@@ -94,7 +100,7 @@ resources:
     bucket: go-cli
     regexp: releases/v(.*)/cf-linux-amd64.tgz
 
-- name: docker-image
+- name: task-image
   type: docker-image
   source:
     email: {{docker-hub-email}}
