@@ -1,0 +1,17 @@
+---
+platform: linux
+image: docker:///starkandwayne/mattermost-boshrelease-pipeline
+
+inputs:
+- {name: boshrelease, path: .}
+
+params:
+  cf_username:
+  cf_password:
+  cf_org:
+  cf_space: mattermost-test
+  cf_service_name: cf-sql
+
+
+run:
+  path: ci/tasks/create-sql-service.sh

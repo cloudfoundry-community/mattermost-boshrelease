@@ -71,8 +71,8 @@ jobs:
       mattermost:
         sql:
           driver_name: postgres
-          url: postgres://username:password@pellefant.db.elephantsql.com:5432/dbdbdbdbdb
           max_connections: 5
+          url: postgres://username:password@pellefant.db.elephantsql.com:5432/dbdbdbdbdb
       route_registrar:
         external_host: mattermost.54.1.2.3.xip.io
 ```

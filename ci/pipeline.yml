@@ -30,13 +30,24 @@ jobs:
   plan:
   - aggregate:
     - {get: boshrelease, trigger: true}
-  - task: upload-dev-release
-    file: boshrelease/ci/tasks/upload-dev-release.yml
+  - task: create-sql-service
+    file: boshrelease/ci/tasks/create-sql-service.yml
     config:
       params:
-        bosh_target: {{bosh-lite-target}}
-        bosh_username: {{bosh-lite-username}}
-        bosh_password: {{bosh-lite-password}}
+        cf_username: {{cf-username}}
+        cf_password: {{cf-password}}
+        cf_org: {{cf-org}}
+        cf_space: {{cf-space}}
+        cf_service_name: ci-sql
+
+
+  # - task: upload-dev-release
+  #   file: boshrelease/ci/tasks/upload-dev-release.yml
+  #   config:
+  #     params:
+  #       bosh_target: {{bosh-lite-target}}
+  #       bosh_username: {{bosh-lite-username}}
+  #       bosh_password: {{bosh-lite-password}}
 
 - name: shipit
   public: true
