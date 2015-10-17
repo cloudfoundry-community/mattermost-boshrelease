@@ -19,7 +19,6 @@ auth:
     password: ${bosh_password}
 EOF
 
-cd boshrelease
 bosh target ${bosh_target}
 
 bosh create release --name mattermost
