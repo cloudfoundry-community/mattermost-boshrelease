@@ -7,9 +7,9 @@ STEMCELL_OS=${STEMCELL_OS:-ubuntu}
 
 infrastructure=$1
 
-if [ "$infrastructure" != "aws-ec2" ] && \
+if [ "$infrastructure" != "aws" ] && \
     [ "$infrastructure" != "warden" ] ; then
-  echo "usage: ./make_manifest <aws-ec2|warden>"
+  echo "usage: ./make_manifest <aws|warden>"
   exit 1
 fi
 
@@ -28,7 +28,7 @@ if [[ $DIRECTOR_NAME = "warden" ]]; then
   fi
 fi
 
-if [[ $infrastructure = "aws-ec2" ]]; then
+if [[ $infrastructure = "aws" ]]; then
   if [[ $DIRECTOR_CPI != "aws" ]]; then
     echo "Not targeting an AWS BOSH. Please use 'bosh target' before running this script."
     exit 1
