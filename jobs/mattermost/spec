@@ -10,6 +10,9 @@ templates:
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
 properties:
+  mattermost.site_name:
+    description: Site name; it's not Slack, it is...
+    default: Stark & Wayne presents Mattermost
   mattermost.sql.driver_name:
     description: Either 'postgres' or 'mysql'
     default: postgres
