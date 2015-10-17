@@ -52,13 +52,55 @@ jobs:
       repository: create-final-release/boshrelease
       rebase: true
 
+- name: task-image
+  public: true
+  serial: true
+  plan:
+  - aggregate:
+    - {get: boshrelease}
+    - {get: boshrelease-image, trigger: true}
+    - {get: cf-cli, trigger: true}
+  - task: combined
+    config:
+      platform: linux
+      image: docker:///busybox
+      inputs:
+      - {name: boshrelease, path: .}
+      - {name: cf-cli, path: ci/image/cf-cli}
+      run: {path: echo}
+  - put: task-image
+    params:
+      build: combined/ci/image
+
 resources:
 - name: boshrelease
   type: git
   source:
-    uri: git@github.com:drnic/mattermost-boshrelease.git
+    uri: git@github.com:cloudfoundry-community/mattermost-boshrelease.git
     branch: {{pipeline-branch}}
     private_key: {{github-key}}
+
+- name: boshrelease-image
+  type: git
+  source:
+    uri: git@github.com:cloudfoundry-community/mattermost-boshrelease.git
+    branch: {{pipeline-branch}}
+    private_key: {{github-key}}
+    globs: [ci/image/*]
+
+- name: cf-cli
+  type: s3
+  source:
+    bucket: go-cli
+    regexp: releases/v(.*)/cf-linux-amd64.tgz
+
+- name: docker-image
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: {{docker-create-hub-task-image}}
 
 - name: mattermost
   type: github-release
