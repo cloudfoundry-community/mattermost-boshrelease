@@ -4,7 +4,10 @@ jobs:
   public: true
   plan:
   - aggregate:
-    - {get: mattermost-platform, trigger: true}
+    - get: mattermost-platform
+      trigger: true
+      params:
+        globs: [mattermost*]
     - {get: boshrelease}
   - task: bump-blob
     file: boshrelease/ci/tasks/bump-blob.yml

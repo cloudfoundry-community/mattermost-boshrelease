@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -e # fail fast
-set -x # print commands
 
 if [[ "${aws_access_key_id}X" == "X" ]]; then
   echo 'Require $aws_access_key_id, $aws_secret_access_key'
@@ -15,6 +14,8 @@ blobstore:
     access_key_id: ${aws_access_key_id}
     secret_access_key: ${aws_secret_access_key}
 EOF
+
+set -x # print commands
 
 # bosh -n upload blobs
 #
