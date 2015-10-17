@@ -5,6 +5,8 @@ BOSH Release for mattermost
 
 ![sample1](https://raw.githubusercontent.com/drnic/mattermost-boshrelease/master/docs/images/mattermost-sample1.jpg)
 
+-	[Concourse CI pipeline](https://ci.starkandwayne.com/pipelines/mattermost-boshrelease)
+
 Requirements
 ------------
 
