@@ -20,7 +20,7 @@ jobs:
       mattermost:
         sql:
           driver_name: postgres
-          url: postgres://mmuser:mmuser_password@10.10.10.1:5432/mattermost?sslmode=disable&connect_timeout=10
+          url: (( params "please provide DB url, such as postgres://mmuser:mmuser_password@10.10.10.1:5432/mattermost?sslmode=disable&connect_timeout=10"))
           max_connections: 10
           at_rest_encrypt_key: 7rAh6iwQCkV4cA1Gsg3fgGOXJAQ43QVg
       route_registrar:
