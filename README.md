@@ -1,5 +1,5 @@
 BOSH Release for mattermost
-====================================
+===========================
 
 [Mattermost](http://www.mattermost.com/) is a self-hosted Slack-alternative - a modern communication, behind your firewall, running on BOSH in AWS, vSphere, GCE, Azure, OpenStack and more.
 
@@ -13,8 +13,12 @@ In v1 there are some initial requirements that will be lifted in future BOSH rel
 -	You are running Cloud Foundry, including a public-facing load balancer, gorouter and NATS. The v1 BOSH release advertise a route via the CF router for users to be able to access the deployment. In future, the release will support running without CF router, and support direct access to public load balancers.
 -	External SQL database - either type `postgres` or `mysql`. The v1 BOSH release does not include its own DB job. See section [External SQL database](#external_sql_database) for options for provisioning and getting the `url` for your DB. In future, the release will offer a built-in solution for convenience, but it may still be desirable to use a DB that is professionally managed and supported by a Cloud Foundry service broker.
 
-Usage
------
+Deployment
+----------
+
+After following the deployment instructions in this section, you will be presented with the initial admin configuration sequence:
+
+![sample1](https://raw.githubusercontent.com/drnic/mattermost-boshrelease/master/docs/images/admin-start.jpg)
 
 To use this BOSH release, first upload it to your BOSH:
 
@@ -65,7 +69,7 @@ jobs:
           url: postgres://username:password@pellefant.db.elephantsql.com:5432/dbdbdbdbdb
           max_connections: 5
       route_registrar:
-        external_host: mattermost.54.226.78.87.xip.io
+        external_host: mattermost.54.1.2.3.xip.io
 ```
 
 External SQL database
@@ -80,8 +84,8 @@ One option is to provision a SQL service via your public or private Cloud Foundr
 For example, [Pivotal Web Services](https://run.pivotal.io) includes a [PostgreSQL service ElephantSQL](https://console.run.pivotal.io/marketplace/elephantsql).
 
 ```
-cf create-space mattermost
-cf t -s mattermost
+cf create-space mattermost2
+cf t -s mattermost2
 cf create-service elephantsql turtle mattermost
 cf create-service-key mattermost mattermost-bosh
 cf service-key mattermost mattermost-bosh
