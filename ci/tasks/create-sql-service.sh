@@ -31,4 +31,4 @@ jobs:
           url: ${db_uri}
 EOF
 
-echo tmp/testconfig.yml
+cat tmp/testconfig.yml
