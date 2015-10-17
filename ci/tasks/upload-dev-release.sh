@@ -22,7 +22,7 @@ EOF
 cd boshrelease
 bosh target ${bosh_target}
 
-bosh create release --name postgresql-docker
+bosh create release --name mattermost
 bosh -n upload release --rebase
 
 ./templates/make_manifest garden broker embedded

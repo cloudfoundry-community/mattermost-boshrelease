@@ -23,7 +23,7 @@ jobs:
   serial: true
   plan:
   - aggregate:
-    - {get: boshrelease, passed: [bump]}
+    - {get: boshrelease, trigger: true}
   - task: upload-dev-release
     file: boshrelease/ci/tasks/upload-dev-release.yml
     config:
