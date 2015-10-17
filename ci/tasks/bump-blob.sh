@@ -15,13 +15,13 @@ blobstore:
     secret_access_key: ${aws_secret_access_key}
 EOF
 
-if [[ ! -f tmp/mattermost-platform/mattermost.tar.gz ]]; then
-  echo "Expected file tmp/mattermost-platform/mattermost.tar.gz"
+if [[ ! -f tmp/mattermost/mattermost.tar.gz ]]; then
+  echo "Expected file tmp/mattermost/mattermost.tar.gz"
   exit 1
 fi
 
-version=$(cat tmp/mattermost-platform/version)
-cp tmp/mattermost-platform/mattermost.tar.gz tmp/mattermost-${version}.tar.gz
+version=$(cat tmp/mattermost/version)
+cp tmp/mattermost/mattermost.tar.gz tmp/mattermost-${version}.tar.gz
 bosh add blob tmp/mattermost-${version}.tar.gz mattermost
 
 bosh -n upload blobs

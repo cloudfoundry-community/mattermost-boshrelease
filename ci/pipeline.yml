@@ -4,7 +4,7 @@ jobs:
   public: true
   plan:
   - aggregate:
-    - get: mattermost-platform
+    - get: mattermost
       trigger: true
       params:
         globs: [mattermost*]
@@ -56,11 +56,11 @@ resources:
 - name: boshrelease
   type: git
   source:
-    uri: git@github.com:drnic/mattermost-platform-boshrelease.git
+    uri: git@github.com:drnic/mattermost-boshrelease.git
     branch: {{pipeline-branch}}
     private_key: {{github-key}}
 
-- name: mattermost-platform
+- name: mattermost
   type: github-release
   source:
     user: mattermost

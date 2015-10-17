@@ -1,4 +1,4 @@
-name: mattermost-platform-warden
+name: mattermost-warden
 
 meta:
   stemcell:

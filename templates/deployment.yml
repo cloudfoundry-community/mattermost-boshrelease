@@ -6,7 +6,7 @@ name: (( params "please provide a deployment 'name'" ))
 director_uuid: (( params "please provide director_uuid" ))
 
 releases:
-  - name: mattermost-platform
+  - name: mattermost
     version: latest
   - name: route-registrar
     version: latest

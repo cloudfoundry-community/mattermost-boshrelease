@@ -2,7 +2,7 @@
 
 set -e
 
-template_prefix="mattermost-platform"
+template_prefix="mattermost"
 STEMCELL_OS=${STEMCELL_OS:-ubuntu}
 
 infrastructure=$1

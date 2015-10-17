@@ -1,9 +1,9 @@
-BOSH Release for mattermost-platform
+BOSH Release for mattermost
 ====================================
 
 [Mattermost](http://www.mattermost.com/) is a self-hosted Slack-alternative - a modern communication, behind your firewall, running on BOSH in AWS, vSphere, GCE, Azure, OpenStack and more.
 
-![sample1](https://raw.githubusercontent.com/drnic/mattermost-platform-boshrelease/master/docs/images/mattermost-sample1.jpg)
+![sample1](https://raw.githubusercontent.com/drnic/mattermost-boshrelease/master/docs/images/mattermost-sample1.jpg)
 
 Requirements
 ------------
@@ -20,13 +20,13 @@ To use this BOSH release, first upload it to your BOSH:
 
 ```
 bosh upload release https://bosh.io/d/github.com/cloudfoundry-community/route-registrar-boshrelease
-bosh upload release https://bosh.io/d/github.com/cloudfoundry-community/mattermost-platform-boshrelease
+bosh upload release https://bosh.io/d/github.com/cloudfoundry-community/mattermost-boshrelease
 ```
 
 Next, you can use some Spruce templates to generate a deployment manifest.
 
 ```
-git clone https://github.com/cloudfoundry-community/mattermost-platform-boshrelease.git
+git clone https://github.com/cloudfoundry-community/mattermost-boshrelease.git
 ```
 
 Next, create a remote PostgreSQL DB to store your configuration, such as with [ElephantSQL](https://www.elephantsql.com/).

@@ -5,8 +5,8 @@ image: docker:///concourse/concourse-ci
 inputs:
 - name: boshrelease
   path: .
-- name: mattermost-platform
-  path: tmp/mattermost-platform
+- name: mattermost
+  path: tmp/mattermost
 
 params:
   aws_access_key_id:

@@ -9,7 +9,7 @@ jobs:
   - name: mattermost
     templates:
     - name: mattermost
-      release: mattermost-platform
+      release: mattermost
     - name: route-registrar
       release: route-registrar
     instances: 1
