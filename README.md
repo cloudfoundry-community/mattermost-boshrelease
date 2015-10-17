@@ -5,7 +5,7 @@ Mattermost BOSH release
 
 ![sample1](https://raw.githubusercontent.com/drnic/mattermost-boshrelease/master/docs/images/mattermost-sample1.jpg)
 
--	[Concourse CI pipeline](https://ci.starkandwayne.com/pipelines/mattermost-boshrelease)
+-	[Concourse CI pipeline](https://ci.starkandwayne.com/pipelines/mattermost-boshrelease) which automatically bumps to newer Mattermost releases
 
 Requirements
 ------------
