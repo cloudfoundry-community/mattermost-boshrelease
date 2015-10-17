@@ -18,7 +18,7 @@ Deployment
 
 After following the deployment instructions in this section, you will be presented with the initial admin configuration sequence:
 
-![sample1](https://raw.githubusercontent.com/drnic/mattermost-boshrelease/master/docs/images/admin-start.jpg)
+![sample1](https://raw.githubusercontent.com/drnic/mattermost-boshrelease/master/docs/images/admin-start.png)
 
 To use this BOSH release, first upload it to your BOSH:
 
