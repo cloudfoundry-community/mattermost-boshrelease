@@ -5,6 +5,9 @@ Mattermost BOSH release
 
 ![sample1](https://raw.githubusercontent.com/drnic/mattermost-boshrelease/master/docs/images/mattermost-sample1.jpg)
 
+Interesting links:
+
+-	[Open source Slack-alternative reaches 1.0: Self-host ready, Slack-compatible, MIT licensed](http://www.mattermost.org/open-source-slack-alternative-reaches-1-0/)
 -	[Concourse CI pipeline](https://ci.starkandwayne.com/pipelines/mattermost-boshrelease) which automatically bumps to newer Mattermost releases
 
 Requirements
