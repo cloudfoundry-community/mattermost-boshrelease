@@ -18,8 +18,17 @@ jobs:
     networks: (( params "please provide jobs.mattermost.networks" ))
     properties:
       mattermost:
-          sql:
-            driver_name: postgres
-            url: postgres://mmuser:mmuser_password@10.10.10.1:5432/mattermost?sslmode=disable&connect_timeout=10
-            max_connections: 10
-            at_rest_encrypt_key: 7rAh6iwQCkV4cA1Gsg3fgGOXJAQ43QVg
+        sql:
+          driver_name: postgres
+          url: postgres://mmuser:mmuser_password@10.10.10.1:5432/mattermost?sslmode=disable&connect_timeout=10
+          max_connections: 10
+          at_rest_encrypt_key: 7rAh6iwQCkV4cA1Gsg3fgGOXJAQ43QVg
+      route_registrar:
+        external_host: (( params "please provide properties.route_registrar.external_host to advertise as the route"))
+        port: 8065
+        health_checker:
+          name: mattermost
+        message_bus_servers:
+          - host: (( params "please provide at least one NATS host"))
+            user: (( params "please provide at least one NATS user"))
+            password: (( params "please provide at least one NATS password"))

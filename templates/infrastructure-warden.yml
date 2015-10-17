@@ -15,6 +15,13 @@ jobs:
   - name: mattermost
     networks:
       - name: mattermost_platform1
+    properties:
+      route_registrar:
+        external_host: mattermost.10.244.0.34.xip.io
+        message_bus_servers:
+        - host: 10.244.0.6:4222
+          user: nats
+          password: nats
 
 compilation:
   cloud_properties:
