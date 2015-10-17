@@ -1,1 +1,6 @@
---- {}
+---
+mattermost/mattermost-1.1.0.tar.gz:
+  object_id: 315435bc-7b52-4198-bfa0-c2b3e8b57153
+  sha: !binary |-
+    MWRkMWM1MDJlM2IwOTFjNTA1MGM3YTYzOWYzYzY3MTAwYzJkY2RlZg==
+  size: 15101104
