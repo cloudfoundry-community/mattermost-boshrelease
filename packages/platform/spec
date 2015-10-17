@@ -1,0 +1,4 @@
+---
+name: platform
+dependencies: []
+files: [mattermost/mattermost*.tar.gz]

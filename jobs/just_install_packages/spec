@@ -1,6 +1,6 @@
 ---
 name: just_install_packages
-packages: []
+packages: [platform]
 templates:
   ignoreme: ignoreme
 properties: {}
