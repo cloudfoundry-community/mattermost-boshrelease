@@ -39,15 +39,13 @@ jobs:
         cf_org: {{cf-org}}
         cf_space: {{cf-space}}
         cf_service_name: ci-sql
-
-
-  # - task: upload-dev-release
-  #   file: boshrelease/ci/tasks/upload-dev-release.yml
-  #   config:
-  #     params:
-  #       bosh_target: {{bosh-lite-target}}
-  #       bosh_username: {{bosh-lite-username}}
-  #       bosh_password: {{bosh-lite-password}}
+  - task: upload-dev-release
+    file: boshrelease/ci/tasks/upload-dev-release.yml
+    config:
+      params:
+        bosh_target: {{bosh-lite-target}}
+        bosh_username: {{bosh-lite-username}}
+        bosh_password: {{bosh-lite-password}}
 
 - name: shipit
   public: true

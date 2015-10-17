@@ -25,5 +25,5 @@ bosh target ${bosh_target}
 bosh create release --name mattermost
 bosh -n upload release --rebase
 
-./templates/make_manifest warden
+./templates/make_manifest warden tmp/sql-service/tmp/testconfig.yml
 bosh -n deploy

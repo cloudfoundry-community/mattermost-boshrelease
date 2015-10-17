@@ -3,7 +3,9 @@ platform: linux
 image: docker:///starkandwayne/mattermost-boshrelease-pipeline
 
 inputs:
-- name: boshrelease
+- {name: boshrelease, path: .}
+- {name: create-sql-service, path: tmp/sql-service}
+
 
 params:
   bosh_target:
@@ -11,4 +13,4 @@ params:
   bosh_password: admin
 
 run:
-  path: boshrelease/ci/tasks/upload-dev-release.sh
+  path: ci/tasks/upload-dev-release.sh
