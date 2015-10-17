@@ -1,6 +1,3 @@
-meta:
-  environment: ~
-
 update:
   canaries: 1
   max_in_flight: 50
@@ -13,10 +10,12 @@ jobs:
     templates:
     - name: mattermost
       release: mattermost-platform
+    - name: route-registrar
+      release: route-registrar
     instances: 1
     persistent_disk: 0
     resource_pool: small_z1
-    networks: (( merge ))
+    networks: (( params "please provide jobs.mattermost.networks" ))
     properties:
       mattermost:
           sql:
@@ -24,7 +23,3 @@ jobs:
             url: postgres://mmuser:mmuser_password@10.10.10.1:5432/mattermost?sslmode=disable&connect_timeout=10
             max_connections: 10
             at_rest_encrypt_key: 7rAh6iwQCkV4cA1Gsg3fgGOXJAQ43QVg
-
-networks: (( merge ))
-
-properties: {}

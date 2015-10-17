@@ -1,14 +1,7 @@
 ---
+name: NAME
 meta:
-  environment: NAME
-  dns_root: microbosh
-  security_groups:
-    - mattermost_platform
   stemcell:
     name: STEMCELL
 
 director_uuid: PLACEHOLDER-DIRECTOR-UUID
-
-releases:
-  - name: mattermost-platform
-    version: latest
