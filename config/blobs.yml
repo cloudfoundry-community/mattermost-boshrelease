@@ -1,9 +1,4 @@
 ---
-mattermost/mattermost-1.2.0-rc2.tar.gz:
-  object_id: dd24d3cb-ca4a-4c75-8dc7-e2abe64e3d82
-  sha: !binary |-
-    OGJhZjY0ODJmNTgzMWQ0ZGRhOWQ0NDkwNWJhNjZjZDQwODkwNzg3MQ==
-  size: 15476871
 mattermost/mattermost-1.2.0.tar.gz:
   object_id: d3abc43b-0e6a-4bc0-a755-153717321119
   sha: !binary |-
