@@ -15,6 +15,10 @@ blobstore:
     secret_access_key: ${aws_secret_access_key}
 EOF
 
+sudo apt-get update -f
+sudo apt-get install tree -f
+tree .
+
 if [[ ! -f tmp/mattermost/mattermost.tar.gz ]]; then
   echo "Expected file tmp/mattermost/mattermost.tar.gz"
   exit 1
