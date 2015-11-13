@@ -1,7 +1,7 @@
 FROM concourse/concourse-ci
 # https://github.com/concourse/concourse/blob/master/ci/dockerfiles/concourse-ci/Dockerfile
 
-RUN apt-get update && apt-get install curl wget bzr -y
+RUN apt-get update && apt-get install curl wget bzr tree -y
 
 ADD cf-cli/cf-linux-amd64.tgz /usr/bin/
 ADD http://stedolan.github.io/jq/download/linux64/jq /usr/bin/
