@@ -25,4 +25,6 @@ bosh create release --name mattermost
 bosh -n upload release --rebase
 
 ./templates/make_manifest warden tmp/sql-service/tmp/testconfig.yml
+
+bosh -n delete deployment mattermost-warden || "skipping failed delete"
 bosh -n deploy
