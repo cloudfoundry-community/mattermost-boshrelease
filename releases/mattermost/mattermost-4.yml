@@ -1,0 +1,27 @@
+---
+packages:
+- name: platform
+  version: !binary |-
+    NzQ3NjA5MmU4OWU2MjdjM2Q5ODgwNDZiNTdiYzRmMDI5YTRhNDJhNg==
+  fingerprint: !binary |-
+    NzQ3NjA5MmU4OWU2MjdjM2Q5ODgwNDZiNTdiYzRmMDI5YTRhNDJhNg==
+  sha1: !binary |-
+    YjhlMWZiMTk3NTRlM2QyZGJiZmE1ZmIxMjI5NmJlZWNkMGU4MDJlZA==
+  dependencies: []
+jobs:
+- name: mattermost
+  version: !binary |-
+    ZTg3N2Y4NjE4NzRkNmI0MWU3ZmExYzlmZWNmODRjN2NmMjI4YTA5ZQ==
+  fingerprint: !binary |-
+    ZTg3N2Y4NjE4NzRkNmI0MWU3ZmExYzlmZWNmODRjN2NmMjI4YTA5ZQ==
+  sha1: f13c485ecbac4e87812e7d1d83b2d139603267dc
+license:
+  version: !binary |-
+    OGRhNmViM2RmMWRjZTY0Yjc4NjEwZTdjYmFmNDI0NWQ2NmU4OGYxYw==
+  fingerprint: !binary |-
+    OGRhNmViM2RmMWRjZTY0Yjc4NjEwZTdjYmFmNDI0NWQ2NmU4OGYxYw==
+  sha1: 92a8fe4232545847ad0056ba50ad1ccb53daf4a9
+commit_hash: d4c9d0cf
+uncommitted_changes: true
+name: mattermost
+version: '4'
