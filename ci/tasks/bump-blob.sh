@@ -24,6 +24,11 @@ fi
 
 version=$(cat tmp/mattermost/version)
 cp tmp/mattermost/mattermost.tar.gz tmp/mattermost-${version}.tar.gz
+
+# currently there are no other blobs than mattermost; so throw away old one.
+cat > config/blob.yml << EOF
+--- {}
+EOF
 bosh add blob tmp/mattermost-${version}.tar.gz mattermost
 
 bosh -n upload blobs
