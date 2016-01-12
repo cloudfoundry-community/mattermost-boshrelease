@@ -11,3 +11,7 @@ mattermost/mattermost-1.3.0.tar.gz:
   object_id: 4bf8eb5d-80ff-40e0-bad6-6df9f1e9ee5f
   sha: 2b845222fc92b17b70644f1d98b1929a51826591
   size: 23698088
+mattermost/mattermost-1.4.0-rc2.tar.gz:
+  object_id: 9325c556-23ec-4d9d-b45e-5c55b876952d
+  sha: 8f94d3200844a7990606787b4e2db933beb8e9a2
+  size: 24165493
