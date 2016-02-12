@@ -27,8 +27,7 @@ jobs:
 - name: testflight
   serial: true
   plan:
-  - aggregate:
-    - {get: boshrelease, trigger: true}
+  - {get: boshrelease, trigger: true}
   - task: create-sql-service
     file: boshrelease/ci/tasks/create-sql-service.yml
     config:

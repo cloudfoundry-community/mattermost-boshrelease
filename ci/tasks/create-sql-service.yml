@@ -3,7 +3,10 @@ platform: linux
 image: docker:///starkandwayne/mattermost-boshrelease-pipeline
 
 inputs:
-- {name: boshrelease, path: .}
+- {name: boshrelease}
+
+outputs:
+- {name: sql-service}
 
 params:
   cf_username:

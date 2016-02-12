@@ -4,7 +4,7 @@ image: docker:///starkandwayne/mattermost-boshrelease-pipeline
 
 inputs:
 - {name: boshrelease}
-- {name: create-sql-service}
+- {name: sql-service}
 
 
 params:

@@ -2,6 +2,9 @@
 
 set -e # fail fast
 
+sql_service_output=$(pwd)/sql-service
+cd boshrelease
+
 cf login -a https://api.run.pivotal.io -u ${cf_username} -p ${cf_password} -o ${cf_org} -s ${cf_space}
 
 set -x # print commands
@@ -19,8 +22,8 @@ service_key_info=$(cf curl "/v2/spaces/$(cat ~/.cf/config.json| jq -r .SpaceFiel
 db_uri=$(cf curl ${service_key_info} | jq -r ".resources[0].entity.credentials.uri")
 db_max_conns=$(cf curl ${service_key_info} | jq -r ".resources[0].entity.credentials.max_conns")
 
-mkdir -p tmp
-cat > tmp/testconfig.yml << EOF
+mkdir -p ${sql_service_output}
+cat > ${sql_service_output}/sql_service_bosh_config.yml << EOF
 jobs:
   - name: mattermost
     properties:
