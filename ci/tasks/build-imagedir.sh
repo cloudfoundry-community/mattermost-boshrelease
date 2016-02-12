@@ -2,5 +2,8 @@
 
 set -e -x
 
-cp -r boshrelease/ci/image imagedir
-cp -a cf-cli imagedir/cf-cli
+mkdir -p imagedir
+cp -r boshrelease/ci/image/ imagedir/
+cp -a cf-cli imagedir/
+
+ls -al imagedir/
