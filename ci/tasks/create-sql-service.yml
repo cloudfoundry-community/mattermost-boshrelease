@@ -17,4 +17,4 @@ params:
 
 
 run:
-  path: ci/tasks/create-sql-service.sh
+  path: boshrelease/ci/tasks/create-sql-service.sh
