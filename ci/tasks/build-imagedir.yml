@@ -1,0 +1,13 @@
+---
+platform: linux
+
+image: docker:///busybox
+
+inputs:
+- {name: boshrelease}
+- {name: cf-cli}
+
+outputs: [{name: imagedir}]
+
+run:
+  path: boshrelease/ci/tasks/build-imagedir.sh

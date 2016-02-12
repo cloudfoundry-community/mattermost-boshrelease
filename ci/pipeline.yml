@@ -73,17 +73,11 @@ jobs:
     - {get: boshrelease}
     - {get: boshrelease-image, trigger: true}
     - {get: cf-cli, trigger: true}
-  - task: combined
-    config:
-      platform: linux
-      image: docker:///busybox
-      inputs:
-      - {name: boshrelease, path: .}
-      - {name: cf-cli, path: ci/image/cf-cli}
-      run: {path: echo}
+  - task: build-imagedir
+    file: boshrelease/ci/tasks/build-imagedir.yml
   - put: task-image
     params:
-      build: combined/ci/image
+      build: imagedir
 
 resources:
 - name: boshrelease
