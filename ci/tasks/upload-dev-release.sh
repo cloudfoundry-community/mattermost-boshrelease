@@ -3,6 +3,9 @@
 set -e
 set -x
 
+sql_service=$(pwd)/create-sql-service
+cd boshrelease
+
 if [[ "${bosh_target}X" == "X" ]]; then
   echo 'Require $bosh_target, $bosh_username, $bosh_password'
   exit 1
@@ -24,7 +27,7 @@ bosh target ${bosh_target}
 bosh create release --name mattermost
 bosh -n upload release --rebase
 
-./templates/make_manifest warden tmp/sql-service/tmp/testconfig.yml
+./templates/make_manifest warden ${sql_service}/tmp/testconfig.yml
 
 bosh -n delete deployment mattermost-warden || "skipping failed delete"
 bosh -n deploy
