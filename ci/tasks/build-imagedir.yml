@@ -10,4 +10,5 @@ inputs:
 outputs: [{name: imagedir}]
 
 run:
-  path: boshrelease/ci/tasks/build-imagedir.sh
+  path: ./boshrelease/ci/tasks/build-imagedir.sh
+  args: []
