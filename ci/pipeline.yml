@@ -113,7 +113,7 @@ resources:
     email: {{docker-hub-email}}
     username: {{docker-hub-username}}
     password: {{docker-hub-password}}
-    repository: {{docker-create-hub-task-image}}
+    repository: starkandwayne/mattermost-boshrelease-pipeline
 
 - name: mattermost
   type: github-release
