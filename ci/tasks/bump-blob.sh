@@ -5,10 +5,6 @@ set -e # fail fast
 mattermost_dir=$(pwd)/mattermost
 ls -al ${mattermost_dir}/
 
-if [[ ! -f ${mattermost_dir}/mattermost.tar.gz ]]; then
-  echo "Expected file ${mattermost_dir}/mattermost.tar.gz"
-  exit 1
-fi
 mattermost_version=$(cat ${mattermost_dir}/version)
 if [[ "${mattermost_version}X" == "X" ]]; then
   echo "Expected file ${mattermost_dir}/version"
