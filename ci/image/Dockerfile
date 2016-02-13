@@ -1,9 +1,11 @@
 FROM concourse/concourse-ci
 # https://github.com/concourse/concourse/blob/master/ci/dockerfiles/concourse-ci/Dockerfile
 
-RUN apt-get update && apt-get install curl wget bzr tree jq -y
+RUN apt-get update && apt-get install curl wget bzr tree -y
 
 ADD cf-cli/cf-cli_*_linux_x86-64.tgz /usr/bin/
+ADD https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 /usr/bin/jq
+RUN chmod 775 /usr/bin/jq
 
 ADD https://github.com/cloudfoundry-incubator/spiff/releases/download/v1.0.7/spiff_linux_amd64.zip /tmp/
 RUN unzip /tmp/spiff_linux_amd64.zip -d /usr/local/bin
