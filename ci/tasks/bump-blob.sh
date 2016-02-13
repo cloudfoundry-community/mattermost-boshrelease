@@ -8,6 +8,10 @@ if [[ ! -f ${mattermost_dir}/mattermost.tar.gz ]]; then
   exit 1
 fi
 mattermost_version=$(cat ${mattermost_dir}/version)
+if [[ "${mattermost_version}X" != "X" ]]; then
+  echo "Expected file ${mattermost_dir}/version"
+  exit 1
+fi
 
 if [[ "${aws_access_key_id}X" == "X" ]]; then
   echo 'Require $aws_access_key_id, $aws_secret_access_key'
