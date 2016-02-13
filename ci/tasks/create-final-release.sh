@@ -1,9 +1,14 @@
 #!/bin/bash
 
-set -e
+set -e -x
 
 release_name=${release_name:-"postgresql-docker"}
 
+if [[ -z "$(git config --global user.name)" ]]
+then
+  git config --global user.name "Concourse Bot"
+  git config --global user.email "drnic+bot@starkandwayne.com"
+fi
 git clone boshrelease final-release
 cd final-release
 
@@ -28,12 +33,6 @@ blobstore:
 EOF
 
 bosh -n create release --final
-
-if [[ -z "$(git config --global user.name)" ]]
-then
-  git config --global user.name "Concourse Bot"
-  git config --global user.email "drnic+bot@starkandwayne.com"
-fi
 
 version=$(ls releases/${release_name}/${release_name}-*yml | xargs -L1 basename | grep -o -E '[0-9]+' | sort -nr | head -n1)
 git add -A
