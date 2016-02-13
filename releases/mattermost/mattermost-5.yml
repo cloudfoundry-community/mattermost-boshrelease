@@ -1,0 +1,20 @@
+---
+packages:
+- name: platform
+  version: 7c23d246274340f3fbe8021050bbecec0229f92d
+  fingerprint: 7c23d246274340f3fbe8021050bbecec0229f92d
+  sha1: f8ed2333418d0bccd51aa40e5ebc7635b13b9c05
+  dependencies: []
+jobs:
+- name: mattermost
+  version: e877f861874d6b41e7fa1c9fecf84c7cf228a09e
+  fingerprint: e877f861874d6b41e7fa1c9fecf84c7cf228a09e
+  sha1: f13c485ecbac4e87812e7d1d83b2d139603267dc
+license:
+  version: 8da6eb3df1dce64b78610e7cbaf4245d66e88f1c
+  fingerprint: 8da6eb3df1dce64b78610e7cbaf4245d66e88f1c
+  sha1: 92a8fe4232545847ad0056ba50ad1ccb53daf4a9
+commit_hash: 49c17783
+uncommitted_changes: true
+name: mattermost
+version: '5'
