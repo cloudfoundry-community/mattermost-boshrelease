@@ -62,7 +62,7 @@ jobs:
         bosh_password: {{bosh-lite-password}}
   - put: boshrelease
     params:
-      repository: create-final-release/boshrelease
+      repository: final-release
       rebase: true
 
 - name: task-image
