@@ -14,4 +14,4 @@ params:
   aws_secret_access_key:
 
 run:
-  path: ci/tasks/bump-blob.sh
+  path: boshrelease/ci/tasks/bump-blob.sh
