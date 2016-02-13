@@ -3,6 +3,7 @@
 set -e # fail fast
 
 mattermost_dir=$(pwd)/mattermost
+ls -al ${mattermost_dir}/
 
 if [[ ! -f ${mattermost_dir}/mattermost.tar.gz ]]; then
   echo "Expected file ${mattermost_dir}/mattermost.tar.gz"
@@ -42,6 +43,7 @@ cat > config/blob.yml << EOF
 --- {}
 EOF
 bosh add blob ${mattermost_dir}/mattermost-${mattermost_version}.tar.gz mattermost
+ls -alR blobs/
 
 bosh -n upload blobs
 
