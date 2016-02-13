@@ -65,6 +65,12 @@ jobs:
     params:
       repository: final-release
       rebase: true
+  - put: boshrelease-release
+    params:
+      name: final-release/tmp/release/name
+      tag: final-release/tmp/release/version
+      body: final-release/tmp/release/notes.md
+      globs: [final-release/releases/*/*.tgz]
 
 - name: task-image
   public: true
@@ -115,6 +121,13 @@ resources:
   source:
     user: mattermost
     repository: platform
+    access_token: {{github-access-token}}
+
+- name: boshrelease-release
+  type: github-release
+  source:
+    user: cloudfoundry-community
+    repository: mattermost-boshrelease
     access_token: {{github-access-token}}
 
 - name: boshrelease-image-pg94

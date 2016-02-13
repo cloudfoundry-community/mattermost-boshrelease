@@ -30,8 +30,17 @@ blobstore:
     secret_access_key: ${aws_secret_access_key}
 EOF
 
-bosh -n create release --final
+bosh -n create release --final --with-tarball
 
 version=$(ls releases/*/*yml | xargs -L1 basename | grep -o -E '[0-9]+' | sort -nr | head -n1)
 git add -A
 git commit -m "release v${version}"
+
+mattermost_version=$(cat config/blobs.yml | yaml2json | jq -r "keys | first | match(\"mattermost-(.*).tar.gz\") | .captures[0].string")
+
+mkdir -p tmp/release
+echo "v${version} - mattermost v${mattermost_version}" > tmp/release/name
+echo "v${version}" > tmp/release/version
+cat > tmp/release/notes.md << EOS
+See https://github.com/mattermost/platform/releases/tag/v${mattermost_version} for Mattermost release notes.
+EOS
