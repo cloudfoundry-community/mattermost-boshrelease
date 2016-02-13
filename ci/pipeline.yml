@@ -22,7 +22,7 @@ jobs:
         aws_access_key_id: {{blobstore-aws-accesss}}
         aws_secret_access_key: {{blobstore-aws-secret}}
   - put: boshrelease
-    params: {repository: bump-blob, rebase: true}
+    params: {repository: bumped-release, rebase: true}
 
 - name: testflight
   serial: true

@@ -4,9 +4,10 @@ image: docker:///starkandwayne/mattermost-boshrelease-pipeline
 
 inputs:
 - name: boshrelease
-  path: .
 - name: mattermost
-  path: tmp/mattermost
+
+outputs:
+- name: bumped-release
 
 params:
   aws_access_key_id:
