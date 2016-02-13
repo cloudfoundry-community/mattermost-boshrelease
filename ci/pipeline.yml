@@ -114,6 +114,7 @@ resources:
   source:
     user: mattermost
     repository: platform
+    access_token: {{github-access-token}}
 
 - name: boshrelease-image-pg94
   type: git
