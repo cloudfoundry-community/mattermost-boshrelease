@@ -23,9 +23,11 @@ auth:
 EOF
 
 bosh target ${bosh_target}
+bosh -n upload release https://bosh.io/d/github.com/cloudfoundry-community/route-registrar-boshrelease\?v=3
 
 bosh create release --name mattermost
 bosh -n upload release --rebase
+
 
 ./templates/make_manifest warden ${sql_service}/sql_service_bosh_config.yml
 
