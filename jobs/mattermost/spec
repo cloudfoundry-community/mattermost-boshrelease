@@ -32,7 +32,7 @@ properties:
     default: ":8605"
   mattermost.ServiceSettings.ConnectionSecurity:
     description: "Controls whether MM itself does TLS termination (set to \"TLS\" to get SSL termination) NOTE: TLSCertFile and TLSKeyFile must be set if this setting is \"TLS\""
-    default: None
+    default: ""
   mattermost.ServiceSettings.TLSCertFile:
     description: The path to the certificate file to use for TLS connection security.
     default: ""
@@ -126,7 +126,7 @@ properties:
 
   mattermost.TeamSettings.SiteName:
     description: Site name; it's not Slack, it is...
-    default: Stark & Wayne presents Mattermost
+    default: Mattermost
   mattermost.TeamSettings.EnableUserCreation:
     description: Ability to create new accounts is enabled via inviting new members or sharing the team invite link. (true|false)
     default: true
@@ -221,7 +221,7 @@ properties:
     default: "[%D %T] [%L] (%S) %M"
   mattermost.LogSettings.FileLocation:
     description: The location of the log files.  The path that you set must exist and Mattermost must have write permissions in it.
-    default: "./logs"
+    default: "/var/vcap/sys/log/mattermost/"
   mattermost.LogSettings.EnableWebhookDebugging:
     description: Contents of incoming webhooks are printed to log files for debugging. (true|false)
     default: true
@@ -250,7 +250,7 @@ properties:
     default: local
   mattermost.FileSettings.Directory:
     description: Directory to which files are written.
-    default: "./data/"
+    default: "/var/vcap/store/mattermost/"
   mattermost.FileSettings.EnablePublicLink:
     description: Allow users to generate public links to files and images for sharing outside the Mattermost system with a public URL.
     default: true
