@@ -221,7 +221,7 @@ properties:
     default: "[%D %T] [%L] (%S) %M"
   mattermost.LogSettings.FileLocation:
     description: The location of the log files.  The path that you set must exist and Mattermost must have write permissions in it.
-    default: "/var/vcap/sys/log/mattermost/mattermost.log"
+    default: "/var/vcap/sys/log/mattermost/"
   mattermost.LogSettings.EnableWebhookDebugging:
     description: Contents of incoming webhooks are printed to log files for debugging. (true|false)
     default: true
