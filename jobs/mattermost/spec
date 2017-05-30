@@ -250,7 +250,7 @@ properties:
     default: local
   mattermost.FileSettings.Directory:
     description: Directory to which files are written.
-    default: "./data/"
+    default: "/var/vcap/store/mattermost/"
   mattermost.FileSettings.EnablePublicLink:
     description: Allow users to generate public links to files and images for sharing outside the Mattermost system with a public URL.
     default: true
