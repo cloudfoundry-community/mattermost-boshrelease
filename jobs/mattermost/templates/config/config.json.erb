@@ -1,7 +1,7 @@
 {
     "ServiceSettings": {
         "SiteURL": "<%= p("mattermost.ServiceSettings.SiteURL") %>",
-        "LicenseFileLocation": "<%= p("mattermost.ServiceSettings.LicenseFileLocation") %>",
+        "LicenseFileLocation": "<%= p("mattermost.License") == "" ? "" : "/var/vcap/jobs/mattermost/config/license" %>",
         "ListenAddress": "<%= p("mattermost.ServiceSettings.ListenAddress") %>",
         "ConnectionSecurity": "<%= p("mattermost.ServiceSettings.ConnectionSecurity") %>",
         "TLSCertFile": "<%= p("mattermost.ServiceSettings.TLSCertFile") %>",
@@ -192,7 +192,7 @@
     "LdapSettings": {
         "Enable": <%= p("mattermost.LdapSettings.Enable") %>,
         "LdapServer": "<%= p("mattermost.LdapSettings.LdapServer") %>",
-        "LdapPort": <%= p("mattermost.LdapSettings.Enable") %>,
+        "LdapPort": <%= p("mattermost.LdapSettings.LdapPort") %>,
         "ConnectionSecurity": "<%= p("mattermost.LdapSettings.ConnectionSecurity") %>",
         "BaseDN": "<%= p("mattermost.LdapSettings.BaseDN") %>",
         "BindUsername": "<%= p("mattermost.LdapSettings.BindUsername") %>",

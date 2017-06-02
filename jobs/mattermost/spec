@@ -8,6 +8,7 @@ templates:
   bin/ctl: bin/ctl
   bin/monit_debugger: bin/monit_debugger
   config/config.json.erb: config/config.json
+  config/license.erb: config/license
   data/properties.sh.erb: data/properties.sh
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
@@ -22,11 +23,11 @@ provides:
     type: mattermost_cluster
 
 properties:
+  mattermost.License:
+    description: Enterprise Edition license file contents.  EE features will not be available unless this is set.
+    default: ""
   mattermost.ServiceSettings.SiteURL:
     description: The URL, including port number and protocol, that users will use to access Mattermost. This field is required in Mattermost v3.8 and later.  REQUIRED to be set
-  mattermost.ServiceSettings.LicenseFileLocation:
-    description: Enterprise Edition license file.  EE features will not be available unless this is set.
-    default: ""
   mattermost.ServiceSettings.ListenAddress:
     description:  "The address and port to which to bind and listen. Specifying “:8065” will bind to all network interfaces. Specifying 127.0.0.1:8065 will only bind to the network interface having that IP address."
     default: ":8605"
