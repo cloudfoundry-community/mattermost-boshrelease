@@ -32,8 +32,8 @@
         "SessionLengthMobileInDays": <%= p("mattermost.ServiceSettings.SessionLengthMobileInDays") %>,
         "SessionLengthSSOInDays": <%= p("mattermost.ServiceSettings.SessionLengthSSOInDays") %>,
         "SessionCacheInMinutes": <%= p("mattermost.ServiceSettings.SessionCacheInMinutes") %>,
-        "WebsocketSecurePort": 443,
-        "WebsocketPort": 80,
+        "WebsocketSecurePort": <%= p("mattermost.ServiceSettings.WebsocketSecurePort") %>,
+        "WebsocketPort": <%= p("mattermost.ServiceSettings.WebsocketPort") %>,
         "WebserverMode": "gzip",
         "EnableCustomEmoji": <%= p("mattermost.ServiceSettings.EnableCustomEmoji") %>,
         "RestrictCustomEmojiCreation": "<%= p("mattermost.ServiceSettings.RestrictCustomEmojiCreation") %>",
@@ -246,14 +246,16 @@
         "AndroidAppDownloadLink": "<%= p("mattermost.NativeAppSettings.AndroidAppDownloadLink") %>",
         "IosAppDownloadLink": "<%= p("mattermost.NativeAppSettings.IosAppDownloadLink") %>"
     },
-    <% link("cluster_nodes") do |nodes| -%>
+    <% nodes = link("cluster_nodes").instances -%>
     <% if nodes.length > 1 -%>
+    
     "ClusterSettings": {
         "Enable": true,
         "InterNodeListenAddress": "<%= p("mattermost.ClusterSettings.InterNodeListenAddress") %>",
-        "InterNodeUrls": <%= nodes.instances.map{|node| "https://#{node.address}"}.join(',') %>
+        "InterNodeUrls": [<%= nodes.map{|node| "\"http://#{node.address}\""}.join(',') %>]
     },
-    <% end; end -%>
+    <% end -%>
+
     "MetricsSettings": {
         "Enable": <%= p("mattermost.MetricsSettings.Enable") %>,
         "BlockProfileRate": <%= p("mattermost.MetricsSettings.BlockProfileRate") %>,
