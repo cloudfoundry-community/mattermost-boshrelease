@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+set -x # show commands
+
+cd /var/vcap/jobs/load_test
+chmod 700 .ssh
+chmod 600 .ssh/id_rsa
+
+# add the ssh key to the vcap user
+ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no <%= p("SSHUsername") %>@<%= link("cluster_nodes").instances.first.address %> "sudo sh -c 'cat .ssh/authorized_keys >> /home/vcap/.ssh/authorized_keys'"
+ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no <%= p("SSHUsername") %>@<%= link("cluster_nodes").instances.first.address %> "sudo chmod 757 /var/vcap/jobs/mattermost/packages/platform"
+
+/var/vcap/packages/load_test/bin/loadtest all
+
+ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no <%= p("SSHUsername") %>@<%= link("cluster_nodes").instances.first.address %> "sudo sh -c 'sed "2d" /home/vcap/.ssh/authorized_keys' && sudo chmod 755 /var/vcap/jobs/mattermost/packages/platform"

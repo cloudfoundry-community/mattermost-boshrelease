@@ -1,0 +1,47 @@
+---
+name: load_test
+
+packages:
+- load_test
+
+templates:
+  bin/errand.sh.erb: bin/run
+  config/config.json.erb: config/loadtestconfig.json
+  ssh_key.erb: .ssh/id_rsa
+
+consumes:
+  - name: cluster_nodes
+    type: mattermost_cluster
+
+properties:
+  ServerURL:
+    description: public url your users normal log in to
+    default: "http://localhost:8065"
+  WebsocketURL:
+    description: public url for websockets, generally the same as ServerURL, but with ws replacing the http
+    default: "ws://localhost:8065"
+  SSHUsername:
+    description: username to create on the mattermost server
+  SSHKey:
+    description:  public ssh (id_rsa) key for the ssh user
+  AdminEmail:
+    description: login email address of an admin user in your mattermost system (will be created if not yet present)
+    default: "success+ltadmin@simulator.amazonses.com"
+  AdminPassword:
+    description: password for the admin user above
+    default: "ltpassword"
+  NumTeams:
+    description: how many teams to emulate
+    default: 1,
+  NumChannelsPerTeam:
+    description: how many channels to create per team
+    default: 4000,
+  NumUsers:
+    description: number of users to emulate
+    default: 20000
+  TestLengthMinutes:
+    description: how long to run the test in minutes
+    default: 20
+  NumActiveEntities:
+    description: number of active entities to use (not sure how this is different than NumUsers)
+    default: 20000
