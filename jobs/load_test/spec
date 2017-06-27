@@ -30,6 +30,9 @@ properties:
   AdminPassword:
     description: password for the admin user above
     default: "ltpassword"
+  SkipBulkload:
+    description: if you know the users, teams, etc have already been created, you can skip bulk loading them
+    default: false
   NumTeams:
     description: how many teams to emulate
     default: 1,
@@ -45,3 +48,16 @@ properties:
   NumActiveEntities:
     description: number of active entities to use (not sure how this is different than NumUsers)
     default: 20000
+  ActionRateMilliseconds:
+    description: How often each entity should take an action. For example, for an entity that only posts this would be the time between posts.
+    default: 240000
+  ActionRateMaxVarianceMilliseconds:
+    description: This is the maximum variance in action rate for each wait period. So if the action rate was 2000ms and the max variance was 500ms. The min and max action rate would be 1500ms and 2500ms.
+    default: 60000
+
+  sleep_before_seconds:
+    description: for debugging purposes, this will sleep before the load test starts
+    default: 0
+  sleep_after_seconds:
+    description: for debugging purposes, this will sleep before the load test ends
+    default: 0

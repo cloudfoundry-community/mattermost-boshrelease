@@ -12,6 +12,12 @@ chmod 600 .ssh/id_rsa
 ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no <%= p("SSHUsername") %>@<%= link("cluster_nodes").instances.first.address %> "sudo sh -c 'cat .ssh/authorized_keys >> /home/vcap/.ssh/authorized_keys'"
 ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no <%= p("SSHUsername") %>@<%= link("cluster_nodes").instances.first.address %> "sudo chmod 757 /var/vcap/jobs/mattermost/packages/platform"
 
-/var/vcap/packages/load_test/bin/loadtest all
+sleep <%= p(sleep_before_seconds) %>
 
-ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no <%= p("SSHUsername") %>@<%= link("cluster_nodes").instances.first.address %> "sudo sh -c 'sed "2d" /home/vcap/.ssh/authorized_keys' && sudo chmod 755 /var/vcap/jobs/mattermost/packages/platform"
+/var/vcap/packages/load_test/bin/loadtest all >>/var/vcap/sys/log/load_test/stdout.log 2>>/var/vcap/sys/log/load_test/stderr.log
+
+ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no <%= p("SSHUsername") %>@<%= link("cluster_nodes").instances.first.address %> "sudo sh -c 'sed -i "3d" /home/vcap/.ssh/authorized_keys' && sudo chmod 755 /var/vcap/jobs/mattermost/packages/platform"
+
+sleep <%= p(sleep_after_seconds) %>
+
+cp *.log /var/vcap/sys/log/load_test/

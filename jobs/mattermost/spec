@@ -64,6 +64,9 @@ properties:
   mattermost.ServiceSettings.MaximumLoginAttempts:
     description: Failed login attempts allowed before a user is locked out and required to reset their password via email.
     default: 10
+  mattermost.ServiceSettings.GoroutineHealthThreshold:
+    description: set a threshold for number of goroutines (-1 is unlimited?? maybe)
+    default: -1
   mattermost.ServiceSettings.SessionLengthWebInDays:
     description: Set the number of days before web sessions expire and users will need to log in again.
     default: 30
@@ -468,6 +471,22 @@ properties:
     description: Configurable link to download the iOS app.
     default: "https://about.mattermost.com/mattermost-ios-app/"
 
+  mattermost.AnnouncementSettings.EnableBanner:
+    description: Enable the announcement banner
+    default: false
+  mattermost.AnnouncementSettings.BannerText:
+    description: Text to display in the announcemnet banner
+    default: ""
+  mattermost.AnnouncementSettings.BannerColor:
+    description: Color of the banner itself
+    default: "#f2a93b"
+  mattermost.AnnouncementSettings.BannerTextColor:
+    description: Color of the banner text
+    default: "#333333"
+  mattermost.AnnouncementSettings.AllowBannerDismissal:
+    description: Allow users to dismiss the banner after they have read the announcement
+    default: true
+
   mattermost.ClusterSettings.InterNodeListenAddress:
     description: (E20 Only) The address the Mattermost Server will listen on for inter-node communication.
     default: ":8075"
@@ -506,3 +525,7 @@ properties:
   mattermost.WebrtcSettings.TurnSharedKey:
     description: Enter your TURN Server Shared Key. This is used to created dynamic passwords to establish the connection. Each password is valid for a short period of time.
     default: ""
+
+  mattermost.AnalyticsSettings.MaxUsersForStatistics:
+    description: Sets the maximum number of users on the server before statistics for total posts, total hashtag posts, total file posts, posts per day, and active users with posts per day are disabled.
+    default: 2500

@@ -12,6 +12,7 @@
         "ReadTimeout": 300,
         "WriteTimeout": 300,
         "MaximumLoginAttempts": <%= p("mattermost.ServiceSettings.MaximumLoginAttempts") %>,
+        "GoroutineHealthThreshold": <%= p("mattermost.ServiceSettings.GoroutineHealthThreshold") %>,
         "GoogleDeveloperKey": "<%= p("mattermost.ServiceSettings.GoogleDeveloperKey") %>",
         "EnableOAuthServiceProvider": <%= p("mattermost.ServiceSettings.EnableOAuthServiceProvider") %>,
         "EnableIncomingWebhooks": <%= p("mattermost.ServiceSettings.EnableIncomingWebhooks") %>,
@@ -246,9 +247,17 @@
         "AndroidAppDownloadLink": "<%= p("mattermost.NativeAppSettings.AndroidAppDownloadLink") %>",
         "IosAppDownloadLink": "<%= p("mattermost.NativeAppSettings.IosAppDownloadLink") %>"
     },
+
+    "AnnouncementSettings": {
+        "EnableBanner": <%= p("mattermost.AnnouncementSettings.EnableBanner") %>,
+        "BannerText": "<%= p("mattermost.AnnouncementSettings.BannerText") %>",
+        "BannerColor": "<%= p("mattermost.AnnouncementSettings.BannerColor") %>",
+        "BannerTextColor": "<%= p("mattermost.AnnouncementSettings.BannerTextColor") %>",
+        "AllowBannerDismissal": <%= p("mattermost.AnnouncementSettings.AllowBannerDismissal") %>
+    },
     <% nodes = link("cluster_nodes").instances -%>
     <% if nodes.length > 1 -%>
-    
+
     "ClusterSettings": {
         "Enable": true,
         "InterNodeListenAddress": "<%= p("mattermost.ClusterSettings.InterNodeListenAddress") %>",
@@ -273,5 +282,8 @@
         "TurnURI": "<%= p("mattermost.WebrtcSettings.TurnURI") %>",
         "TurnUsername": "<%= p("mattermost.WebrtcSettings.TurnUsername") %>",
         "TurnSharedKey": "<%= p("mattermost.WebrtcSettings.TurnSharedKey") %>"
+    },
+    "AnalyticsSettings": {
+        "MaxUsersForStatistics": <%= p("mattermost.AnalyticsSettings.MaxUsersForStatistics") %>
     }
 }

@@ -11,7 +11,7 @@
         "ConfigFileLoc": "/var/vcap/jobs/mattermost/config/config.json",
         "AdminEmail": "<%= p("AdminEmail") %>",
         "AdminPassword": "<%= p("AdminPassword") %>",
-        "SkipBulkload": false
+        "SkipBulkload": <%= p("SkipBulkload") %>
     },
     "LoadtestEnviromentConfig": {
         "NumTeams": <%= p("NumTeams") %>,
@@ -40,8 +40,8 @@
         "TestLengthMinutes": <%= p("TestLengthMinutes") %>,
         "NumActiveEntities": <%= p("NumActiveEntities") %>,
         "EntityStartNum": 0,
-        "ActionRateMilliseconds": 240000,
-        "ActionRateMaxVarianceMilliseconds": 60000,
+        "ActionRateMilliseconds": <%= p("ActionRateMilliseconds") %>,
+        "ActionRateMaxVarianceMilliseconds": <%= p("ActionRateMaxVarianceMilliseconds") %>,
         "EnableRequestTiming": true,
         "UploadImageChance": 0.01,
         "DoStatusPolling": true
