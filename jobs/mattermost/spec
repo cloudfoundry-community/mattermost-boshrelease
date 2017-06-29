@@ -1,26 +1,531 @@
 ---
 name: mattermost
+
 packages:
 - platform
+
 templates:
   bin/ctl: bin/ctl
   bin/monit_debugger: bin/monit_debugger
   config/config.json.erb: config/config.json
+  config/license.erb: config/license
   data/properties.sh.erb: data/properties.sh
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
+
+consumes:
+  - name: cluster_nodes
+    type: mattermost_cluster
+    optional: true
+
+provides:
+  - name: cluster_nodes
+    type: mattermost_cluster
+
 properties:
-  mattermost.site_name:
-    description: Site name; it's not Slack, it is...
-    default: Stark & Wayne presents Mattermost
-  mattermost.sql.driver_name:
-    description: Either 'postgres' or 'mysql'
-    default: postgres
-  mattermost.sql.url:
-    description: DB URL, e.g postgres://mmuser:mmuser_password@10.10.10.1:5432/mattermost?sslmode=disable&connect_timeout=10
-  mattermost.sql.max_connections:
-    description: Max Idle & Max Open Connections
+  mattermost.License:
+    description: Enterprise Edition license file contents.  EE features will not be available unless this is set.
+    default: ""
+  mattermost.ServiceSettings.SiteURL:
+    description: The URL, including port number and protocol, that users will use to access Mattermost. This field is required in Mattermost v3.8 and later.  REQUIRED to be set
+  mattermost.ServiceSettings.ListenAddress:
+    description:  "The address and port to which to bind and listen. Specifying “:8065” will bind to all network interfaces. Specifying 127.0.0.1:8065 will only bind to the network interface having that IP address."
+    default: ":8605"
+  mattermost.ServiceSettings.ConnectionSecurity:
+    description: "Controls whether MM itself does TLS termination (set to \"TLS\" to get SSL termination) NOTE: TLSCertFile and TLSKeyFile must be set if this setting is \"TLS\""
+    default: ""
+  mattermost.ServiceSettings.TLSCertFile:
+    description: The path to the certificate file to use for TLS connection security.
+    default: ""
+  mattermost.ServiceSettings.TLSKeyFile:
+    description:  The path to the TLS key file to use for TLS connection security.
+    default: ""
+  mattermost.ServiceSettings.Forward80To443:
+    description: Determines if traffic on 80 is forwarded to 443.  When using a proxy such as NGINX in front of Mattermost this setting is unnecessary and should be set to false.
+    default: false
+  mattermost.ServiceSettings.WebserverMode:
+    description: gzip compression applies to the HTML, CSS, Javascript, and other static content files that make up the Mattermost web client. It is recommended to enable gzip to improve performance unless your environment has specific restrictions, such as a web proxy that distributes gzip files poorly. This setting requires a server restart to take effect.  (gzip|Uncompressed|Disabled)
+    default: gzip
+  mattermost.ServiceSettings.RestrictPostDelete:
+    description: Restrict the permission level required to delete messages. Team Admins and System Admins can delete messages only in channels where they are members. Messages can be deleted anytime. (all|team_admin|system_admin)
+    default: all
+  mattermost.ServiceSettings.AllowEditPost:
+    description:   Set the time limit that users have to edit their messages after posting. (always|never|timelimit)
+    default: always
+  mattermost.ServiceSettings.PostEditTimeLimit:
+    description: How many seconds does a user have to edit a message after posting it.
+    default: 300
+  mattermost.ServiceSettings.EnableMultifactorAuthentication:
+    description: (E10 or higher) When true, users with LDAP and email authentication will be given the option to require a phone-based passcode, in addition to their password-based authentication, to sign-in to the Mattermost server.
+    default: false
+  mattermost.ServiceSettings.EnforceMultifactorAuthentication:
+    description: (E10 or higher) Require MFA for all users.
+    default: false
+  mattermost.ServiceSettings.MaximumLoginAttempts:
+    description: Failed login attempts allowed before a user is locked out and required to reset their password via email.
     default: 10
-  mattermost.sql.at_rest_encrypt_key:
-    description: At rest encrypt key. Must be 32 chars.
-    default: 7rAh6iwQCkV4cA1Gsg3fgGOXJAQ43QVg
+  mattermost.ServiceSettings.GoroutineHealthThreshold:
+    description: set a threshold for number of goroutines (-1 is unlimited?? maybe)
+    default: -1
+  mattermost.ServiceSettings.SessionLengthWebInDays:
+    description: Set the number of days before web sessions expire and users will need to log in again.
+    default: 30
+  mattermost.ServiceSettings.SessionLengthMobileInDays:
+    description: Set the number of days before native mobile sessions expire.
+    default: 30
+  mattermost.ServiceSettings.SessionLengthSSOInDays:
+    description: Set the number of days before SSO sessions expire. (gitlab)
+    default: 30
+  mattermost.ServiceSettings.SessionCacheInMinutes:
+    description: Set the number of minutes to cache a session in memory.
+    default: 10
+  mattermost.ServiceSettings.WebsocketSecurePort:
+    description: This setting defines the port on which the secured WebSocket will listen using the wss protocol.
+    default: 443
+  mattermost.ServiceSettings.WebsocketPort:
+    description: This setting defines the port on which the unsecured WebSocket will listen using the ws protocol.
+    default: 80
+  mattermost.ServiceSettings.AllowCorsFrom:
+    description: Enable HTTP cross-origin requests from specific domains separated by spaces. Type * to allow CORS from any domain or leave it blank to disable it.
+    default: ""
+  mattermost.ServiceSettings.EnableInsecureOutgoingConnections:
+    description: Outgoing HTTPS requests can accept unverified, self-signed certificates.
+    default: false
+  mattermost.ServiceSettings.EnableSecurityFixAlert:
+    description: Enable System Admins to be notified by email if a relevant security fix alert is announced. (true|false)
+    default: true
+  mattermost.ServiceSettings.EnableIncomingWebhooks:
+    description: Developers building integrations can create webhook URLs for public channels and private channels.
+    default: true
+  mattermost.ServiceSettings.EnableOutgoingWebhooks:
+    description: Developers building integrations can create webhook tokens for public channels.
+    default: true
+  mattermost.ServiceSettings.EnableCommands:
+    description: Slash commands send events to external integrations that send a response back to Mattermost.
+    default: false
+  mattermost.ServiceSettings.EnableOAuthServiceProvider:
+    description: Mattermost acts as an OAuth 2.0 service provider allowing Mattermost to authorize API requests from external applications.
+    default: false
+  mattermost.ServiceSettings.EnableOnlyAdminIntegrations:
+    description: Webhooks and slash commands can only be created, edited and viewed by Team and System Admins, and OAuth 2.0 applications by System Admins.
+    default: true
+  mattermost.ServiceSettings.EnablePostUsernameOverride:
+    description: Webhooks, slash commands, OAuth 2.0 apps, and other integrations such as Zapier, will be allowed to change the username they are posting as. If no username is present, the username for the post is the same as it would be for a setting of False.
+    default: false
+  mattermost.ServiceSettings.EnablePostIconOverride:
+    description: Webhooks, slash commands and other integrations, such as Zapier, will be allowed to change the profile picture they post with.
+    default: false
+  mattermost.ServiceSettings.GoogleDeveloperKey:
+    description: "Google API developer key if request rate is too high. See https://docs.mattermost.com/administration/config-settings.html#google-api-key"
+    default: ""
+  mattermost.ServiceSettings.EnableLinkPreviews:
+    description: Enables users to display a preview of website content below the message, if available.
+    default: false
+  mattermost.ServiceSettings.EnableCustomEmoji:
+    description: Enables a Custom Emoji option in the Main Menu, where users can go to create customized emoji.
+    default: false
+  mattermost.ServiceSettings.RestrictCustomEmojiCreation:
+    description: (E10 and greater) Determines who is allowed to create custom emoji (all|admin|system_admin)
+    default: all
+  mattermost.ServiceSettings.EnableTesting:
+    description: "/loadtest slash command is enabled to load test accounts and test data."
+    default: false
+  mattermost.ServiceSettings.EnableDeveloper:
+    description: Javascript errors are shown in a purple bar at the top of the user interface. Not recommended for use in production.
+    default: false
+
+  mattermost.TeamSettings.SiteName:
+    description: Site name; it's not Slack, it is...
+    default: Mattermost
+  mattermost.TeamSettings.EnableUserCreation:
+    description: Ability to create new accounts is enabled via inviting new members or sharing the team invite link. (true|false)
+    default: true
+  mattermost.TeamSettings.EnableTeamCreation:
+    description: "True: Ability to create a new team is enabled for all users.
+                 False: Only System Administrators can create teams from the team selection page. The Create A New Team button is hidden in the main menu UI."
+    default: true
+  mattermost.TeamSettings.MaxUsersPerTeam:
+    description: Maximum number of users per team, including both active and inactive users.
+    default: 50
+  mattermost.TeamSettings.MaxChannelsPerTeam:
+    description: Maximum number of channels per team, including both active and deleted channels.
+    default: 2000
+  mattermost.TeamSettings.MaxNotificationsPerChannel:
+    description: Maximum total number of users in a channel before @all, @here, and @channel no longer send notifications to maximize performance.
+    default: 1000
+  mattermost.TeamSettings.RestrictCreationToDomains:
+    description: Teams and user accounts can only be created by a verified email from this list of comma-separated domains (e.g. “corp.mattermost.com, mattermost.org”).
+    default: ""
+  mattermost.TeamSettings.RestrictDirectMessage:
+    description: Determines who a user can direct message.  'any' - anyone on the server, 'team' - only users that share at least one team.
+    default: any
+  mattermost.TeamSettings.RestrictTeamInvite:
+    description: "(E10 and higher) Set policy on who can invite others to a team using the Send Email Invite, Get Team Invite Link, and Add Members to Team options on the main menu. Options: (all|team_admin|system_admin)"
+    default: all
+  mattermost.TeamSettings.RestrictPublicChannelCreation:
+    description: Restrict the permission level required to create public channels. (all|team_admin|system_admin)
+    default: all
+  mattermost.TeamSettings.RestrictPublicChannelManagement:
+    description: Restrict the permission level required to rename and set the header or purpose for public channels. (all|channel_admin|team_admin|system_admin)
+    default: all
+  mattermost.TeamSettings.RestrictPublicChannelDeletion:
+    description: Restrict the permission level required to delete public channels. (all|channel_admin|team_admin|system_admin)
+    default: all
+  mattermost.TeamSettings.RestrictPrivateChannelCreation:
+    description: Restrict the permission level required to create private channels. (all|team_admin|system_admin)
+    default: all
+  mattermost.TeamSettings.RestrictPrivateChannelManagement:
+    description: Restrict the permission level required to rename and set the header or purpose for private channels. (all|channel_admin|team_admin|system_admin)
+    default: all
+  mattermost.TeamSettings.RestrictPrivateChannelDeletion:
+    description: Restrict the permission level required to delete private channels. (all|channel_admin|team_admin|system_admin)
+    default: all
+  mattermost.TeamSettings.RestrictPrivateChannelManageMembers:
+    description: Set policy on who can add and remove members from private channels. (all|channel_admin|team_admin|system_admin)
+    default: all
+  mattermost.TeamSettings.EnableOpenServer:
+    description: Users can sign up to the server from the root page without an invite.
+    default: false
+  mattermost.TeamSettings.EnableCustomBrand:
+    description: (E10 and greater) Enables custom branding to show a JPG image some custom text on the server login page.
+    default: false
+  mattermost.TeamSettings.CustomBrandText:
+    description: (E10 and greater) Custom text will be shown below custom brand image on left side of server login page.
+    default: ""
+  mattermost.TeamSettings.CustomDescriptionText:
+    description: (E10 and greater) Description of service shown in login screens and UI.
+    default: ""
+
+  mattermost.SqlSettings.DriverName:
+    description: Either 'postgres' or 'mysql'
+    default: mysql
+  mattermost.SqlSettings.DataSource:
+    description: This is the connection string to the master database.
+  mattermost.SqlSettings.MaxIdleConns:
+    description: Maximum number of idle connections held open to the database.
+    default: 10
+  mattermost.SqlSettings.MaxOpenConns:
+    description: Maximum number of open connections held open to the database.
+    default: 10
+  mattermost.SqlSettings.AtRestEncryptKey:
+    description: 32-character (to be randomly generated via Admin Console) salt available to encrypt and decrypt sensitive fields in database.
+    default: ""
+  mattermost.SqlSettings.Trace:
+    description: Executing SQL statements are written to the log for development.
+    default: false
+
+  mattermost.LogSettings.EnableConsole:
+    description: Output log messages to the console based on ConsoleLevel option. The server writes messages to the standard output stream (stdout).
+    default: true
+  mattermost.LogSettings.ConsoleLevel:
+    description: Level of detail at which log events are written to the console when EnableConsole = true. (DEBUG|ERROR|INFO)
+    default: INFO
+  mattermost.LogSettings.EnableFile:
+    description: Typically set to true in production. When true, logged events are written to the mattermost.log file in the directory specified by the FileLocation setting.
+    default: true
+  mattermost.LogSettings.FileLevel:
+    description: Level of detail at which log events are written to log files when EnableFile = true. (true|false)
+    default: true
+  mattermost.LogSettings.FileFormat:
+    description: Format of log message output.
+    default: "[%D %T] [%L] (%S) %M"
+  mattermost.LogSettings.FileLocation:
+    description: The location of the log files.  The path that you set must exist and Mattermost must have write permissions in it.
+    default: "/var/vcap/sys/log/mattermost/"
+  mattermost.LogSettings.EnableWebhookDebugging:
+    description: Contents of incoming webhooks are printed to log files for debugging. (true|false)
+    default: true
+  mattermost.LogSettings.EnableDiagnostics:
+    description: To improve the quality and performance of future Mattermost updates, this option sends error reporting and diagnostic information to Mattermost, Inc. (true|false)
+    default: true
+
+  mattermost.PasswordSettings.MinimumLength:
+    description: (E10 and higher) Minimum number of characters required for a valid password. (5-64)
+    default: 5
+  mattermost.PasswordSettings.Number:
+    description: At least one required
+    default: false
+  mattermost.PasswordSettings.Lowercase:
+    description: At least one required
+    default: false
+  mattermost.PasswordSettings.Uppercase:
+    description: At least one required
+    default: false
+  mattermost.PasswordSettings.Symbol:
+    description: "At least one required Valid symbols include: !\"#$%&'()*+,-./:;<=>?@[]^_`|~"
+    default: false
+
+  mattermost.FileSettings.DriverName:
+    description: Storage system where files and image attachments are saved. (local|amazons3)
+    default: local
+  mattermost.FileSettings.Directory:
+    description: Directory to which files are written.
+    default: "/var/vcap/store/mattermost/"
+  mattermost.FileSettings.EnablePublicLink:
+    description: Allow users to generate public links to files and images for sharing outside the Mattermost system with a public URL.
+    default: true
+  mattermost.FileSettings.PublicLinkSalt:
+    description: 32-character salt added to the URL of public links when public links are enabled.
+    default: ""
+  mattermost.FileSettings.AmazonS3AccessKeyId:
+    description: Obtain this credential from your Amazon AWS administrator.
+    default: ""
+  mattermost.FileSettings.AmazonS3SecretAccessKey:
+    description: Obtain this credential from your Amazon AWS administrator.
+    default: ""
+  mattermost.FileSettings.AmazonS3Bucket:
+    description: Name you selected for your S3 bucket in AWS.
+    default: ""
+  mattermost.FileSettings.AmazonS3Region:
+    description: AWS region you selected for creating your S3 bucket.
+    default: ""
+  mattermost.FileSettings.AmazonS3Endpoint:
+    description: Endpoint to use for S3
+    default: "s3.amazonaws.com"
+  mattermost.FileSettings.AmazonS3SSL:
+    description: Enables only secure Amazon S3 Connections. (true|false)
+    default: true
+  mattermost.FileSettings.EnableFileAttachments:
+    description: When false, users cannot upload files and images by attaching them to messages.
+    default: true
+  mattermost.FileSettings.MaxFileSize:
+    description: Maximum file size for message attachments entered in megabytes in the System Console UI. Converted to bytes in config.json at 1048576 bytes per megabyte. (Default of 52428800 is 50MB)
+    default: 52428800
+
+  mattermost.RateLimitSettings.Enable:
+    description: APIs are throttled at the rate specified by PerSec.
+    default: false
+  mattermost.RateLimitSettings.PerSec:
+    description: Throttle API at this number of requests per second if rate limiting is enabled.
+    default: 10
+  mattermost.RateLimitSettings.MaxBurst:
+    description: Maximum number of requests allowed beyond the per second query limit.
+    default: 100
+  mattermost.RateLimitSettings.MemoryStoreSize:
+    description: Maximum number of user sessions connected to the system as determined by VaryByRemoteAddr and VaryByHeader variables.
+    default: 10000
+  mattermost.RateLimitSettings.VaryByRemoteAddr:
+    description: Rate limit API access by IP address.
+    default: true
+  mattermost.RateLimitSettings.VaryByHeader:
+    description: Vary rate limiting by HTTP header field specified (""|X-Real-IP|X-Forwarded-For|anything you want)
+    default: ""
+
+  mattermost.PrivacySettings.ShowEmailAddress:
+    description: Show email address of all users. (true|false)
+    default: true
+  mattermost.PrivacySettings.ShowFullName:
+    description: Show full name of all users. (true|false)
+    default: true
+
+  mattermost.SupportSettings.TermsOfServiceLink:
+    description: Configurable link to Terms of Service your organization may provide to end users.
+    default: "https://about.mattermost.com/default-terms/"
+  mattermost.SupportSettings.PrivacyPolicyLink:
+    description: Configurable link to Privacy Policy your organization may provide to end users.
+    default: "https://about.mattermost.com/default-privacy-policy/"
+  mattermost.SupportSettings.AboutLink:
+    description: Configurable link to an About page describing your organization may provide to end users.
+    default: "https://about.mattermost.com/default-about/"
+  mattermost.SupportSettings.HelpLink:
+    description: Configurable link to a Help page your organization may provide to end users.
+    default: "https://about.mattermost.com/default-help/"
+  mattermost.SupportSettings.ReportAProblemLink:
+    description: Set the link for the support website.
+    default: "https://about.mattermost.com/default-report-a-problem/"
+  mattermost.SupportSettings.SupportEmail:
+    description: Set an email for feedback or support requests.
+    default: "feedback@mattermost.com"
+
+  mattermost.EmailSettings.EnableSignUpWithEmail:
+    description: Allow team creation and account signup using email and password. (true|false)
+    default: true
+  mattermost.EmailSettings.EnableSignInWithEmail:
+    description: Mattermost allows users to sign in using their email and password. (true|false)
+    default: true
+  mattermost.EmailSettings.EnableSignInWithUsername:
+    description: Mattermost allows users to sign in using their username and password. This setting is typically only used when email verification is disabled. (true|false)
+    default: false
+  mattermost.EmailSettings.RequireEmailVerification:
+    description: Require email verification after account creation prior to allowing login. (true|false)
+    default: false
+  mattermost.EmailSettings.InviteSalt:
+    description: 32-character (to be randomly generated via System Console) salt added to signing of email invites.
+    default: ""
+  mattermost.EmailSettings.SendEmailNotifications:
+    description: Enables sending of email notifications.
+    default: false
+  mattermost.EmailSettings.EnableEmailBatching:
+    description: Users can select how often to receive email notifications, and multiple notifications within that timeframe will be combined into a single email.
+    default: false
+  mattermost.EmailSettings.FeedbackName:
+    description: Name displayed on email account used when sending notification emails from Mattermost system.
+    default: ""
+  mattermost.EmailSettings.FeedbackEmail:
+    description: Address displayed on email account used when sending notification emails from Mattermost system.
+    default: ""
+  mattermost.EmailSettings.FeedbackOrganization:
+    description: Organization name and mailing address displayed in the footer of email notifications from Mattermost
+    default: ""
+  mattermost.EmailSettings.SMTPUsername:
+    description: Obtain this credential from the administrator setting up your email server.
+    default: ""
+  mattermost.EmailSettings.SMTPPassword:
+    description: Obtain this credential from the administrator setting up your email server.
+    default: ""
+  mattermost.EmailSettings.SMTPServer:
+    description: Location of SMTP email server.
+    default: ""
+  mattermost.EmailSettings.SMTPPort:
+    description: Port of SMTP email server.
+    default: ""
+  mattermost.EmailSettings.ConnectionSecurity:
+    description: Email connection Security (""|PLAIN|TLS|STARTTLS)
+    default: ""
+  mattermost.EmailSettings.SendPushNotifications:
+    description: Your Mattermost server sends mobile push notifications to the server specified in PushNotificationServer.
+    default: false
+  mattermost.EmailSettings.PushNotificationServer:
+    description: Location of Mattermost Push Notification Service (MPNS), which re-sends push notifications from Mattermost to services like Apple Push Notification Service (APNS) and Google Cloud Messaging (GCM).
+    default: ""
+  mattermost.EmailSettings.PushNotificationContents:
+    description: Controlls how much detail is provided in push notifications. (generic|full) Generic only sends User and Channel
+    default: "generic"
+
+  mattermost.LdapSettings.Enable:
+    description: Mattermost allows login using AD/LDAP or Active Directory. (true|false)
+    default: false
+  mattermost.LdapSettings.LdapServer:
+    description: The domain or IP address of the AD/LDAP server.
+  mattermost.LdapSettings.LdapPort:
+    description: The port Mattermost will use to connect to the AD/LDAP server.
+    default: 389
+  mattermost.LdapSettings.ConnectionSecurity:
+    description: The type of connection security Mattermost uses to connect to AD/LDAP. (""|TLS|STARTTLS)
+    default: ""
+  mattermost.LdapSettings.BaseDN:
+    description: The Base Distinguished Name of the location where Mattermost should start its search for users in the AD/LDAP tree.
+    default: ""
+  mattermost.LdapSettings.BindUsername:
+    description: The username used to perform the AD/LDAP search.
+  mattermost.LdapSettings.BindPassword:
+    description: Password of the user given in Bind Username. This field is required, and anonymous bind is not currently supported.
+  mattermost.LdapSettings.UserFilter:
+    description: (Optional) Enter an AD/LDAP Filter to use when searching for user objects.
+    default: ""
+  mattermost.LdapSettings.FirstNameAttribute:
+    description: (Optional) The attribute in the AD/LDAP server that will be used to populate the first name of users in Mattermost.  When set, users will not be able to edit their First Name, since it is synchronized with the LDAP server. When blank, users can set their own First Name in Account Settings.
+    default: ""
+  mattermost.LdapSettings.LastNameAttribute:
+    description: (Optional) The attribute in the AD/LDAP server that will be used to populate the last name of users in Mattermost.  When set, users will not be able to edit their Last Name, since it is synchronized with the LDAP server. When blank, users can set their own Last Name in Account Settings.
+    default: ""
+  mattermost.LdapSettings.NicknameAttribute:
+    description: (Optional) The attribute in the AD/LDAP server that will be used to populate the nickname of users in Mattermost. When set, users will not be able to edit their Nickname, since it is synchronized with the LDAP server. When blank, users can set their own Nickname in Account Settings.
+    default: ""
+  mattermost.LdapSettings.EmailAttribute:
+    description: The attribute in the AD/LDAP server that will be used to populate the email addresses of users in Mattermost.
+    default: ""
+  mattermost.LdapSettings.UsernameAttribute:
+    description: The attribute in the AD/LDAP server that will be used to populate the username field in Mattermost user interface.
+    default: ""
+  mattermost.LdapSettings.IdAttribute:
+    description: The attribute in the AD/LDAP server that will be used as a unique identifier in Mattermost.
+    default: ""
+  mattermost.LdapSettings.LoginFieldName:
+    description: The placeholder text that appears in the login field on the login page. Typically this would be whatever name is used to refer to AD/LDAP credentials in your company, so it is recognizable to your users. Defaults to AD/LDAP Username.
+    default: ""
+  mattermost.LdapSettings.PositionAttribute:
+    description: (Optional) The attribute in the AD/LDAP server that will be used to populate the position field in Mattermost (typically used to describe a person’s job title or role at the company). When set, users will not be able to edit their position, since it is synchronized with the LDAP server. When blank, users can set their own Position in Account Settings.
+    default: ""
+  mattermost.LdapSettings.SyncIntervalMinutes:
+    description: Set how often Mattermost accounts synchronize attributes with AD/LDAP, in minutes.
+    default: 60
+  mattermost.LdapSettings.MaxPageSize:
+    description: The maximum number of users the Mattermost server will request from the AD/LDAP server at one time. Use this setting if your AD/LDAP server limits the number of users that can be requested at once. 0 is unlimited.
+    default: 0
+  mattermost.LdapSettings.QueryTimeout:
+    description: The timeout value for queries to the AD/LDAP server.
+    default: 60
+  mattermost.LdapSettings.SkipCertificateVerification:
+    description: Skips the certificate verification step for TLS or STARTTLS connections.
+    default: false
+
+
+  mattermost.ComplianceSettings.Enable:
+    description: (E20) Compliance reporting is enabled in Mattermost. (true|false)
+    default: false
+  mattermost.ComplianceSettings.Directory:
+    description: (E20) Sets the directory where compliance reports are written.
+    default: "./data/"
+  mattermost.ComplianceSettings.EnableDaily:
+    description: (E20) Mattermost generates a daily compliance report. (true|false)
+    default: false
+
+  mattermost.NativeAppSettings.AppDownloadLink:
+    description: Configurable link to a download page for Mattermost Apps.
+    default: "https://about.mattermost.com/downloads/"
+  mattermost.NativeAppSettings.AndroidAppDownloadLink:
+    description: Configurable link to download the Android app.
+    default: "https://about.mattermost.com/mattermost-android-app/"
+  mattermost.NativeAppSettings.IosAppDownloadLink:
+    description: Configurable link to download the iOS app.
+    default: "https://about.mattermost.com/mattermost-ios-app/"
+
+  mattermost.AnnouncementSettings.EnableBanner:
+    description: Enable the announcement banner
+    default: false
+  mattermost.AnnouncementSettings.BannerText:
+    description: Text to display in the announcemnet banner
+    default: ""
+  mattermost.AnnouncementSettings.BannerColor:
+    description: Color of the banner itself
+    default: "#f2a93b"
+  mattermost.AnnouncementSettings.BannerTextColor:
+    description: Color of the banner text
+    default: "#333333"
+  mattermost.AnnouncementSettings.AllowBannerDismissal:
+    description: Allow users to dismiss the banner after they have read the announcement
+    default: true
+
+  mattermost.ClusterSettings.InterNodeListenAddress:
+    description: (E20 Only) The address the Mattermost Server will listen on for inter-node communication.
+    default: ":8075"
+
+  mattermost.MetricsSettings.Enable:
+    description: Mattermost enables performance monitoring collection and profiling.
+    default: false
+  mattermost.MetricsSettings.BlockProfileRate:
+    description: Value that controls the fraction of goroutine blocking events reported in the blocking profile.
+    default: 0
+  mattermost.MetricsSettings.ListenAddress:
+    description: The address the Mattermost server will listen on to expose performance metrics.
+    default: ":8067"
+
+  mattermost.WebrtcSettings.Enable:
+    description: Mattermost will allow making one-on-one video calls on Chrome, Firefox and Mattermost Desktop Apps on a server running in SSL mode.
+    default: false
+  mattermost.WebrtcSettings.GatewayWebsocketUrl:
+    description: "This is the websocket used to signal and establish communication between the peers. Enter wss://<mattermost-webrtc-gateway-url>:<port>. Make sure you use WS or WSS in your URL depending on your server configuration."
+    default: ""
+  mattermost.WebrtcSettings.GatewayAdminUrl:
+    description: "Mattermost WebRTC uses this URL to obtain valid tokens for each peer to establish the connection. Enter https://<mattermost-webrtc-gateway-url>:<port>/admin. Make sure you use HTTP or HTTPS in your URL depending on your server configuration."
+    default: ""
+  mattermost.WebrtcSettings.GatewayAdminSecret:
+    description: Enter your admin secret password to access the Gateway Admin URL.
+    default: ""
+  mattermost.WebrtcSettings.StunURI:
+    description: "Enter your STUN URI as stun:<your-stun-url>:<port>. STUN is a standardized network protocol to allow an end host to assist devices to access its public IP address if it is located behind a NAT."
+    default: ""
+  mattermost.WebrtcSettings.TurnURI:
+    description: "Enter your TURN URI as turn:<your-turn-url>:<port>. TURN is a standardized network protocol to allow an end host to assist devices to establish a connection by using a relay public IP address if it is located behind a symmetric NAT."
+    default: ""
+  mattermost.WebrtcSettings.TurnUsername:
+    description: Enter your TURN Server Username.
+    default: ""
+  mattermost.WebrtcSettings.TurnSharedKey:
+    description: Enter your TURN Server Shared Key. This is used to created dynamic passwords to establish the connection. Each password is valid for a short period of time.
+    default: ""
+
+  mattermost.AnalyticsSettings.MaxUsersForStatistics:
+    description: Sets the maximum number of users on the server before statistics for total posts, total hashtag posts, total file posts, posts per day, and active users with posts per day are disabled.
+    default: 2500

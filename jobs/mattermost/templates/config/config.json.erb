@@ -1,47 +1,110 @@
 {
     "ServiceSettings": {
-        "ListenAddress": ":8065",
-        "MaximumLoginAttempts": 10,
-        "SegmentDeveloperKey": "",
-        "GoogleDeveloperKey": "",
-        "EnableOAuthServiceProvider": false,
-        "EnableIncomingWebhooks": true,
-        "EnablePostUsernameOverride": false,
-        "EnablePostIconOverride": false,
-        "EnableTesting": false,
-        "EnableSecurityFixAlert": true
+        "SiteURL": "<%= p("mattermost.ServiceSettings.SiteURL") %>",
+        "LicenseFileLocation": "<%= p("mattermost.License") == "" ? "" : "/var/vcap/jobs/mattermost/config/license" %>",
+        "ListenAddress": "<%= p("mattermost.ServiceSettings.ListenAddress") %>",
+        "ConnectionSecurity": "<%= p("mattermost.ServiceSettings.ConnectionSecurity") %>",
+        "TLSCertFile": "<%= p("mattermost.ServiceSettings.TLSCertFile") %>",
+        "TLSKeyFile": "<%= p("mattermost.ServiceSettings.TLSKeyFile") %>",
+        "UseLetsEncrypt": false,
+        "LetsEncryptCertificateCacheFile": "./config/letsencrypt.cache",
+        "Forward80To443": <%= p("mattermost.ServiceSettings.Forward80To443") %>,
+        "ReadTimeout": 300,
+        "WriteTimeout": 300,
+        "MaximumLoginAttempts": <%= p("mattermost.ServiceSettings.MaximumLoginAttempts") %>,
+        "GoroutineHealthThreshold": <%= p("mattermost.ServiceSettings.GoroutineHealthThreshold") %>,
+        "GoogleDeveloperKey": "<%= p("mattermost.ServiceSettings.GoogleDeveloperKey") %>",
+        "EnableOAuthServiceProvider": <%= p("mattermost.ServiceSettings.EnableOAuthServiceProvider") %>,
+        "EnableIncomingWebhooks": <%= p("mattermost.ServiceSettings.EnableIncomingWebhooks") %>,
+        "EnableOutgoingWebhooks": <%= p("mattermost.ServiceSettings.EnableOutgoingWebhooks") %>,
+        "EnableCommands": <%= p("mattermost.ServiceSettings.EnableCommands") %>,
+        "EnableOnlyAdminIntegrations": <%= p("mattermost.ServiceSettings.EnableOnlyAdminIntegrations") %>,
+        "EnablePostUsernameOverride": <%= p("mattermost.ServiceSettings.EnablePostUsernameOverride") %>,
+        "EnablePostIconOverride": <%= p("mattermost.ServiceSettings.EnablePostIconOverride") %>,
+        "EnableLinkPreviews": <%= p("mattermost.ServiceSettings.EnableLinkPreviews") %>,
+        "EnableTesting": <%= p("mattermost.ServiceSettings.EnableTesting") %>,
+        "EnableDeveloper": <%= p("mattermost.ServiceSettings.EnableDeveloper") %>,
+        "EnableSecurityFixAlert": <%= p("mattermost.ServiceSettings.EnableSecurityFixAlert") %>,
+        "EnableInsecureOutgoingConnections": <%= p("mattermost.ServiceSettings.EnableInsecureOutgoingConnections") %>,
+        "EnableMultifactorAuthentication": <%= p("mattermost.ServiceSettings.EnableMultifactorAuthentication") %>,
+        "EnforceMultifactorAuthentication": <%= p("mattermost.ServiceSettings.EnforceMultifactorAuthentication") %>,
+        "AllowCorsFrom": "<%= p("mattermost.ServiceSettings.AllowCorsFrom") %>",
+        "SessionLengthWebInDays": <%= p("mattermost.ServiceSettings.SessionLengthWebInDays") %>,
+        "SessionLengthMobileInDays": <%= p("mattermost.ServiceSettings.SessionLengthMobileInDays") %>,
+        "SessionLengthSSOInDays": <%= p("mattermost.ServiceSettings.SessionLengthSSOInDays") %>,
+        "SessionCacheInMinutes": <%= p("mattermost.ServiceSettings.SessionCacheInMinutes") %>,
+        "WebsocketSecurePort": <%= p("mattermost.ServiceSettings.WebsocketSecurePort") %>,
+        "WebsocketPort": <%= p("mattermost.ServiceSettings.WebsocketPort") %>,
+        "WebserverMode": "gzip",
+        "EnableCustomEmoji": <%= p("mattermost.ServiceSettings.EnableCustomEmoji") %>,
+        "RestrictCustomEmojiCreation": "<%= p("mattermost.ServiceSettings.RestrictCustomEmojiCreation") %>",
+        "RestrictPostDelete": "<%= p("mattermost.ServiceSettings.RestrictPostDelete") %>",
+        "AllowEditPost": "<%= p("mattermost.ServiceSettings.AllowEditPost") %>",
+        "PostEditTimeLimit": <%= p("mattermost.ServiceSettings.PostEditTimeLimit") %>,
+        "TimeBetweenUserTypingUpdatesMilliseconds": 5000,
+        "EnablePostSearch": true,
+        "EnableUserTypingMessages": true,
+        "EnableUserStatuses": true,
+        "ClusterLogTimeoutMilliseconds": 2000
     },
     "TeamSettings": {
-        "SiteName": "<%= p("mattermost.site_name") %>",
-        "MaxUsersPerTeam": 50,
-        "EnableTeamCreation": true,
-        "EnableUserCreation": true,
-        "RestrictCreationToDomains": ""
+        "SiteName": "<%= p("mattermost.TeamSettings.SiteName") %>",
+        "EnableUserCreation": <%= p("mattermost.TeamSettings.EnableUserCreation") %>,
+        "EnableTeamCreation": <%= p("mattermost.TeamSettings.EnableTeamCreation") %>,
+        "MaxUsersPerTeam": <%= p("mattermost.TeamSettings.MaxUsersPerTeam") %>,
+        "MaxChannelsPerTeam": <%= p("mattermost.TeamSettings.MaxChannelsPerTeam") %>,
+        "MaxNotificationsPerChannel": <%= p("mattermost.TeamSettings.MaxNotificationsPerChannel") %>,
+        "EnableOpenServer": <%= p("mattermost.TeamSettings.EnableOpenServer") %>,
+        "RestrictCreationToDomains": "<%= p("mattermost.TeamSettings.RestrictCreationToDomains") %>",
+        "EnableCustomBrand": <%= p("mattermost.TeamSettings.EnableCustomBrand") %>,
+        "CustomBrandText": "<%= p("mattermost.TeamSettings.CustomBrandText") %>",
+        "CustomDescriptionText": "<%= p("mattermost.TeamSettings.CustomDescriptionText") %>",
+        "RestrictDirectMessage": "any",
+        "RestrictTeamInvite": "<%= p("mattermost.TeamSettings.RestrictTeamInvite") %>",
+        "RestrictPublicChannelManagement": "<%= p("mattermost.TeamSettings.RestrictPublicChannelManagement") %>",
+        "RestrictPrivateChannelManagement": "<%= p("mattermost.TeamSettings.RestrictPrivateChannelManagement") %>",
+        "RestrictPublicChannelCreation": "<%= p("mattermost.TeamSettings.RestrictPublicChannelCreation") %>",
+        "RestrictPrivateChannelCreation": "<%= p("mattermost.TeamSettings.RestrictPrivateChannelCreation") %>",
+        "RestrictPublicChannelDeletion": "<%= p("mattermost.TeamSettings.RestrictPublicChannelDeletion") %>",
+        "RestrictPrivateChannelDeletion": "<%= p("mattermost.TeamSettings.RestrictPrivateChannelDeletion") %>",
+        "RestrictPrivateChannelManageMembers": "<%= p("mattermost.TeamSettings.RestrictPrivateChannelManageMembers") %>",
+        "UserStatusAwayTimeout": 300
     },
+
     "SqlSettings": {
-      <% if_p("mattermost.sql.driver_name", "mattermost.sql.url", "mattermost.sql.max_connections", "mattermost.sql.at_rest_encrypt_key") do |driver_name, url, max_connections, key| %>
-        "DriverName": "<%= driver_name %>",
-        "DataSource": "<%= url %>",
+        "DriverName": "<%= p("mattermost.SqlSettings.DriverName") %>",
+        "DataSource": "<%= p("mattermost.SqlSettings.DataSource") %>",
         "DataSourceReplicas": [],
-        "MaxIdleConns": <%= max_connections %>,
-        "MaxOpenConns": <%= max_connections %>,
-        "Trace": false,
-        "AtRestEncryptKey": "<%= key %>"
-      <% end %>
+        "DataSourceSearchReplicas": [],
+        "MaxIdleConns": <%= p("mattermost.SqlSettings.MaxIdleConns") %>,
+        "MaxOpenConns": <%= p("mattermost.SqlSettings.MaxOpenConns") %>,
+        "Trace": <%= p("mattermost.SqlSettings.Trace") %>,
+        "AtRestEncryptKey": "<%= p("mattermost.SqlSettings.AtRestEncryptKey") %>"
     },
     "LogSettings": {
-        "EnableConsole": true,
-        "ConsoleLevel": "DEBUG",
-        "EnableFile": true,
-        "FileLevel": "INFO",
-        "FileFormat": "",
-        "FileLocation": "/var/vcap/sys/log/mattermost/mattermost.log"
+        "EnableConsole": <%= p("mattermost.LogSettings.EnableConsole") %>,
+        "ConsoleLevel": "<%= p("mattermost.LogSettings.ConsoleLevel") %>",
+        "EnableFile": <%= p("mattermost.LogSettings.EnableFile") %>,
+        "FileLevel": "<%= p("mattermost.LogSettings.FileLevel") %>",
+        "FileFormat": "<%= p("mattermost.LogSettings.FileFormat") %>",
+        "FileLocation": "<%= p("mattermost.LogSettings.FileLocation") %>",
+        "EnableWebhookDebugging": <%= p("mattermost.LogSettings.EnableWebhookDebugging") %>,
+        "EnableDiagnostics": <%= p("mattermost.LogSettings.EnableDiagnostics") %>
+    },
+    "PasswordSettings": {
+        "MinimumLength": <%= p("mattermost.PasswordSettings.MinimumLength") %>,
+        "Lowercase": <%= p("mattermost.PasswordSettings.Lowercase") %>,
+        "Number": <%= p("mattermost.PasswordSettings.Number") %>,
+        "Uppercase": <%= p("mattermost.PasswordSettings.Uppercase") %>,
+        "Symbol": <%= p("mattermost.PasswordSettings.Symbol") %>
     },
     "FileSettings": {
-        "DriverName": "local",
-        "Directory": "/var/vcap/store/mattermost/",
-        "EnablePublicLink": true,
-        "PublicLinkSalt": "A705AklYF8MFDOfcwh3I488G8vtLlVip",
+        "EnableFileAttachments": <%= p("mattermost.FileSettings.EnableFileAttachments") %>,
+        "MaxFileSize": <%= p("mattermost.FileSettings.MaxFileSize") %>,
+        "DriverName": "<%= p("mattermost.FileSettings.DriverName") %>",
+        "Directory": "<%= p("mattermost.FileSettings.Directory") %>",
+        "EnablePublicLink": <%= p("mattermost.FileSettings.EnablePublicLink") %>,
+        "PublicLinkSalt": "<%= p("mattermost.FileSettings.PublicLinkSalt") %>",
         "ThumbnailWidth": 120,
         "ThumbnailHeight": 100,
         "PreviewWidth": 1024,
@@ -49,38 +112,55 @@
         "ProfileWidth": 128,
         "ProfileHeight": 128,
         "InitialFont": "luximbi.ttf",
-        "AmazonS3AccessKeyId": "",
-        "AmazonS3SecretAccessKey": "",
-        "AmazonS3Bucket": "",
-        "AmazonS3Region": ""
+        "AmazonS3AccessKeyId": "<%= p("mattermost.FileSettings.AmazonS3AccessKeyId") %>",
+        "AmazonS3SecretAccessKey": "<%= p("mattermost.FileSettings.AmazonS3SecretAccessKey") %>",
+        "AmazonS3Bucket": "<%= p("mattermost.FileSettings.AmazonS3Bucket") %>",
+        "AmazonS3Region": "<%= p("mattermost.FileSettings.AmazonS3Region") %>",
+        "AmazonS3Endpoint": "<%= p("mattermost.FileSettings.AmazonS3Endpoint") %>",
+        "AmazonS3SSL": <%= p("mattermost.FileSettings.AmazonS3SSL") %>
     },
     "EmailSettings": {
-        "EnableSignUpWithEmail": true,
-        "SendEmailNotifications": false,
-        "RequireEmailVerification": false,
-        "FeedbackName": "",
-        "FeedbackEmail": "",
-        "SMTPUsername": "",
-        "SMTPPassword": "",
-        "SMTPServer": "",
-        "SMTPPort": "",
-        "ConnectionSecurity": "",
-        "InviteSalt": "bjlSR4QqkXFBr7TP4oDzlfZmcNuH9YoS",
-        "PasswordResetSalt": "vZ4DcKyVVRlKHHJpexcuXzojkE5PZ5eL",
-        "ApplePushServer": "",
-        "ApplePushCertPublic": "",
-        "ApplePushCertPrivate": ""
+        "EnableSignUpWithEmail": <%= p("mattermost.EmailSettings.EnableSignUpWithEmail") %>,
+        "EnableSignInWithEmail": <%= p("mattermost.EmailSettings.EnableSignInWithEmail") %>,
+        "EnableSignInWithUsername": <%= p("mattermost.EmailSettings.EnableSignInWithUsername") %>,
+        "SendEmailNotifications": <%= p("mattermost.EmailSettings.SendEmailNotifications") %>,
+        "RequireEmailVerification": <%= p("mattermost.EmailSettings.RequireEmailVerification") %>,
+        "FeedbackName": "<%= p("mattermost.EmailSettings.FeedbackName") %>",
+        "FeedbackEmail": "<%= p("mattermost.EmailSettings.FeedbackEmail") %>",
+        "FeedbackOrganization": "<%= p("mattermost.EmailSettings.FeedbackOrganization") %>",
+        "SMTPUsername": "<%= p("mattermost.EmailSettings.SMTPUsername") %>",
+        "SMTPPassword": "<%= p("mattermost.EmailSettings.SMTPPassword") %>",
+        "SMTPServer": "<%= p("mattermost.EmailSettings.SMTPServer") %>",
+        "SMTPPort": "<%= p("mattermost.EmailSettings.SMTPPort") %>",
+        "ConnectionSecurity": "<%= p("mattermost.EmailSettings.ConnectionSecurity") %>",
+        "InviteSalt": "<%= p("mattermost.EmailSettings.InviteSalt") %>",
+        "SendPushNotifications": <%= p("mattermost.EmailSettings.SendPushNotifications") %>,
+        "PushNotificationServer": "<%= p("mattermost.EmailSettings.PushNotificationServer") %>",
+        "PushNotificationContents": "<%= p("mattermost.EmailSettings.PushNotificationContents") %>",
+        "EnableEmailBatching": <%= p("mattermost.EmailSettings.EnableEmailBatching") %>,
+        "EmailBatchingBufferSize": 256,
+        "EmailBatchingInterval": 30,
+        "SkipServerCertificateVerification": false
     },
     "RateLimitSettings": {
-        "EnableRateLimiter": true,
-        "PerSec": 10,
-        "MemoryStoreSize": 10000,
-        "VaryByRemoteAddr": true,
-        "VaryByHeader": ""
+        "Enable": <%= p("mattermost.RateLimitSettings.Enable") %>,
+        "PerSec": <%= p("mattermost.RateLimitSettings.PerSec") %>,
+        "MaxBurst": <%= p("mattermost.RateLimitSettings.MaxBurst") %>,
+        "MemoryStoreSize": <%= p("mattermost.RateLimitSettings.MemoryStoreSize") %>,
+        "VaryByRemoteAddr": <%= p("mattermost.RateLimitSettings.VaryByRemoteAddr") %>,
+        "VaryByHeader": "<%= p("mattermost.RateLimitSettings.VaryByHeader") %>"
     },
     "PrivacySettings": {
-        "ShowEmailAddress": true,
-        "ShowFullName": true
+        "ShowEmailAddress": <%= p("mattermost.PrivacySettings.ShowEmailAddress") %>,
+        "ShowFullName": <%= p("mattermost.PrivacySettings.ShowFullName") %>
+    },
+    "SupportSettings": {
+        "TermsOfServiceLink": "<%= p("mattermost.SupportSettings.TermsOfServiceLink") %>",
+        "PrivacyPolicyLink": "<%= p("mattermost.SupportSettings.PrivacyPolicyLink") %>",
+        "AboutLink": "<%= p("mattermost.SupportSettings.AboutLink") %>",
+        "HelpLink": "<%= p("mattermost.SupportSettings.HelpLink") %>",
+        "ReportAProblemLink": "<%= p("mattermost.SupportSettings.ReportAProblemLink") %>",
+        "SupportEmail": "<%= p("mattermost.SupportSettings.SupportEmail") %>"
     },
     "GitLabSettings": {
         "Enable": false,
@@ -90,5 +170,120 @@
         "AuthEndpoint": "",
         "TokenEndpoint": "",
         "UserApiEndpoint": ""
+    },
+    "GoogleSettings": {
+        "Enable": false,
+        "Secret": "",
+        "Id": "",
+        "Scope": "profile email",
+        "AuthEndpoint": "https://accounts.google.com/o/oauth2/v2/auth",
+        "TokenEndpoint": "https://www.googleapis.com/oauth2/v4/token",
+        "UserApiEndpoint": "https://www.googleapis.com/plus/v1/people/me"
+    },
+    "Office365Settings": {
+        "Enable": false,
+        "Secret": "",
+        "Id": "",
+        "Scope": "User.Read",
+        "AuthEndpoint": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+        "TokenEndpoint": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+        "UserApiEndpoint": "https://graph.microsoft.com/v1.0/me"
+    },
+    <% if p("mattermost.LdapSettings.Enable") %>
+    "LdapSettings": {
+        "Enable": <%= p("mattermost.LdapSettings.Enable") %>,
+        "LdapServer": "<%= p("mattermost.LdapSettings.LdapServer") %>",
+        "LdapPort": <%= p("mattermost.LdapSettings.LdapPort") %>,
+        "ConnectionSecurity": "<%= p("mattermost.LdapSettings.ConnectionSecurity") %>",
+        "BaseDN": "<%= p("mattermost.LdapSettings.BaseDN") %>",
+        "BindUsername": "<%= p("mattermost.LdapSettings.BindUsername") %>",
+        "BindPassword": "<%= p("mattermost.LdapSettings.BindPassword") %>",
+        "UserFilter": "<%= p("mattermost.LdapSettings.UserFilter") %>",
+        "FirstNameAttribute": "<%= p("mattermost.LdapSettings.FirstNameAttribute") %>",
+        "LastNameAttribute": "<%= p("mattermost.LdapSettings.LastNameAttribute") %>",
+        "EmailAttribute": "<%= p("mattermost.LdapSettings.EmailAttribute") %>",
+        "UsernameAttribute": "<%= p("mattermost.LdapSettings.UsernameAttribute") %>",
+        "NicknameAttribute": "<%= p("mattermost.LdapSettings.NicknameAttribute") %>",
+        "IdAttribute": "<%= p("mattermost.LdapSettings.IdAttribute") %>",
+        "PositionAttribute": "<%= p("mattermost.LdapSettings.PositionAttribute") %>",
+        "SyncIntervalMinutes": <%= p("mattermost.LdapSettings.SyncIntervalMinutes") %>,
+        "SkipCertificateVerification": <%= p("mattermost.LdapSettings.SkipCertificateVerification") %>,
+        "QueryTimeout": <%= p("mattermost.LdapSettings.QueryTimeout") %>,
+        "MaxPageSize": <%= p("mattermost.LdapSettings.MaxPageSize") %>,
+        "LoginFieldName": "<%= p("mattermost.LdapSettings.LoginFieldName") %>"
+    },
+    <% end %>
+    "ComplianceSettings": {
+        "Enable": <%= p("mattermost.ComplianceSettings.Enable") %>,
+        "Directory": "<%= p("mattermost.ComplianceSettings.Directory") %>",
+        "EnableDaily": <%= p("mattermost.ComplianceSettings.EnableDaily") %>
+    },
+    "LocalizationSettings": {
+        "DefaultServerLocale": "en",
+        "DefaultClientLocale": "en",
+        "AvailableLocales": ""
+    },
+    "SamlSettings": {
+        "Enable": false,
+        "Verify": true,
+        "Encrypt": true,
+        "IdpUrl": "",
+        "IdpDescriptorUrl": "",
+        "AssertionConsumerServiceURL": "",
+        "IdpCertificateFile": "",
+        "PublicCertificateFile": "",
+        "PrivateKeyFile": "",
+        "FirstNameAttribute": "",
+        "LastNameAttribute": "",
+        "EmailAttribute": "",
+        "UsernameAttribute": "",
+        "NicknameAttribute": "",
+        "LocaleAttribute": "",
+        "PositionAttribute": "",
+        "LoginButtonText": "With SAML"
+    },
+    "NativeAppSettings": {
+        "AppDownloadLink": "<%= p("mattermost.NativeAppSettings.AppDownloadLink") %>",
+        "AndroidAppDownloadLink": "<%= p("mattermost.NativeAppSettings.AndroidAppDownloadLink") %>",
+        "IosAppDownloadLink": "<%= p("mattermost.NativeAppSettings.IosAppDownloadLink") %>"
+    },
+
+    "AnnouncementSettings": {
+        "EnableBanner": <%= p("mattermost.AnnouncementSettings.EnableBanner") %>,
+        "BannerText": "<%= p("mattermost.AnnouncementSettings.BannerText") %>",
+        "BannerColor": "<%= p("mattermost.AnnouncementSettings.BannerColor") %>",
+        "BannerTextColor": "<%= p("mattermost.AnnouncementSettings.BannerTextColor") %>",
+        "AllowBannerDismissal": <%= p("mattermost.AnnouncementSettings.AllowBannerDismissal") %>
+    },
+    <% nodes = link("cluster_nodes").instances -%>
+    <% if nodes.length > 1 -%>
+
+    "ClusterSettings": {
+        "Enable": true,
+        "InterNodeListenAddress": "<%= p("mattermost.ClusterSettings.InterNodeListenAddress") %>",
+        "InterNodeUrls": [<%= nodes.map{|node| "\"http://#{node.address}\""}.join(',') %>]
+    },
+    <% end -%>
+
+    "MetricsSettings": {
+        "Enable": <%= p("mattermost.MetricsSettings.Enable") %>,
+        "BlockProfileRate": <%= p("mattermost.MetricsSettings.BlockProfileRate") %>,
+        "ListenAddress": "<%= p("mattermost.MetricsSettings.ListenAddress") %>"
+    },
+    "AnalyticsSettings": {
+        "MaxUsersForStatistics": 2500
+    },
+    "WebrtcSettings": {
+        "Enable": <%= p("mattermost.WebrtcSettings.Enable") %>,
+        "GatewayWebsocketUrl": "<%= p("mattermost.WebrtcSettings.GatewayWebsocketUrl") %>",
+        "GatewayAdminUrl": "<%= p("mattermost.WebrtcSettings.GatewayAdminUrl") %>",
+        "GatewayAdminSecret": "<%= p("mattermost.WebrtcSettings.GatewayAdminSecret") %>",
+        "StunURI": "<%= p("mattermost.WebrtcSettings.StunURI") %>",
+        "TurnURI": "<%= p("mattermost.WebrtcSettings.TurnURI") %>",
+        "TurnUsername": "<%= p("mattermost.WebrtcSettings.TurnUsername") %>",
+        "TurnSharedKey": "<%= p("mattermost.WebrtcSettings.TurnSharedKey") %>"
+    },
+    "AnalyticsSettings": {
+        "MaxUsersForStatistics": <%= p("mattermost.AnalyticsSettings.MaxUsersForStatistics") %>
     }
 }
