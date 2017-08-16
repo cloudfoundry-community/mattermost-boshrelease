@@ -22,3 +22,5 @@ ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no <%= p("SSHUsername") %>@<%= link(
 sleep <%= p("sleep_after_seconds") %>
 
 cp *.log /var/vcap/sys/log/load_test/
+
+cp config/* /var/vcap/sys/log/load_test/
