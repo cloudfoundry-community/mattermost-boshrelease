@@ -6,26 +6,7 @@ mattermost/load-test-3.10.tar.gz:
   size: 348506
   object_id: d2f12f9e-1a09-4169-5c0f-7fb978045943
   sha: 8fb8c11334e11d0a237f4e393b8eff81c2d7b021
-mattermost/mattermost-1.4.0.tar.gz:
-  size: 24170379
-  object_id: 6fc9c494-8f86-4e07-99a8-3a1f105dd579
-  sha: 043102e27a87a517242d1549c1e5b226725db72a
-mattermost/mattermost-2.1.0-rc1.tar.gz:
-  size: 31152402
-  object_id: c0e8af08-6ed0-4e4f-9c25-9e5d23c32833
-  sha: 037c41a174c627953b7f0dda19e097d419830e04
-mattermost/mattermost-2.1.0-rc2.tar.gz:
-  size: 31158921
-  object_id: 4f18819c-0ad1-4a44-bafa-73329203b749
-  sha: b49618254b3b0f03b1bbd36f9a96e53c1be18afc
-mattermost/mattermost-2.1.0.tar.gz:
-  size: 31151729
-  object_id: a8a7156e-4816-4e3a-96ef-963807da9c67
-  sha: e30953a0d82288e350963805d3bb219d9d568963
-mattermost/mattermost-2.2.0-rc2.tar.gz:
-  size: 31205979
-  object_id: a7e46842-e3de-4f96-9173-23af4df347c4
-  sha: efd4f073f07ba5bb892015f6a506a6861cf5381b
-mattermost/mattermost-3.10.0-linux-amd64.tar.gz:
-  size: 51883968
-  sha: 611f12094cbffc3e8e86917987cc998819c2f20b
+mattermost/mattermost-4.1.0-linux-amd64.tar.gz:
+  size: 53019533
+  object_id: b5611673-7915-4a1c-48ce-a76109766055
+  sha: 1c54bd56e8c25a397d4135e9ef8a2930183ba9cd
