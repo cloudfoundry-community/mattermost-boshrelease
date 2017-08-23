@@ -1,0 +1,12 @@
+---
+- type: remove
+  path: /instance_groups/name=mattermost/jobs/name=postgres
+
+- type: remove
+  path: /instance_groups/name=mattermost/jobs/name=mattermost/consumes/db
+
+- type: replace
+  path: /instance_groups/name=mattermost/jobs/name=mattermost/properties/mattermost/SqlSettings?
+  value:
+    DriverName: ((sql-drivername))
+    DataSource: ((sql-datasource))
