@@ -20,10 +20,10 @@ meta:
     operator_file_paths: manifests/operators/routing.yml
     vars: (( concat
       "\nrouting-nats-deployment=" meta.bosh-lite.cf.deployment_name
-      "\nmattermost-uri=mattermost-testflight." meta.bosh-lite.cf.system_domain ))
+      "\nmattermost-hostname=mattermost-testflight." meta.bosh-lite.cf.system_domain ))
     vars-pr: (( concat
       "\nrouting-nats-deployment=" meta.bosh-lite.cf.deployment_name
-      "\nmattermost-uri=mattermost-testflight-pr." meta.bosh-lite.cf.system_domain ))
+      "\nmattermost-hostname=mattermost-testflight-pr." meta.bosh-lite.cf.system_domain ))
 
   aws:
     access_key: (( vault "secret/aws/cfcommunity:access" ))
