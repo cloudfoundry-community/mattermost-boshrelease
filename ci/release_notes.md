@@ -9,3 +9,4 @@
 
 * `mattermost` job can consume `type: postgresql` link to discover database credentials
 * `mattermost.SqlSettings.DriverName` no longer defaults to `mysql` - either provide it explicitly or use BOSH links
+* Mattermost v4.1.0 https://docs.mattermost.com/administration/changelog.html#release-v4-1-0
