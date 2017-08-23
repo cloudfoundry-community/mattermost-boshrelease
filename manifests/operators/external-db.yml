@@ -10,5 +10,6 @@
   value:
     # sql-drivername examples: postgres, mysql
     DriverName: ((sql-drivername))
-    # sql-datasource format: username:password@tcp(10.11.12.13:5432)/mattermost
+    # sql-datasource format for mysql: username:password@tcp(10.11.12.13:3306)/mattermost
+    # sql-datasource format for postgreslq: postgres://username:password@10.11.12.13:5432/mattermost
     DataSource: ((sql-datasource))
