@@ -19,9 +19,11 @@ meta:
   manifest:
     operator_file_paths: manifests/operators/routing.yml
     vars: (( concat
+      "\nmattermost-sql-atrestencryptkey=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       "\nrouting-nats-deployment=" meta.bosh-lite.cf.deployment_name
       "\nmattermost-hostname=mattermost-testflight." meta.bosh-lite.cf.system_domain ))
     vars-pr: (( concat
+      "\nmattermost-sql-atrestencryptkey=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       "\nrouting-nats-deployment=" meta.bosh-lite.cf.deployment_name
       "\nmattermost-hostname=mattermost-testflight-pr." meta.bosh-lite.cf.system_domain ))
 

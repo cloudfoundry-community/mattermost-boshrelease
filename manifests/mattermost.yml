@@ -51,6 +51,8 @@ variables:
   type: password
 - name: mattermost-sql-atrestencryptkey
   type: password
+  options:
+    length: 32
 
 update:
   canaries: 1
