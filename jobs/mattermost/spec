@@ -17,6 +17,9 @@ consumes:
   - name: cluster_nodes
     type: mattermost_cluster
     optional: true
+  - name: db
+    type: postgresql
+    optional: true
 
 provides:
   - name: cluster_nodes

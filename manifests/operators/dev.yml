@@ -1,0 +1,6 @@
+---
+- type: replace
+  path: /releases/name=mattermost
+  value:
+    name: mattermost
+    version: latest

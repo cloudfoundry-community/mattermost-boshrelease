@@ -1,0 +1,69 @@
+name: mattermost
+
+instance_groups:
+- name: mattermost
+  azs: [z1, z2, z3]
+  instances: 2
+  vm_type: default
+  stemcell: default
+  persistent_disk_type: 1GB
+  networks: [{name: default}]
+  jobs:
+  - release: postgres
+    name: postgres
+    provides:
+      db: {as: postgresql}
+    properties:
+      postgres:
+        hba:
+          - host all all 0.0.0.0/0 md5
+          - host all all ::/0 md5
+      pgpool:
+        databases:
+          - name: mattermost
+            users:
+              - admin
+              - mattermost
+            extensions: []
+        users:
+          - username: admin
+            password: ((db-admin-password))
+            admin:    true
+          - username: mattermost
+            password: ((db-mattermost-password))
+  - release: mattermost
+    name: mattermost
+    consumes:
+      db: {from: postgresql}
+    properties:
+      mattermost:
+        ServiceSettings:
+          SiteURL: ((mattermost-siteurl))
+
+variables:
+- name: db-admin-password
+  type: password
+- name: db-user-password
+  type: password
+
+update:
+  canaries: 1
+  max_in_flight: 50
+  canary_watch_time: 1000-30000
+  update_watch_time: 1000-30000
+  serial: false
+
+stemcells:
+- alias: default
+  os: ubuntu-trusty
+  version: latest
+
+releases:
+- name: postgres
+  version: 1.1.0.latest
+  # url: https://github.com/cloudfoundry-community/postgres-boshrelease/releases/download/v1.1.0/postgres-1.1.0.tgz
+  # sha1: 4dce405db892799fbdb8d702ed9168df45984787
+- name: mattermost
+  version: "5"
+  url: https://github.com/cloudfoundry-community/mattermost-boshrelease/releases/download/v5/mattermost-5.tgz
+  sha1: 4cc6ec24381ff67229fe4b587c19371891883ab0

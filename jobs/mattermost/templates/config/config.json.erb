@@ -1,3 +1,19 @@
+<%
+  db = sql_drivername = sql_datasource = nil
+  if_link("db") do |database|
+    db = database
+    db.if_p("postgres.config", "pgpool.users", "pgpool.databases") do |config, users, databases|
+      sql_drivername = "postgres"
+      host = db.instances.first.address
+      port = config["port"] || 6432
+      nonadmin_user = users.find { |u| !u[:admin] && !u["admin"] } || users.first
+      username = nonadmin_user["username"]
+      password = nonadmin_user["password"]
+      dbname = databases.first["name"]
+      sql_datasource = "postgres://#{username}:#{password}@#{host}:#{port}/#{dbname}?sslmode=disable&connect_timeout=10"
+    end
+  end
+-%>
 {
     "ServiceSettings": {
         "SiteURL": "<%= p("mattermost.ServiceSettings.SiteURL") %>",
@@ -72,8 +88,8 @@
     },
 
     "SqlSettings": {
-        "DriverName": "<%= p("mattermost.SqlSettings.DriverName") %>",
-        "DataSource": "<%= p("mattermost.SqlSettings.DataSource") %>",
+        "DriverName": "<%= p("mattermost.SqlSettings.DriverName", sql_drivername) %>",
+        "DataSource": "<%= p("mattermost.SqlSettings.DataSource", sql_datasource) %>",
         "DataSourceReplicas": [],
         "DataSourceSearchReplicas": [],
         "MaxIdleConns": <%= p("mattermost.SqlSettings.MaxIdleConns") %>,
