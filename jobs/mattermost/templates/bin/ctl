@@ -17,9 +17,13 @@ case $1 in
     # store pid in $PIDFILE
     echo $$ > $PIDFILE
 
+    # mattermost looks to want to modify config
+    cp $JOB_DIR/config/initial-config.json $RUN_DIR/config.json
+    chown vcap:vcap $RUN_DIR/config.json
+
     cd /var/vcap/packages/platform
     ulimit -n 49152 # set the open file limit
-    exec chpst -u vcap:vcap platform -c $JOB_DIR/config/config.json \
+    exec chpst -u vcap:vcap platform -c $RUN_DIR/config.json \
          >>$LOG_DIR/$JOB_NAME.stdout.log \
          2>>$LOG_DIR/$JOB_NAME.stderr.log
 
