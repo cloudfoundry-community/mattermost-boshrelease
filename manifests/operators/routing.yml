@@ -1,0 +1,28 @@
+---
+- type: replace
+  path: /instance_groups/name=mattermost/jobs/-
+  value:
+    name: route_registrar
+    release: routing
+    consumes:
+      nats:
+        from: nats
+        deployment: ((routing-nats-deployment))
+    properties:
+      route_registrar:
+        routes:
+        - name: mattermost
+          port: 8080
+          tags:
+            component: mattermost
+          registration_interval: 10s
+          uris:
+          - ((mattermost-uri))
+
+- type: replace
+  path: /releases/-
+  value:
+    name: routing
+    version: 0.161.0
+    url: https://bosh.io/d/github.com/cloudfoundry-incubator/cf-routing-release?v=0.161.0
+    sha1: 05a4c2c7eac94dca40fb622cc936b8f0271ca04f
