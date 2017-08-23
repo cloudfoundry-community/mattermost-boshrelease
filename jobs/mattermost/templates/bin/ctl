@@ -33,8 +33,13 @@ case $1 in
     kill_and_wait $PIDFILE
 
     ;;
+
+  config-diff)
+    diff $RUN_DIR/config.json $JOB_DIR/config/initial-config.json
+
+    ;;
   *)
-    echo "Usage: ctl {start|stop}"
+    echo "Usage: ctl {start|stop|config-diff}"
 
     ;;
 
