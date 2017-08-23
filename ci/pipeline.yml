@@ -250,6 +250,7 @@ jobs:
           outputs:
             - name: gh
             - name: pushme
+            - name: notifications
           run:
             path: ./git/ci/scripts/shipit
             args: []
@@ -258,6 +259,7 @@ jobs:
             VERSION_FROM: version/number
             RELEASE_ROOT: gh
             REPO_OUT:     pushme
+            NOTIFICATION_OUT: notifications
             BRANCH:       (( grab meta.github.branch ))
             GITHUB_OWNER: (( grab meta.github.owner ))
             MANIFEST_PATH: (( concat "manifests/" meta.name ".yml" ))
@@ -285,6 +287,12 @@ jobs:
         put: version
         params:
           bump: patch
+      - put: notify
+        params:
+          channel:  (( grab meta.slack.channel ))
+          username: (( grab meta.slack.username ))
+          icon_url: (( grab meta.slack.icon ))
+          text_file: notifications/message
       on_failure:
         put: notify
         params:
