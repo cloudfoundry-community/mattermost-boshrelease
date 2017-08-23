@@ -12,12 +12,12 @@
       route_registrar:
         routes:
         - name: mattermost
-          port: 8080
+          port: 8605
           tags:
             component: mattermost
           registration_interval: 10s
           uris:
-          - ((mattermost-uri))
+          - ((mattermost-hostname))
 
 - type: replace
   path: /releases/-
@@ -26,3 +26,7 @@
     version: 0.161.0
     url: https://bosh.io/d/github.com/cloudfoundry-incubator/cf-routing-release?v=0.161.0
     sha1: 05a4c2c7eac94dca40fb622cc936b8f0271ca04f
+
+- type: replace
+  path: /instance_groups/name=mattermost/jobs/name=mattermost/properties/mattermost/ServiceSettings/SiteURL?
+  value: https://((mattermost-hostname))

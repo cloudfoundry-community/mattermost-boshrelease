@@ -17,7 +17,7 @@ consumes:
   - name: cluster_nodes
     type: mattermost_cluster
     optional: true
-  - name: db
+  - name: postgresql
     type: postgresql
     optional: true
 
@@ -201,7 +201,6 @@ properties:
 
   mattermost.SqlSettings.DriverName:
     description: Either 'postgres' or 'mysql'
-    default: mysql
   mattermost.SqlSettings.DataSource:
     description: This is the connection string to the master database.
   mattermost.SqlSettings.MaxIdleConns:

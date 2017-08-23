@@ -8,5 +8,7 @@
 - type: replace
   path: /instance_groups/name=mattermost/jobs/name=mattermost/properties/mattermost/SqlSettings?
   value:
+    # sql-drivername examples: postgres, mysql
     DriverName: ((sql-drivername))
+    # sql-datasource format: username:password@tcp(10.11.12.13:5432)/mattermost
     DataSource: ((sql-datasource))

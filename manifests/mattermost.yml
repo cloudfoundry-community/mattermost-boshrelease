@@ -3,7 +3,7 @@ name: mattermost
 instance_groups:
 - name: mattermost
   azs: [z1, z2, z3]
-  instances: 2
+  instances: 1
   vm_type: default
   stemcell: default
   persistent_disk_type: 1GB
@@ -18,6 +18,8 @@ instance_groups:
         hba:
           - host all all 0.0.0.0/0 md5
           - host all all ::/0 md5
+          - local all all trust
+          - local all all trust
       pgpool:
         databases:
           - name: mattermost
@@ -34,16 +36,20 @@ instance_groups:
   - release: mattermost
     name: mattermost
     consumes:
-      db: {from: postgresql}
+      postgresql: {from: postgresql}
     properties:
       mattermost:
+        SqlSettings:
+          AtRestEncryptKey: ((mattermost-sql-atrestencryptkey))
         ServiceSettings:
           SiteURL: ((mattermost-siteurl))
 
 variables:
 - name: db-admin-password
   type: password
-- name: db-user-password
+- name: db-mattermost-password
+  type: password
+- name: mattermost-sql-atrestencryptkey
   type: password
 
 update:
