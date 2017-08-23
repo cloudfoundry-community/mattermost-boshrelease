@@ -3,7 +3,7 @@ meta:
   name:    mattermost
   target:  sw
   url:     https://ci.starkandwayne.com
-  test-errands: load_test
+  # test-errands: load_test
 
   initial_version: 5.1.0
 

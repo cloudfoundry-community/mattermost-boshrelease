@@ -10,6 +10,7 @@ PACKAGE_NAME=github.com/mattermost/mattermost-load-test/cmd/loadtest
 
 mkdir -p src/$NAMESPACE
 tar xzf mattermost/load-test-*.tar.gz -C src/$NAMESPACE
+mv src/$NAMESPACE/mattermost-load-test{*,}
 
 export GOROOT=$(readlink -nf /var/vcap/packages/go)
 export GOPATH=$BOSH_COMPILE_TARGET
