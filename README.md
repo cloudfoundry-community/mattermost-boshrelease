@@ -48,10 +48,10 @@ system_domain=$(bosh -d $cf_deployment manifest | bosh int - --path /instance_gr
 
 bosh deploy manifests/mattermost.yml \
    --vars-store tmp/creds.yml \
-   -v "mattermost-sql-atrestencryptkey=${atrestencryptionkey}" \
+   -v "mattermost-sql-atrestencryptkey=${atrestencryptionkey:?required}" \
   -o manifests/operators/routing.yml \
-  -v routing-nats-deployment=$cf_deployment \
-  -v "mattermost-hostname=mattermost.$system_domain"
+  -v routing-nats-deployment=${cf_deployment:?required} \
+  -v "mattermost-hostname=mattermost.${system_domain:?required}"
 
 open https://mattermost.$system_domain
 ```
