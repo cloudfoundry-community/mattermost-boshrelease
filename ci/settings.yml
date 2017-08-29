@@ -43,4 +43,4 @@ meta:
     webhook:  (( vault "secret/pipelines/" meta.pipeline "/slack:webhook" ))
     channel:  "#mattermost"
     username: starkandwayne-ci
-    icon:     https://cl.ly/0o401h3l1x3R/logo-50x50.png
+    icon:     https://www.starkandwayne.com/assets/images/shield-blue-50x50.png
