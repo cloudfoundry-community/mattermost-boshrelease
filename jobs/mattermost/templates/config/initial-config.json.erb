@@ -323,9 +323,9 @@
     "JobSettings": {
         "RunJobs": <%= p("mattermost.JobSettings.RunJobs") %>,
         "RunScheduler": <%= p("mattermost.JobSettings.RunScheduler") %>
-    }
-    <% if_p("mattermost.ElasticsearchSettings.ConnectionUrl") do %>
-    ,"ElasticsearchSettings": {
+    },
+    <%- if_p("mattermost.ElasticsearchSettings.ConnectionUrl") do -%>
+    "ElasticsearchSettings": {
         "ConnectionUrl": "<%= p("mattermost.ElasticsearchSettings.ConnectionUrl") %>",
         "Username": "<%= p("mattermost.ElasticsearchSettings.Username") %>",
         "Password": "<%= p("mattermost.ElasticsearchSettings.Password") %>",
@@ -334,6 +334,19 @@
         "Sniff": <%= p("mattermost.ElasticsearchSettings.Sniff") %>,
         "PostIndexReplicas": <%= p("mattermost.ElasticsearchSettings.PostIndexReplicas") %>,
         "PostIndexShards": <%= p("mattermost.ElasticsearchSettings.PostIndexShards") %>
+    },
+    <%- end -%>
+    "PluginSettings": {
+        "Plugins": {
+        <%- if p("mattermost.Plugins.Jira.Enabled") -%>
+            "Jira": {
+                "Enabled": true,
+                <%- if_p("mattermost.Plugins.Jira.UserName") do |user| -%>
+                "UserName": "<%= user %>",
+                <%- end -%>
+                "Secret": "<%= p("mattermost.Plugins.Jira.Secret") %>"
+            }
+        <%- end -%>
+        }
     }
-    <% end %>
 }

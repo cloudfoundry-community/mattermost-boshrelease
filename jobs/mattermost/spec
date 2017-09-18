@@ -526,8 +526,7 @@ properties:
     default: true
 
   mattermost.ClusterSettings.ClusterName:
-    description: The cluster to join by name. Only nodes with the same cluster name will join together. This is to support Blue-Green deployments or staging pointing to the same database.
-    default: ""
+    description: The cluster to join by name. Only nodes with the same cluster name will join together. This is to support Blue-Green deployments or staging pointing to the same database.  The deployment name will be used by default.
   mattermost.ClusterSettings.UseIpAddress:
     description: The cluster attempts to communicate using the IP Address, if false, hostname is used
     default: true
@@ -610,3 +609,11 @@ properties:
   mattermost.ElasticsearchSettings.PostIndexShards:
     description: how many shards to use for each post index
     default: 1
+
+  mattermost.Plugins.Jira.Enabled:
+    description: You can configure JIRA webhooks to post message in Mattermost. To help combat phishing attacks, all posts are labelled by a BOT tag.
+    default: false
+  mattermost.Plugins.Jira.Secret:
+    description: The secret used to authenticate to Mattermost. Regenerating the secret for the webhook URL endpoint invalidates your existing JIRA integrations.
+  mattermost.Plugins.Jira.UserName:
+    description: Select the username that this integration is attached to.

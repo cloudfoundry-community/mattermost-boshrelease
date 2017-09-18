@@ -5,16 +5,5 @@ set -u # report the usage of uninitialized variables
 # $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
 # $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
 
-NAMESPACE=github.com/mattermost
-PACKAGE_NAME=github.com/mattermost/mattermost-load-test/cmd/loadtest
-
-mkdir -p src/$NAMESPACE
-tar xzf mattermost/load-test-*.tar.gz -C src/$NAMESPACE
-mv src/$NAMESPACE/mattermost-load-test{*,}
-
-export GOROOT=$(readlink -nf /var/vcap/packages/go)
-export GOPATH=$BOSH_COMPILE_TARGET
-export PATH=$GOROOT/bin:$PATH
-go install $PACKAGE_NAME
-
-cp -a bin $BOSH_INSTALL_TARGET
+tar xzf mattermost/mattermost-load-test-*.tar.gz
+cp -a mattermost-load-test*/bin $BOSH_INSTALL_TARGET

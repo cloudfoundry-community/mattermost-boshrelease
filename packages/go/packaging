@@ -5,8 +5,6 @@ set -u # report the usage of uninitialized variables
 # $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
 export HOME=/var/vcap
 
-
-
 tar xfv go/go1.8.3.linux-amd64.tar.gz
 # Alternatively, to copy archive contents:
 cp -a go/* $BOSH_INSTALL_TARGET

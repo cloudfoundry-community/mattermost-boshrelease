@@ -1,4 +1,5 @@
 ---
 name: platform
 dependencies: []
-files: [mattermost/mattermost-*-linux-amd64.tar.gz]
+files: 
+- mattermost/mattermost-*-linux-amd64.tar.gz
