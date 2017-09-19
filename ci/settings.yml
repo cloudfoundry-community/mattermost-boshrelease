@@ -44,3 +44,140 @@ meta:
     channel:  "#mattermost"
     username: starkandwayne-ci
     icon:     https://www.starkandwayne.com/assets/images/shield-blue-50x50.png
+    blob_success:  '(( concat "$BUILD_PIPELINE_NAME: New version of $BUILD_JOB_NAME was detected, and updated in master. <" meta.url "/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME| Cut a new release?>" ))'
+    blob_failure:  '(( concat "$BUILD_PIPELINE_NAME: :airplane_arriving: <" meta.url "/teams/$BUILD_TEAM_NAME/pipelines/$BUILD_PIPELINE_NAME/jobs/$BUILD_JOB_NAME/builds/$BUILD_NAME| Failed to update the blob for $BUILD_JOB_NAME>" ))'
+
+groups:
+- name: blobs
+  jobs:
+  - mattermost-enterprise
+  - load-test
+
+jobs:
+- name: mattermost-enterprise
+  public: true
+  serial_groups: [git]
+  plan:
+  - aggregate:
+    - { get: git }
+    - { get: mattermost, trigger: true, params: { globs: [mattermost-enterprise-*-linux-amd64.tar.gz] }}
+  - task: update-mattermost
+    config:
+      image_resource:
+        type: docker-image
+        source:
+          repository: (( grab meta.image.name ))
+          tag:        (( grab meta.image.tag ))
+      platform: linux
+      inputs:
+      - name: git
+      - name: mattermost
+      outputs:
+      - name: pushme
+      run:
+        path: ./git/ci/scripts/update-blob
+      params:
+        REPO_ROOT:   git
+        REPO_OUT:    pushme
+        BLOB_DIR:    mattermost
+        BLOB_NAME:   mattermost
+        BLOB_BINARY: mattermost-enterprise-*-linux-amd64.tar.gz
+        BLOB_URL:    https://github.com/starkandwayne/mattermost-releases
+        BLOB_CLEANUP:     mattermost/mattermost.*linux-amd64.tar.gz
+        BLOB_DESTINATION: mattermost/mattermost-enterprise-${VERSION}-linux-amd64.tar.gz
+        AWS_ACCESS_KEY: (( grab meta.aws.access_key ))
+        AWS_SECRET_KEY: (( grab meta.aws.secret_key ))
+        BRANCH:         (( grab meta.github.branch ))
+    on_failure:
+      put: notify
+      params:
+        channel:  (( grab meta.slack.channel ))
+        username: (( grab meta.slack.username ))
+        icon_url: (( grab meta.slack.icon ))
+        text:     (( grab meta.slack.blob_failure ))
+  - put: git
+    params:
+      rebase: true
+      repository: pushme/git
+    on_success:
+      put: notify
+      params:
+        channel:  (( grab meta.slack.channel ))
+        username: (( grab meta.slack.username ))
+        icon_url: (( grab meta.slack.icon ))
+        text:     (( grab meta.slack.blob_success ))
+    on_failure:
+      put: notify
+      params:
+        channel:  (( grab meta.slack.channel ))
+        username: (( grab meta.slack.username ))
+        icon_url: (( grab meta.slack.icon ))
+        text:     (( grab meta.slack.blob_failure ))
+
+- name: load-test
+  public: true
+  serial_groups: [git]
+  plan:
+  - aggregate:
+    - { get: git }
+    - { get: mattermost, trigger: true, params: { globs: [mattermost-load-test-*.tar.gz] }}
+  - task: update-mattermost
+    config:
+      image_resource:
+        type: docker-image
+        source:
+          repository: (( grab meta.image.name ))
+          tag:        (( grab meta.image.tag ))
+      platform: linux
+      inputs:
+      - name: git
+      - name: mattermost
+      outputs:
+      - name: pushme
+      run:
+        path: ./git/ci/scripts/update-blob
+      params:
+        REPO_ROOT:   git
+        REPO_OUT:    pushme
+        BLOB_DIR:    mattermost
+        BLOB_NAME:   load-test
+        BLOB_BINARY: mattermost-load-test-*.tar.gz
+        BLOB_URL:    https://github.com/starkandwayne/mattermost-releases
+        BLOB_CLEANUP:     mattermost/load-test.*
+        BLOB_DESTINATION: mattermost/load-test-${VERSION}.tar.gz
+        AWS_ACCESS_KEY: (( grab meta.aws.access_key ))
+        AWS_SECRET_KEY: (( grab meta.aws.secret_key ))
+        BRANCH:         (( grab meta.github.branch ))
+    on_failure:
+      put: notify
+      params:
+        channel:  (( grab meta.slack.channel ))
+        username: (( grab meta.slack.username ))
+        icon_url: (( grab meta.slack.icon ))
+        text:     (( grab meta.slack.blob_failure ))
+  - put: git
+    params:
+      rebase: true
+      repository: pushme/git
+    on_success:
+      put: notify
+      params:
+        channel:  (( grab meta.slack.channel ))
+        username: (( grab meta.slack.username ))
+        icon_url: (( grab meta.slack.icon ))
+        text:     (( grab meta.slack.blob_success ))
+    on_failure:
+      put: notify
+      params:
+        channel:  (( grab meta.slack.channel ))
+        username: (( grab meta.slack.username ))
+        icon_url: (( grab meta.slack.icon ))
+        text:     (( grab meta.slack.blob_failure ))
+
+resources:
+  - name: mattermost
+    type: github-release
+    source:
+      user:         starkandwayne
+      repository:   mattermost-releases
+      access_token: (( grab meta.github.access_token ))
