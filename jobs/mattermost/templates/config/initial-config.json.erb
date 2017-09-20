@@ -66,7 +66,8 @@
         "EnableEmojiPicker": <%= p("mattermost.ServiceSettings.EnableEmojiPicker") %>,
         "EnableChannelViewedMessages": <%= p("mattermost.ServiceSettings.EnableChannelViewedMessages") %>,
         "EnableAPIv3": <%= p("mattermost.ServiceSettings.EnableAPIv3") %>,
-        "EnableUserAccessTokens": <%= p("mattermost.ServiceSettings.EnableUserAccessTokens") %>
+        "EnableUserAccessTokens": <%= p("mattermost.ServiceSettings.EnableUserAccessTokens") %>,
+        "AllowedUntrustedInternalConnections": "<%= p("mattermost.ServiceSettings.AllowedUntrustedInternalConnections") %>"
     },
     "TeamSettings": {
         "SiteName": "<%= p("mattermost.TeamSettings.SiteName") %>",
@@ -90,7 +91,8 @@
         "RestrictPrivateChannelDeletion": "<%= p("mattermost.TeamSettings.RestrictPrivateChannelDeletion") %>",
         "RestrictPrivateChannelManageMembers": "<%= p("mattermost.TeamSettings.RestrictPrivateChannelManageMembers") %>",
         "UserStatusAwayTimeout": 300,
-        "TeammateNameDisplay": "<%= p("mattermost.TeamSettings.TeammateNameDisplay") %>"
+        "TeammateNameDisplay": "<%= p("mattermost.TeamSettings.TeammateNameDisplay") %>",
+        "EnableXToLeaveChannelsFromLHS": <%= p("mattermost.TeamSettings.EnableXToLeaveChannelsFromLHS") %>
     },
 
     "SqlSettings": {
@@ -144,7 +146,8 @@
         "AmazonS3SignV2": <%= p("mattermost.FileSettings.AmazonS3SignV2") %>,
         "AmazonS3SSE": <%= p("mattermost.FileSettings.AmazonS3SSE") %>,
         "EnableMobileUpload": <%= p("mattermost.FileSettings.EnableMobileUpload") %>,
-        "EnableMobileDownload": <%= p("mattermost.FileSettings.EnableMobileDownload") %>
+        "EnableMobileDownload": <%= p("mattermost.FileSettings.EnableMobileDownload") %>,
+        "AmazonS3Trace": <%= p("mattermost.FileSettings.AmazonS3Trace") %>
     },
     "EmailSettings": {
         "EnableSignUpWithEmail": <%= p("mattermost.EmailSettings.EnableSignUpWithEmail") %>,
@@ -333,7 +336,9 @@
         "EnableSearching": <%= p("mattermost.ElasticsearchSettings.EnableSearching") %>,
         "Sniff": <%= p("mattermost.ElasticsearchSettings.Sniff") %>,
         "PostIndexReplicas": <%= p("mattermost.ElasticsearchSettings.PostIndexReplicas") %>,
-        "PostIndexShards": <%= p("mattermost.ElasticsearchSettings.PostIndexShards") %>
+        "PostIndexShards": <%= p("mattermost.ElasticsearchSettings.PostIndexShards") %>,
+        "AggregatePostsAfterDays": <%= p("mattermost.ElasticsearchSettings.AggregatePostsAfterDays") %>,
+        "PostsAggregatorJobStartTime": "<%= p("mattermost.ElasticsearchSettings.PostsAggregatorJobStartTime") %>"
     },
     <%- end -%>
     "PluginSettings": {
@@ -348,5 +353,14 @@
             }
         <%- end -%>
         }
+    },
+    "ThemeSettings": {
+        "EnableThemeSelection": <%= p("mattermost.ThemeSettings.EnableThemeSelection") %>,
+        <%- if_p("mattermost.ThemeSettings.DefaultTheme") do |theme| -%>
+        "DefaultTheme": <%= theme %>,
+        <%- end -%>
+        "AllowCustomThemes": <%= p("mattermost.ThemeSettings.AllowCustomThemes") %>,
+        "AllowedThemes": <%= p("mattermost.ThemeSettings.AllowedThemes") %>
     }
+    
 }

@@ -14,6 +14,8 @@ ssh -i .ssh/id_rsa -o StrictHostKeyChecking=no <%= p("SSHUsername") %>@<%= link(
 
 sleep <%= p("sleep_before_seconds") %>
 
+ulimit -n 49152 # set the open file limit
+
 mkdir -p /var/vcap/sys/log/load_test
 /var/vcap/packages/load_test/bin/loadtest all >>/var/vcap/sys/log/load_test/stdout.log 2>>/var/vcap/sys/log/load_test/stderr.log
 

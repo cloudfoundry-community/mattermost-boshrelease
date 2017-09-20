@@ -51,9 +51,8 @@ See [release notes] (https://docs.mattermost.com/administration/changelog.html#r
 
 ### Added the following attributes
 
-mattemrost.ServiceSettings.AllowedUntrustedInternalConnections
-mattermost.Tpush
-eamSettings.EnableXToLeaveChannelsFromLHS
+mattermost.ServiceSettings.AllowedUntrustedInternalConnections
+mattermost.TeamSettings.EnableXToLeaveChannelsFromLHS
 mattermost.FileSettings.AmazonS3Trace
 
 #### Additional Changes to Enterprise Edition
