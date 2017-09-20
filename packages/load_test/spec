@@ -2,4 +2,4 @@
 name: load_test
 dependencies: [go]
 files:
-- mattermost/mattermost-load-test-*.tar.gz 
+- mattermost/load-test-*.tar.gz 

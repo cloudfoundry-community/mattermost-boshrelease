@@ -5,5 +5,5 @@ set -u # report the usage of uninitialized variables
 # $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
 # $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
 
-tar xzf mattermost/mattermost-load-test-*.tar.gz
-cp -a mattermost-load-test*/bin $BOSH_INSTALL_TARGET
+tar xzf mattermost/load-test-*.tar.gz
+cp -a load-test*/bin $BOSH_INSTALL_TARGET
