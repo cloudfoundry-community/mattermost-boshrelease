@@ -62,7 +62,11 @@
         "EnablePostSearch": true,
         "EnableUserTypingMessages": true,
         "EnableUserStatuses": true,
-        "ClusterLogTimeoutMilliseconds": 2000
+        "ClusterLogTimeoutMilliseconds": 2000,
+        "EnableEmojiPicker": <%= p("mattermost.ServiceSettings.EnableEmojiPicker") %>,
+        "EnableChannelViewedMessages": <%= p("mattermost.ServiceSettings.EnableChannelViewedMessages") %>,
+        "EnableAPIv3": <%= p("mattermost.ServiceSettings.EnableAPIv3") %>,
+        "EnableUserAccessTokens": <%= p("mattermost.ServiceSettings.EnableUserAccessTokens") %>
     },
     "TeamSettings": {
         "SiteName": "<%= p("mattermost.TeamSettings.SiteName") %>",
@@ -85,7 +89,8 @@
         "RestrictPublicChannelDeletion": "<%= p("mattermost.TeamSettings.RestrictPublicChannelDeletion") %>",
         "RestrictPrivateChannelDeletion": "<%= p("mattermost.TeamSettings.RestrictPrivateChannelDeletion") %>",
         "RestrictPrivateChannelManageMembers": "<%= p("mattermost.TeamSettings.RestrictPrivateChannelManageMembers") %>",
-        "UserStatusAwayTimeout": 300
+        "UserStatusAwayTimeout": 300,
+        "TeammateNameDisplay": "<%= p("mattermost.TeamSettings.TeammateNameDisplay") %>"
     },
 
     "SqlSettings": {
@@ -96,7 +101,8 @@
         "MaxIdleConns": <%= p("mattermost.SqlSettings.MaxIdleConns") %>,
         "MaxOpenConns": <%= p("mattermost.SqlSettings.MaxOpenConns") %>,
         "Trace": <%= p("mattermost.SqlSettings.Trace") %>,
-        "AtRestEncryptKey": "<%= p("mattermost.SqlSettings.AtRestEncryptKey") %>"
+        "AtRestEncryptKey": "<%= p("mattermost.SqlSettings.AtRestEncryptKey") %>",
+        "QueryTimeout": <%= p("mattermost.SqlSettings.QueryTimeout") %>
     },
     "LogSettings": {
         "EnableConsole": <%= p("mattermost.LogSettings.EnableConsole") %>,
@@ -134,7 +140,11 @@
         "AmazonS3Bucket": "<%= p("mattermost.FileSettings.AmazonS3Bucket") %>",
         "AmazonS3Region": "<%= p("mattermost.FileSettings.AmazonS3Region") %>",
         "AmazonS3Endpoint": "<%= p("mattermost.FileSettings.AmazonS3Endpoint") %>",
-        "AmazonS3SSL": <%= p("mattermost.FileSettings.AmazonS3SSL") %>
+        "AmazonS3SSL": <%= p("mattermost.FileSettings.AmazonS3SSL") %>,
+        "AmazonS3SignV2": <%= p("mattermost.FileSettings.AmazonS3SignV2") %>,
+        "AmazonS3SSE": <%= p("mattermost.FileSettings.AmazonS3SSE") %>,
+        "EnableMobileUpload": <%= p("mattermost.FileSettings.EnableMobileUpload") %>,
+        "EnableMobileDownload": <%= p("mattermost.FileSettings.EnableMobileDownload") %>
     },
     "EmailSettings": {
         "EnableSignUpWithEmail": <%= p("mattermost.EmailSettings.EnableSignUpWithEmail") %>,
@@ -157,7 +167,9 @@
         "EnableEmailBatching": <%= p("mattermost.EmailSettings.EnableEmailBatching") %>,
         "EmailBatchingBufferSize": 256,
         "EmailBatchingInterval": 30,
-        "SkipServerCertificateVerification": false
+        "SkipServerCertificateVerification": false,
+        "EnableSMTPAuth": <%= p("mattermost.EmailSettings.EnableSMTPAuth") %>,
+        "EmailNotificationContentType": "<%= p("mattermost.EmailSettings.EmailNotificationContentType") %>"
     },
     "RateLimitSettings": {
         "Enable": <%= p("mattermost.RateLimitSettings.Enable") %>,
@@ -276,9 +288,13 @@
     <% if nodes.length > 1 -%>
 
     "ClusterSettings": {
+        "ClusterName": "<%= p("mattermost.ClusterSettings.ClusterName", spec.deployment) %>",
         "Enable": true,
-        "InterNodeListenAddress": "<%= p("mattermost.ClusterSettings.InterNodeListenAddress") %>",
-        "InterNodeUrls": [<%= nodes.map{|node| "\"http://#{node.address}\""}.join(',') %>]
+        "UseIpAddres": <%= p("mattermost.ClusterSettings.UseIpAddress") %>,
+        "UseExperimentalGossip": <%= p("mattermost.ClusterSettings.UseExperimentalGossip") %>,
+        "ReadOnlyConfig": true,
+        "GossipPort": <%= p("mattermost.ClusterSettings.GossipPort") %>,
+        "StreamingPort": <%= p("mattermost.ClusterSettings.StreamingPort") %>
     },
     <% end -%>
 
@@ -302,5 +318,35 @@
     },
     "AnalyticsSettings": {
         "MaxUsersForStatistics": <%= p("mattermost.AnalyticsSettings.MaxUsersForStatistics") %>
+    },
+
+    "JobSettings": {
+        "RunJobs": <%= p("mattermost.JobSettings.RunJobs") %>,
+        "RunScheduler": <%= p("mattermost.JobSettings.RunScheduler") %>
+    },
+    <%- if_p("mattermost.ElasticsearchSettings.ConnectionUrl") do -%>
+    "ElasticsearchSettings": {
+        "ConnectionUrl": "<%= p("mattermost.ElasticsearchSettings.ConnectionUrl") %>",
+        "Username": "<%= p("mattermost.ElasticsearchSettings.Username") %>",
+        "Password": "<%= p("mattermost.ElasticsearchSettings.Password") %>",
+        "EnableIndexing": <%= p("mattermost.ElasticsearchSettings.EnableIndexing") %>,
+        "EnableSearching": <%= p("mattermost.ElasticsearchSettings.EnableSearching") %>,
+        "Sniff": <%= p("mattermost.ElasticsearchSettings.Sniff") %>,
+        "PostIndexReplicas": <%= p("mattermost.ElasticsearchSettings.PostIndexReplicas") %>,
+        "PostIndexShards": <%= p("mattermost.ElasticsearchSettings.PostIndexShards") %>
+    },
+    <%- end -%>
+    "PluginSettings": {
+        "Plugins": {
+        <%- if p("mattermost.Plugins.Jira.Enabled") -%>
+            "Jira": {
+                "Enabled": true,
+                <%- if_p("mattermost.Plugins.Jira.UserName") do |user| -%>
+                "UserName": "<%= user %>",
+                <%- end -%>
+                "Secret": "<%= p("mattermost.Plugins.Jira.Secret") %>"
+            }
+        <%- end -%>
+        }
     }
 }

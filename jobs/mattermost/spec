@@ -136,7 +136,19 @@ properties:
   mattermost.ServiceSettings.EnableDeveloper:
     description: Javascript errors are shown in a purple bar at the top of the user interface. Not recommended for use in production.
     default: false
-
+  mattermost.ServiceSettings.EnableEmojiPicker:
+    description: Enables an emoji picker that allows users to select emoji to add as reactions or use in messages. Enabling the emoji picker with a large number of custom emoji may slow down performance.
+    default: true
+  mattermost.ServiceSettings.EnableChannelViewedMessages:
+    description: This setting determines whether channel_viewed WebSocket events are sent, which synchronize unread notifications across clients and devices. Disabling the setting in larger deployments may improve server performance.
+    default: true
+  mattermost.ServiceSettings.EnableAPIv3:
+    description: Set to false to disable all version 3 endpoints of the REST API. Integrations that rely on API v3 will fail and can then be identified for migration to API v4. API v3 is deprecated and will be removed in the near future. See https://api.mattermost.com for details.
+    default: true
+  mattermost.ServiceSettings.EnableUserAccessTokens:
+    description: enable personal access tokens for integrations to authenticate against the REST API
+    default: false
+  
   mattermost.TeamSettings.SiteName:
     description: Site name; it's not Slack, it is...
     default: Mattermost
@@ -198,6 +210,9 @@ properties:
   mattermost.TeamSettings.CustomDescriptionText:
     description: (E10 and greater) Description of service shown in login screens and UI.
     default: ""
+  mattermost.TeamSettings.TeammateNameDisplay:
+    description: see https://docs.mattermost.com/administration/config-settings.html#teammate-name-display
+    default: username
 
   mattermost.SqlSettings.DriverName:
     description: Either 'postgres' or 'mysql'
@@ -215,6 +230,9 @@ properties:
   mattermost.SqlSettings.Trace:
     description: Executing SQL statements are written to the log for development.
     default: false
+  mattermost.SqlSettings.QueryTimeout:
+    description: The number of seconds to wait for a response from the database after opening a connection and sending the query. Errors that you see in the UI or in the logs as a result of a query timeout can vary depending on the type of query.
+    default: 30
 
   mattermost.LogSettings.EnableConsole:
     description: Output log messages to the console based on ConsoleLevel option. The server writes messages to the standard output stream (stdout).
@@ -293,6 +311,18 @@ properties:
   mattermost.FileSettings.MaxFileSize:
     description: Maximum file size for message attachments entered in megabytes in the System Console UI. Converted to bytes in config.json at 1048576 bytes per megabyte. (Default of 52428800 is 50MB)
     default: 52428800
+  mattermost.FileSettings.AmazonS3SignV2:
+    description: By default, Mattermost uses Signature V4 to sign API calls to AWS, but under some circumstances, V2 is required. For more information about when to use V2, see http://docs.aws.amazon.com/general/latest/gr/signature-version-2.html
+    default: false
+  mattermost.FileSettings.AmazonS3SSE:
+    description: enable S3 Server Side Encryption for file uploads
+    default: true
+  mattermost.FileSettings.EnableMobileUpload:
+    description: When false, disables file uploads on mobile apps. All file and image uploads on messages are forbidden across clients and devices, including mobile.
+    default: true
+  mattermost.FileSettings.EnableMobileDownload:
+    description: When false, disables file downloads on mobile apps. Users can still download files from a mobile web browser.
+    default: true
 
   mattermost.RateLimitSettings.Enable:
     description: APIs are throttled at the rate specified by PerSec.
@@ -393,6 +423,12 @@ properties:
   mattermost.EmailSettings.PushNotificationContents:
     description: Controlls how much detail is provided in push notifications. (generic|full) Generic only sends User and Channel
     default: "generic"
+  mattermost.EmailSettings.EnableSMTPAuth: 
+    description: support SMTP servers requiring no authentication
+    default: true
+  mattermost.EmailSettings.EmailNotificationContentType:
+    description: specify the amount of detail sent in email notification contents
+    default: full
 
   mattermost.LdapSettings.Enable:
     description: Mattermost allows login using AD/LDAP or Active Directory. (true|false)
@@ -489,9 +525,20 @@ properties:
     description: Allow users to dismiss the banner after they have read the announcement
     default: true
 
-  mattermost.ClusterSettings.InterNodeListenAddress:
-    description: (E20 Only) The address the Mattermost Server will listen on for inter-node communication.
-    default: ":8075"
+  mattermost.ClusterSettings.ClusterName:
+    description: The cluster to join by name. Only nodes with the same cluster name will join together. This is to support Blue-Green deployments or staging pointing to the same database.  The deployment name will be used by default.
+  mattermost.ClusterSettings.UseIpAddress:
+    description: The cluster attempts to communicate using the IP Address, if false, hostname is used
+    default: true
+  mattermost.ClusterSettings.UseExperimentalGossip:
+    description: The server attempts to communicate via the gossip protocol over the gossip port. If false, use the streaming port and streaming protocol.  NOTE, this port is used for health status no matter what.
+    default: false
+  mattermost.ClusterSettings.GossipPort:
+    description: port used for gossip protocol
+    default: 8074
+  mattermost.ClusterSettings.StreamingPort:
+    description: port used for streaming protocol
+    default: 8075
 
   mattermost.MetricsSettings.Enable:
     description: Mattermost enables performance monitoring collection and profiling.
@@ -531,3 +578,42 @@ properties:
   mattermost.AnalyticsSettings.MaxUsersForStatistics:
     description: Sets the maximum number of users on the server before statistics for total posts, total hashtag posts, total file posts, posts per day, and active users with posts per day are disabled.
     default: 2500
+
+  mattermost.JobSettings.RunJobs:
+    description: enable running jobs on the job server
+    default: true
+  mattermost.JobSettings.RunScheduler:
+    description: enable scheduling jobs on the job server
+    default: true
+
+  mattemrost.ElasticsearchSettings.ConnectionUrl:
+    description: Url for the elasticsearch server
+  mattermost.ElasticsearchSettings.Username:
+    description: username for ES access
+    default: ""
+  mattermost.ElasticsearchSettings.Password:
+    description: password for ES access
+    default: ""
+  mattermost.ElasticsearchSettings.EnableIndexing:
+    description: Enables indexing on elasticsearch
+    default: false
+  mattermost.ElasticsearchSettings.EnableSearching:
+    description: Enables searching with Elasticsearch
+    default: false
+  mattermost.ElasticsearchSettings.Sniff:
+    description: Enables sniffing on the ES server
+    default: true
+  mattermost.ElasticsearchSettings.PostIndexReplicas:
+    description: how many replicas to use for each post index
+    default: 1 # we can always re-build the index if it is lost
+  mattermost.ElasticsearchSettings.PostIndexShards:
+    description: how many shards to use for each post index
+    default: 1
+
+  mattermost.Plugins.Jira.Enabled:
+    description: You can configure JIRA webhooks to post message in Mattermost. To help combat phishing attacks, all posts are labelled by a BOT tag.
+    default: false
+  mattermost.Plugins.Jira.Secret:
+    description: The secret used to authenticate to Mattermost. Regenerating the secret for the webhook URL endpoint invalidates your existing JIRA integrations.
+  mattermost.Plugins.Jira.UserName:
+    description: Select the username that this integration is attached to.
