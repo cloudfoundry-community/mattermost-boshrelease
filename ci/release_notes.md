@@ -1,4 +1,4 @@
-# Updates for Mattermost 4.1
+# Updates for Mattermost 4.1 & 4.2
 
 ## BOSH changes
 
@@ -45,8 +45,22 @@
 - mattermost.ElasticsearchSettings.PostIndexReplicas
 - mattermost.ElasticsearchSettings.PostIndexShards
 
-# mattermost
-Bumped https://github.com/starkandwayne/mattermost-releases to v4.2.0
+## Changes to support Mattermost 4.2
 
-# load-test
-Bumped https://github.com/starkandwayne/mattermost-releases to v4.2.0
+See [release notes] (https://docs.mattermost.com/administration/changelog.html#release-v4-2-0) for more details
+
+### Added the following attributes
+
+mattermost.ServiceSettings.AllowedUntrustedInternalConnections
+mattermost.TeamSettings.EnableXToLeaveChannelsFromLHS
+mattermost.FileSettings.AmazonS3Trace
+
+#### Additional Changes to Enterprise Edition
+
+mattermost.ElasticsearchSettings.AggregatePostsAfterDays
+mattermost.ElasticsearchSettings.PostsAggregatorJobStartTime
+mattermost.TeamSettings.ExperimentalTownSquareIsReadOnly
+mattermost.ThemeSettings.EnableThemeSelection
+mattermost.ThemeSettings.DefaultTheme
+mattermost.ThemeSettings.AllowCustomThemes
+mattermost.ThemeSettings.AllowedThemes

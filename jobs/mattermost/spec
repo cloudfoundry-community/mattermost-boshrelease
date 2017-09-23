@@ -148,6 +148,9 @@ properties:
   mattermost.ServiceSettings.EnableUserAccessTokens:
     description: enable personal access tokens for integrations to authenticate against the REST API
     default: false
+  mattermost.ServiceSettings.AllowedUntrustedInternalConnections:
+    description: "see https://docs.mattermost.com/administration/config-settings.html#allow-untrusted-internal-connections-to"
+    default: ""
   
   mattermost.TeamSettings.SiteName:
     description: Site name; it's not Slack, it is...
@@ -213,6 +216,12 @@ properties:
   mattermost.TeamSettings.TeammateNameDisplay:
     description: see https://docs.mattermost.com/administration/config-settings.html#teammate-name-display
     default: username
+  mattermost.TeamSettings.EnableXToLeaveChannelsFromLHS:
+    description: Users can leave Public and Private Channels by clicking the “x” beside the channel name.
+    default: false
+  mattermost.TeamSettings.ExperimentalTownSquareIsReadOnly:
+    description: Only Administrators can post in Town Square.
+    default: false
 
   mattermost.SqlSettings.DriverName:
     description: Either 'postgres' or 'mysql'
@@ -323,6 +332,9 @@ properties:
   mattermost.FileSettings.EnableMobileDownload:
     description: When false, disables file downloads on mobile apps. Users can still download files from a mobile web browser.
     default: true
+  mattermost.FileSettings.AmazonS3Trace:
+    description: Additional debugging information is included in the system logs. Typically set to false in production.
+    default: false
 
   mattermost.RateLimitSettings.Enable:
     description: APIs are throttled at the rate specified by PerSec.
@@ -609,6 +621,12 @@ properties:
   mattermost.ElasticsearchSettings.PostIndexShards:
     description: how many shards to use for each post index
     default: 1
+  mattermost.ElasticsearchSettings.AggregatePostsAfterDays:
+    description: Elasticsearch indexes over the age specified by this setting will be aggregated during the daily scheduled job.
+    default: 365
+  mattermost.ElasticsearchSettings.PostsAggregatorJobStartTime:
+    description: The start time of the daily scheduled aggregator job.
+    default: "03:00"
 
   mattermost.Plugins.Jira.Enabled:
     description: You can configure JIRA webhooks to post message in Mattermost. To help combat phishing attacks, all posts are labelled by a BOT tag.
@@ -617,3 +635,15 @@ properties:
     description: The secret used to authenticate to Mattermost. Regenerating the secret for the webhook URL endpoint invalidates your existing JIRA integrations.
   mattermost.Plugins.Jira.UserName:
     description: Select the username that this integration is attached to.
+
+  mattermost.ThemeSettings.EnableThemeSelection:
+    description: Enables the Display > Theme tab in Account Settings so users can select their theme.
+    default: true
+  mattermost.ThemeSettings.DefaultTheme:
+    description: Set a default theme that applies to all new users on the system.
+  mattermost.ThemeSettings.AllowCustomThemes:
+    description: Enables the Display > Theme > Custom Theme section in Account Settings.
+    default: true
+  mattermost.ThemeSettings.AllowedThemes:
+    description: Select the themes that can be chosen by users when "EnableThemeSelection" is set to true.
+    default: '["default", "organization", "mattermostDark", "windows10"]'
