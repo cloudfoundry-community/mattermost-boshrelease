@@ -151,7 +151,10 @@ properties:
   mattermost.ServiceSettings.AllowedUntrustedInternalConnections:
     description: "see https://docs.mattermost.com/administration/config-settings.html#allow-untrusted-internal-connections-to"
     default: ""
-  
+  mattermost.ServiceSettings.SessionIdleTimeoutInMinutes:
+    description: "The number of minutes from the last time a user was active on the system to the expiry of the user’s session. Once expired, the user will need to log in to continue. Minimum is 5 minutes, and 0 is unlimited.  NOTE: does not apply to mobile apps, In High Availability mode, enable IP hash load balancing for reliable timeout measurement. (consider AWS NLBs for this)"
+    default: 0
+   
   mattermost.TeamSettings.SiteName:
     description: Site name; it's not Slack, it is...
     default: Mattermost
@@ -627,6 +630,9 @@ properties:
   mattermost.ElasticsearchSettings.PostsAggregatorJobStartTime:
     description: The start time of the daily scheduled aggregator job.
     default: "03:00"
+  mattermost.ElasticsearchSettings.IndexPrefix:
+    description: Prefix on the Elasticsearch index name. Enables the use of Mattermost Elasticsearch on a shared Elasticsearch cluster.
+    default: ""
 
   mattermost.Plugins.Jira.Enabled:
     description: You can configure JIRA webhooks to post message in Mattermost. To help combat phishing attacks, all posts are labelled by a BOT tag.
@@ -647,3 +653,19 @@ properties:
   mattermost.ThemeSettings.AllowedThemes:
     description: Select the themes that can be chosen by users when "EnableThemeSelection" is set to true.
     default: '["default", "organization", "mattermostDark", "windows10"]'
+
+  mattermost.DataRetentionSettings.EnableMessageDeletion:
+    description: Delete messages after `MessageRetentionDays` days
+    default: false  
+  mattermost.DataRetentionSettings.MessageRetentionDays:
+    description: how many days messages are kept in Mattermost.  The minimum time is one day.
+    default: 365
+  mattermost.DataRetentionSettings.EnableFileDeletion:
+    description: Delete Files after `FileRetentionDays` days
+    default: false
+  mattermost.DataRetentionSettings.FileRetentionDays:
+    description: how many days files are kept in Mattermost.  The minimum time is one day.
+    default: 365
+  mattermost.DataRetentionSettings.DeletionJobStartTime:
+    description: Set the start time of the daily scheduled data retention job. Choose a time when fewer people are using your system. Must be a 24-hour time stamp in the form HH:MM.
+    default: "02:00"

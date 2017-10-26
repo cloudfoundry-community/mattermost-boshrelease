@@ -67,7 +67,8 @@
         "EnableChannelViewedMessages": <%= p("mattermost.ServiceSettings.EnableChannelViewedMessages") %>,
         "EnableAPIv3": <%= p("mattermost.ServiceSettings.EnableAPIv3") %>,
         "EnableUserAccessTokens": <%= p("mattermost.ServiceSettings.EnableUserAccessTokens") %>,
-        "AllowedUntrustedInternalConnections": "<%= p("mattermost.ServiceSettings.AllowedUntrustedInternalConnections") %>"
+        "AllowedUntrustedInternalConnections": "<%= p("mattermost.ServiceSettings.AllowedUntrustedInternalConnections") %>",
+        "SessionIdleTimeoutInMinutes": <%= p("mattermost.ServiceSettings.SessionIdleTimeoutInMinutes") %>
     },
     "TeamSettings": {
         "SiteName": "<%= p("mattermost.TeamSettings.SiteName") %>",
@@ -338,7 +339,8 @@
         "PostIndexReplicas": <%= p("mattermost.ElasticsearchSettings.PostIndexReplicas") %>,
         "PostIndexShards": <%= p("mattermost.ElasticsearchSettings.PostIndexShards") %>,
         "AggregatePostsAfterDays": <%= p("mattermost.ElasticsearchSettings.AggregatePostsAfterDays") %>,
-        "PostsAggregatorJobStartTime": "<%= p("mattermost.ElasticsearchSettings.PostsAggregatorJobStartTime") %>"
+        "PostsAggregatorJobStartTime": "<%= p("mattermost.ElasticsearchSettings.PostsAggregatorJobStartTime") %>",
+        "IndexPrefix": <%= p("mattermost.ElasticsearchSettings.IndexPrefix") %>
     },
     <%- end -%>
     "PluginSettings": {
@@ -361,6 +363,12 @@
         <%- end -%>
         "AllowCustomThemes": <%= p("mattermost.ThemeSettings.AllowCustomThemes") %>,
         "AllowedThemes": <%= p("mattermost.ThemeSettings.AllowedThemes") %>
+    },
+    "DataRetentionSettings": {
+        "EnableMessageDeletion": <%= p("mattermost.DataRetentionSettings.EnableMessageDeletion") %>,
+        "MessageRetentionDays": <%= p("mattermost.DataRetentionSettings.MessageRetentionDays" )%>,
+        "EnableFileDeletion": <%= p("mattermost.DataRetentionSettings.EnableFileDeletion") %>,
+        "FileRetentionDays": <%= p("mattermost.DataRetentionSettings.FileRetentionDays") %>,
+        "DeletionJobStartTime": "<%= p("mattermost.DataRetentionSettings.DeletionJobStartTime") %>"
     }
-    
 }
