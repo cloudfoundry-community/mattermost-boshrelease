@@ -6,4 +6,4 @@ set -u # report the usage of uninitialized variables
 # $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
 
 tar xzf mattermost/load-test-*.tar.gz
-cp -a load-test*/bin $BOSH_INSTALL_TARGET
+cp -a mattermost-load-test*/bin $BOSH_INSTALL_TARGET
