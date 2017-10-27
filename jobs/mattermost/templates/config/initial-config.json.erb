@@ -196,13 +196,13 @@
         "SupportEmail": "<%= p("mattermost.SupportSettings.SupportEmail") %>"
     },
     "GitLabSettings": {
-        "Enable": false,
-        "Secret": "",
-        "Id": "",
-        "Scope": "",
-        "AuthEndpoint": "",
-        "TokenEndpoint": "",
-        "UserApiEndpoint": ""
+        "Enable": <%= p("mattermost.GitLabSettings.Enable") %>,
+        "Secret": "<%= p("mattermost.GitLabSettings.Secret") %>",
+        "Id": "<%= p("mattermost.GitLabSettings.Id") %>",
+        "Scope": "<%= p("mattermost.GitLabSettings.Scope") %>",
+        "AuthEndpoint": "<%= p("mattermost.GitLabSettings.AuthEndpoint") %>",
+        "TokenEndpoint": "<%= p("mattermost.GitLabSettings.TokenEndpoint") %>",
+        "UserApiEndpoint": "<%= p("mattermost.GitLabSettings.UserApiEndpoint") %>"
     },
     "GoogleSettings": {
         "Enable": false,
