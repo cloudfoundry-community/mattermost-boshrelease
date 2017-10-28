@@ -384,6 +384,28 @@ properties:
     description: Set an email for feedback or support requests.
     default: "feedback@mattermost.com"
 
+  mattermost.GitLabSettings.Enable:
+    description: Enable GitLab authentication
+    default: false
+  mattermost.GitLabSettings.Id:
+    description: The client application ID.
+    default: ""
+  mattermost.GitLabSettings.Secret:
+    description: The client application secret.
+    default: ""
+  mattermost.GitLabSettings.Scope:
+    description: The authorization scope.
+    default: ""
+  mattermost.GitLabSettings.AuthEndpoint:
+    description: The authorization endpoint.
+    default: ""
+  mattermost.GitLabSettings.TokenEndpoint:
+    description: The token endpoint.
+    default: ""
+  mattermost.GitLabSettings.UserApiEndpoint:
+    description: The user api endpoint.
+    default: ""
+
   mattermost.EmailSettings.EnableSignUpWithEmail:
     description: Allow team creation and account signup using email and password. (true|false)
     default: true
@@ -601,7 +623,7 @@ properties:
     description: enable scheduling jobs on the job server
     default: true
 
-  mattemrost.ElasticsearchSettings.ConnectionUrl:
+  mattermost.ElasticsearchSettings.ConnectionUrl:
     description: Url for the elasticsearch server
   mattermost.ElasticsearchSettings.Username:
     description: username for ES access
