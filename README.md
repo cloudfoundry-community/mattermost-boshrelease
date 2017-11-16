@@ -35,10 +35,19 @@ bosh deploy manifests/mattermost.yml -v "mattermost-sql-atrestencryptkey=${atres
 To register a route via your Cloud Foundry load balancer + router, you can use `manifests/operators/routing.yml`. If your Cloud Foundry deployment name is `cf`, and your system domain is `system.ourcompany.com`:
 
 ```
+
+export BOSH_ENVIRONMENT=<bosh-alias>
+export BOSH_DEPLOYMENT=mattermost
+
+# name of cf deployment in BOSH, e.g. 'cf'
+cf_deployment=cf
+
+system_domain=$(bosh -d $cf_deployment manifest | bosh int - --path /instance_groups/name=api/jobs/name=cloud_controller_ng/properties/system_domain)
+
 bosh deploy manifests/mattermost.yml \
   -o manifests/operators/routing.yml \
-  -v routing-nats-deployment=cf \
-  -v mattermost-hostname=mattermost.system.ourcompany.com
+  -v routing-nats-deployment=${cf_deployment} \
+  -v mattermost-hostname=mattermost.${system_domain}
 ```
 
 You could also dynamically look up your system domain:
