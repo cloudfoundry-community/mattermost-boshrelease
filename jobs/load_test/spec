@@ -5,7 +5,7 @@ packages:
 - load_test
 
 templates:
-  bin/errand.sh.erb: bin/run
+  bin/run: bin/run
   config/config.json.erb: config/loadtestconfig.json
   ssh_key.erb: .ssh/id_rsa
 
