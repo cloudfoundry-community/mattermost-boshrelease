@@ -13,20 +13,9 @@ mattermost.GitLabSettings.Scope
 mattermost.GitLabSettings.AuthEndpoint
 mattermost.GitLabSettings.TokenEndpoint
 mattermost.GitLabSettings.UserApiEndpoint
-# mattermost
-Bumped https://github.com/starkandwayne/mattermost-releases to v4.3.2
 
-# load-test
-Bumped https://github.com/starkandwayne/mattermost-releases to v4.3.2
-
-# mattermost
-Bumped https://github.com/starkandwayne/mattermost-releases to v4.4.0
-
-# load-test
-Bumped https://github.com/starkandwayne/mattermost-releases to v4.4.0
-
-# mattermost
+## mattermost
 Bumped https://github.com/starkandwayne/mattermost-releases to v4.4.1
 
-# load-test
+## load-test
 Bumped https://github.com/starkandwayne/mattermost-releases to v4.4.1
