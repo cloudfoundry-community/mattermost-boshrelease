@@ -1,6 +1,6 @@
-# Updates for Matermost 4.0 and later
+# Updating to Mattermost 4.4
 
-## Bosh changes
+## BOSH release changes
 
 NONE
 
