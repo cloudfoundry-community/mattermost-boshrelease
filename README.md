@@ -19,7 +19,8 @@ export BOSH_DEPLOYMENT=mattermost
 
 git clone https://github.com/cloudfoundry-community/mattermost-boshrelease.git
 cd mattermost-boshrelease
-bosh deploy manifests/mattermost.yml
+bosh deploy manifests/mattermost.yml \
+  -v mattermost-siteurl=http://mattermost.system.ourcompany.com
 ```
 
 If your BOSH does not have Credhub/Config Server, then remember ` --vars-store` to allow generation of passwords and certificates.
