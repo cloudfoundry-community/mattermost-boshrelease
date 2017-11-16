@@ -2,7 +2,7 @@
 
 ## BOSH release changes
 
-NONE
+* Improvements to README + new operator script to discover `bosh cloud-config` options
 
 ## Added the following Attributes
 
