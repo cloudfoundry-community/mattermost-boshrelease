@@ -19,3 +19,6 @@ Bumped https://github.com/starkandwayne/mattermost-releases to v4.4.1
 
 ## load-test
 Bumped https://github.com/starkandwayne/mattermost-releases to v4.4.1
+
+# mattermost
+Bumped https://github.com/starkandwayne/mattermost-releases to v4.4.2
