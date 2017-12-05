@@ -2,10 +2,10 @@ go/go1.8.3.linux-amd64.tar.gz:
   size: 90029041
   object_id: 0a1c26d6-d8d3-485d-581f-3413476f6179
   sha: 838c415896ef5ecd395dfabde5e7e6f8ac943c8e
-mattermost/load-test-4.4.1.tar.gz:
-  size: 5461842
-  object_id: c2519d0b-49c0-487f-5b3a-6bf5c69036f0
-  sha: 3828666ee690bfa8eb9e9fc4ac274f3be8d0d5e6
+mattermost/load-test-4.4.3.tar.gz:
+  size: 5464292
+  object_id: 9c55a728-7097-43de-41bc-de02b2d0e4bd
+  sha: 1a26ec320292e8374c5d60c8ef28ae488ad527e5
 mattermost/mattermost-enterprise-4.4.3-linux-amd64.tar.gz:
   size: 35835892
   object_id: 7616534e-96cc-42a4-4868-d6fe2722aa43
