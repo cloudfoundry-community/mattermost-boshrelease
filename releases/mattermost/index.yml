@@ -17,6 +17,8 @@ builds:
     version: 6.2.1
   d89aa368-f1c8-4590-b986-d3a822f62edc:
     version: "5"
+  d8f55349-ab0f-48c0-4336-a61debb2332f:
+    version: 6.2.2
   e5532717-d23a-4e02-776d-d568eb60203e:
     version: 6.1.2
   fac57012-f2e4-443f-9439-7372ed0ab87b:
