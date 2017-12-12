@@ -6,7 +6,7 @@ mattermost/load-test-4.4.3.tar.gz:
   size: 5464292
   object_id: 9c55a728-7097-43de-41bc-de02b2d0e4bd
   sha: 1a26ec320292e8374c5d60c8ef28ae488ad527e5
-mattermost/mattermost-enterprise-4.4.3-linux-amd64.tar.gz:
-  size: 35835892
-  object_id: 7616534e-96cc-42a4-4868-d6fe2722aa43
-  sha: 17303ed9c5221ba6c8a2c1f49a8161d728a63995
+mattermost/mattermost-enterprise-4.4.5-linux-amd64.tar.gz:
+  size: 35831557
+  object_id: bddd13e2-8be6-45d0-55a8-fd79de1304d5
+  sha: d6d67c2dad054623546bda513ca3c8c8f3190217
