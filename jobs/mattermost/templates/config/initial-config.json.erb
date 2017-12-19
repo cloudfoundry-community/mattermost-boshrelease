@@ -68,7 +68,8 @@
         "EnableAPIv3": <%= p("mattermost.ServiceSettings.EnableAPIv3") %>,
         "EnableUserAccessTokens": <%= p("mattermost.ServiceSettings.EnableUserAccessTokens") %>,
         "AllowedUntrustedInternalConnections": "<%= p("mattermost.ServiceSettings.AllowedUntrustedInternalConnections") %>",
-        "SessionIdleTimeoutInMinutes": <%= p("mattermost.ServiceSettings.SessionIdleTimeoutInMinutes") %>
+        "SessionIdleTimeoutInMinutes": <%= p("mattermost.ServiceSettings.SessionIdleTimeoutInMinutes") %>,
+        "CloseUnusedDirectMessages": <%= p("mattermost.ServiceSettings.CloseUnusedDirectMessages") %>
     },
     "TeamSettings": {
         "SiteName": "<%= p("mattermost.TeamSettings.SiteName") %>",
@@ -93,7 +94,8 @@
         "RestrictPrivateChannelManageMembers": "<%= p("mattermost.TeamSettings.RestrictPrivateChannelManageMembers") %>",
         "UserStatusAwayTimeout": 300,
         "TeammateNameDisplay": "<%= p("mattermost.TeamSettings.TeammateNameDisplay") %>",
-        "EnableXToLeaveChannelsFromLHS": <%= p("mattermost.TeamSettings.EnableXToLeaveChannelsFromLHS") %>
+        "EnableXToLeaveChannelsFromLHS": <%= p("mattermost.TeamSettings.EnableXToLeaveChannelsFromLHS") %>,
+        "EnableConfirmNotificationsToChannel": <%= p("mattermost.TeamSettings.EnableConfirmNotificationsToChannel")%>
     },
 
     "SqlSettings": {
@@ -243,7 +245,8 @@
         "SkipCertificateVerification": <%= p("mattermost.LdapSettings.SkipCertificateVerification") %>,
         "QueryTimeout": <%= p("mattermost.LdapSettings.QueryTimeout") %>,
         "MaxPageSize": <%= p("mattermost.LdapSettings.MaxPageSize") %>,
-        "LoginFieldName": "<%= p("mattermost.LdapSettings.LoginFieldName") %>"
+        "LoginFieldName": "<%= p("mattermost.LdapSettings.LoginFieldName") %>",
+        "EnableSyncWithLdap": <%= p("mattermost.LdapSettings.EnableSyncWithLdap")%>
     },
     <% end %>
     "ComplianceSettings": {
@@ -258,6 +261,7 @@
     },
     "SamlSettings": {
         "Enable": false,
+        "EnableSync": false,
         "Verify": true,
         "Encrypt": true,
         "IdpUrl": "",
@@ -340,10 +344,18 @@
         "PostIndexShards": <%= p("mattermost.ElasticsearchSettings.PostIndexShards") %>,
         "AggregatePostsAfterDays": <%= p("mattermost.ElasticsearchSettings.AggregatePostsAfterDays") %>,
         "PostsAggregatorJobStartTime": "<%= p("mattermost.ElasticsearchSettings.PostsAggregatorJobStartTime") %>",
-        "IndexPrefix": <%= p("mattermost.ElasticsearchSettings.IndexPrefix") %>
+        "IndexPrefix": <%= p("mattermost.ElasticsearchSettings.IndexPrefix") %>,
+        "LiveIndexingBatchSize": <%= p("mattermost.ElasticsearchSettings.LiveIndexingBatchSize") %>,
+        "RequestTimeoutSeconds": <%= p("mattermost.ElasticsearchSettings.RequestTimeoutSeconds") %>,
+        "BulkIndexingTimeWindowSeconds": <%= p("mattermost.ElasticsearchSettings.BulkIndexingTimeWindowSeconds") %>
+
     },
     <%- end -%>
     "PluginSettings": {
+        "Enable": <%= p("mattermost.PluginSettings.Enable") %>,
+        "EnableUploads": <%= p("mattermost.PluginSettings.EnableUploads") %>,
+        "Directory": "<%= p("mattermost.PluginSettings.Directory:") %>", 
+        "PluginStates": <%= p("mattermost.PluginSettings.PluginStates") %>,
         "Plugins": {
         <%- if p("mattermost.Plugins.Jira.Enabled") -%>
             "Jira": {

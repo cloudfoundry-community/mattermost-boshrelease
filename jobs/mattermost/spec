@@ -154,6 +154,9 @@ properties:
   mattermost.ServiceSettings.SessionIdleTimeoutInMinutes:
     description: "The number of minutes from the last time a user was active on the system to the expiry of the user’s session. Once expired, the user will need to log in to continue. Minimum is 5 minutes, and 0 is unlimited.  NOTE: does not apply to mobile apps, In High Availability mode, enable IP hash load balancing for reliable timeout measurement. (consider AWS NLBs for this)"
     default: 0
+  mattermost.ServiceSettings.CloseUnusedDirectMessages:
+    description: If true Direct message conversations with no activity for 7 days will be hidden from the sidebar.
+    default: false
    
   mattermost.TeamSettings.SiteName:
     description: Site name; it's not Slack, it is...
@@ -225,6 +228,9 @@ properties:
   mattermost.TeamSettings.ExperimentalTownSquareIsReadOnly:
     description: Only Administrators can post in Town Square.
     default: false
+  mattermost.TeamSettings.EnableConfirmNotificationsToChannel:
+    description: Users will be prompted to confirm when posting @channel and @all in channels with over five members.
+    default: true
 
   mattermost.SqlSettings.DriverName:
     description: Either 'postgres' or 'mysql'
@@ -524,6 +530,9 @@ properties:
   mattermost.LdapSettings.SkipCertificateVerification:
     description: Skips the certificate verification step for TLS or STARTTLS connections.
     default: false
+  mattermost.LdapSettings.EnableSyncWithLdap:
+    description: when true Mattermost periodically synchronizes SAML user attributes, including user deactivation and removal, with AD/LDAP
+    default: false
 
 
   mattermost.ComplianceSettings.Enable:
@@ -655,6 +664,15 @@ properties:
   mattermost.ElasticsearchSettings.IndexPrefix:
     description: Prefix on the Elasticsearch index name. Enables the use of Mattermost Elasticsearch on a shared Elasticsearch cluster.
     default: ""
+  mattermost.ElasticsearchSettings.LiveIndexingBatchSize:
+    description: set how many new posts are batched together before they are added to the Elasticsearch index
+    default: 1
+  mattermost.ElasticsearchSettings.RequestTimeoutSeconds:
+    description: set the timeout in seconds for Elasticseaerch calls
+    default: 30
+  mattermost.ElasticsearchSettings.BulkIndexingTimeWindowSeconds:
+    description: set the maximum time window for a batch of posts being indexed by the Bulk Indexer
+    default: 3600
 
   mattermost.Plugins.Jira.Enabled:
     description: You can configure JIRA webhooks to post message in Mattermost. To help combat phishing attacks, all posts are labelled by a BOT tag.
@@ -663,6 +681,20 @@ properties:
     description: The secret used to authenticate to Mattermost. Regenerating the secret for the webhook URL endpoint invalidates your existing JIRA integrations.
   mattermost.Plugins.Jira.UserName:
     description: Select the username that this integration is attached to.
+
+  mattermost.PluginSettings.Enable:
+    description: If true, plugins are enabled on this server
+    default: true
+  mattermost.PluginSettings.EnableUploads:
+    description: Allows system administrators to upload new plugins.  Set to false unless you are uploading a plugin
+    default: false 
+  mattermost.PluginSettings.Directory:
+    description: specify the directory of where plugins are stored
+    default: ./plugins
+  mattermost.PluginSettings.PluginStates:
+    description: set whether an installed plugin is active or not
+    default: {}
+  
 
   mattermost.ThemeSettings.EnableThemeSelection:
     description: Enables the Display > Theme tab in Account Settings so users can select their theme.
