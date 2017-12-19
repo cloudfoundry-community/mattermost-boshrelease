@@ -157,6 +157,12 @@ properties:
   mattermost.ServiceSettings.CloseUnusedDirectMessages:
     description: If true Direct message conversations with no activity for 7 days will be hidden from the sidebar.
     default: false
+  mattermost.ServiceSettings.EnablePreviewFeatures:
+    description: Enable the pre-release features menue in the account settings menu
+    default: true
+  mattermost.ServiceSettings.ExperimentalEnableAuthenticationTransfer:
+    description: Users can change their sign-in method to any that is enabled on the server
+    default: true
    
   mattermost.TeamSettings.SiteName:
     description: Site name; it's not Slack, it is...
@@ -472,6 +478,9 @@ properties:
   mattermost.EmailSettings.EmailNotificationContentType:
     description: specify the amount of detail sent in email notification contents
     default: full
+  mattermost.EmailSettings.UseChannelInEmailNotifications:
+    description: whether email notifications contain the channel name in the subject line
+    default: false
 
   mattermost.LdapSettings.Enable:
     description: Mattermost allows login using AD/LDAP or Active Directory. (true|false)
@@ -690,11 +699,13 @@ properties:
     default: false 
   mattermost.PluginSettings.Directory:
     description: specify the directory of where plugins are stored
-    default: ./plugins
+    default: /var/vcap/store/mattermost/plugins
   mattermost.PluginSettings.PluginStates:
     description: set whether an installed plugin is active or not
     default: {}
-  
+  mattermost.PluginSettings.ClientDirectory:
+    description: to set the location of client plugins
+    default: /var/vcap/store/mattermost/client/plugins
 
   mattermost.ThemeSettings.EnableThemeSelection:
     description: Enables the Display > Theme tab in Account Settings so users can select their theme.
@@ -723,3 +734,19 @@ properties:
   mattermost.DataRetentionSettings.DeletionJobStartTime:
     description: Set the start time of the daily scheduled data retention job. Choose a time when fewer people are using your system. Must be a 24-hour time stamp in the form HH:MM.
     default: "02:00"
+
+  mattermost.MessageExportSettings.EnableExport: 
+    default: false
+    description: to enable message export.
+  mattermost.MessageExportSettings.DailyRunTime: 
+    default: "01:00" 
+    description: to set the time for the daily export job.
+  mattermost.MessageExportSettings.ExportFromTimestamp: 
+    default: 0 
+    description: to set the timestamp for which posts to include in the message export.
+  mattermost.MessageExportSettings.FileLocation: 
+    default: "export"
+    description: to set the message export location.
+  mattermost.MessageExportSettings.BatchSize: 
+    default: 10000
+    description: to set how many new posts are batched together to a compliance export file

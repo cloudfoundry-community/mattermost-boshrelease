@@ -69,7 +69,9 @@
         "EnableUserAccessTokens": <%= p("mattermost.ServiceSettings.EnableUserAccessTokens") %>,
         "AllowedUntrustedInternalConnections": "<%= p("mattermost.ServiceSettings.AllowedUntrustedInternalConnections") %>",
         "SessionIdleTimeoutInMinutes": <%= p("mattermost.ServiceSettings.SessionIdleTimeoutInMinutes") %>,
-        "CloseUnusedDirectMessages": <%= p("mattermost.ServiceSettings.CloseUnusedDirectMessages") %>
+        "CloseUnusedDirectMessages": <%= p("mattermost.ServiceSettings.CloseUnusedDirectMessages") %>,
+        "EnablePreviewFeatures": <%= p("mattermost.ServiceSettings.EnablePreviewFeatures") %>, 
+        "ExperimentalEnableAuthenticationTransfer": <%= p("mattermost.ServiceSettings.ExperimentalEnableAuthenticationTransfer") %>
     },
     "TeamSettings": {
         "SiteName": "<%= p("mattermost.TeamSettings.SiteName") %>",
@@ -175,7 +177,8 @@
         "EmailBatchingInterval": 30,
         "SkipServerCertificateVerification": false,
         "EnableSMTPAuth": <%= p("mattermost.EmailSettings.EnableSMTPAuth") %>,
-        "EmailNotificationContentType": "<%= p("mattermost.EmailSettings.EmailNotificationContentType") %>"
+        "EmailNotificationContentType": "<%= p("mattermost.EmailSettings.EmailNotificationContentType") %>",
+        "UseChannelInEmailNotifications": <%= p("mattermost.EmailSettings.UseChannelInEmailNotifications") %>
     },
     "RateLimitSettings": {
         "Enable": <%= p("mattermost.RateLimitSettings.Enable") %>,
@@ -354,7 +357,7 @@
     "PluginSettings": {
         "Enable": <%= p("mattermost.PluginSettings.Enable") %>,
         "EnableUploads": <%= p("mattermost.PluginSettings.EnableUploads") %>,
-        "Directory": "<%= p("mattermost.PluginSettings.Directory:") %>", 
+        "Directory": "<%= p("mattermost.PluginSettings.Directory") %>", 
         "PluginStates": <%= p("mattermost.PluginSettings.PluginStates") %>,
         "Plugins": {
         <%- if p("mattermost.Plugins.Jira.Enabled") -%>
@@ -366,7 +369,8 @@
                 "Secret": "<%= p("mattermost.Plugins.Jira.Secret") %>"
             }
         <%- end -%>
-        }
+        },
+        "ClientDirectory": "<%= p("mattermost.PluginSettings.ClientDirectory") %>"
     },
     "ThemeSettings": {
         "EnableThemeSelection": <%= p("mattermost.ThemeSettings.EnableThemeSelection") %>,
@@ -382,5 +386,12 @@
         "EnableFileDeletion": <%= p("mattermost.DataRetentionSettings.EnableFileDeletion") %>,
         "FileRetentionDays": <%= p("mattermost.DataRetentionSettings.FileRetentionDays") %>,
         "DeletionJobStartTime": "<%= p("mattermost.DataRetentionSettings.DeletionJobStartTime") %>"
-    }
+    },
+    "MessageExportSettings": {
+      "EnableExport": <%= p("mattermost.MessageExportSettings.EnableExport") %>,
+      "DailyRunTime": "<%= p("mattermost.MessageExportSettings.DailyRunTime") %>",
+      "ExportFromTimestamp": "<%= p("mattermost.MessageExportSettings.ExportFromTimestamp") %>",
+      "FileLocation": "<%= p("mattermost.MessageExportSettings.FileLocation") %>",
+      "BatchSize": <%= p("mattermost.MessageExportSettings.BatchSize") %>
+  }
 }
