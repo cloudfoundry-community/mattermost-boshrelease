@@ -1,0 +1,11 @@
+#!/bin/bash
+
+mkdir -p /var/vcap/store/mattermost/plugins
+chown vcap:vcap /var/vcap/store/mattermost/plugins
+chmod 7700 /var/vcap/store/mattermost/plugins
+mkdir -p /var/vcap/store/mattermost/client/plugins
+chown vcap:vcap /var/vcap/store/mattermost/client/plugins
+chown vcap:vcap /var/vcap/store/mattermost/client
+chmod 770 /var/vcap/store/mattermost/client
+chmod 770 /var/vcap/store/mattermost/client/plugins
+
