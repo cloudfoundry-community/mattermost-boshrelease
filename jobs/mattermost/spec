@@ -6,6 +6,7 @@ packages:
 
 templates:
   bin/ctl: bin/ctl
+  bin/pre-start: bin/pre-start
   bin/monit_debugger: bin/monit_debugger
   config/initial-config.json.erb: config/initial-config.json
   config/license.erb: config/license
@@ -697,15 +698,9 @@ properties:
   mattermost.PluginSettings.EnableUploads:
     description: Allows system administrators to upload new plugins.  Set to false unless you are uploading a plugin
     default: false 
-  mattermost.PluginSettings.Directory:
-    description: specify the directory of where plugins are stored
-    default: /var/vcap/store/mattermost/plugins
   mattermost.PluginSettings.PluginStates:
     description: set whether an installed plugin is active or not
     default: {}
-  mattermost.PluginSettings.ClientDirectory:
-    description: to set the location of client plugins
-    default: /var/vcap/store/mattermost/client/plugins
 
   mattermost.ThemeSettings.EnableThemeSelection:
     description: Enables the Display > Theme tab in Account Settings so users can select their theme.

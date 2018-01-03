@@ -357,7 +357,7 @@
     "PluginSettings": {
         "Enable": <%= p("mattermost.PluginSettings.Enable") %>,
         "EnableUploads": <%= p("mattermost.PluginSettings.EnableUploads") %>,
-        "Directory": "<%= p("mattermost.PluginSettings.Directory") %>", 
+        "Directory": "/var/vcap/store/mattermost/client/plugins", 
         "PluginStates": <%= p("mattermost.PluginSettings.PluginStates") %>,
         "Plugins": {
         <%- if p("mattermost.Plugins.Jira.Enabled") -%>
@@ -370,7 +370,7 @@
             }
         <%- end -%>
         },
-        "ClientDirectory": "<%= p("mattermost.PluginSettings.ClientDirectory") %>"
+        "ClientDirectory": "/var/vcap/store/mattermost/client/plugins"
     },
     "ThemeSettings": {
         "EnableThemeSelection": <%= p("mattermost.ThemeSettings.EnableThemeSelection") %>,
