@@ -358,15 +358,15 @@
         "Enable": <%= p("mattermost.PluginSettings.Enable") %>,
         "EnableUploads": <%= p("mattermost.PluginSettings.EnableUploads") %>,
         "Directory": "/var/vcap/store/mattermost/client/plugins", 
-        "PluginStates": <%= p("mattermost.PluginSettings.PluginStates") %>,
+        "PluginStates": <%= JSON.pretty_generate(p("mattermost.PluginSettings.PluginStates")) %>,
         "Plugins": {
         <%- if p("mattermost.Plugins.Jira.Enabled") -%>
-            "Jira": {
-                "Enabled": true,
+            "jira": {
+                "enabled": true,
                 <%- if_p("mattermost.Plugins.Jira.UserName") do |user| -%>
-                "UserName": "<%= user %>",
+                "username": "<%= user %>",
                 <%- end -%>
-                "Secret": "<%= p("mattermost.Plugins.Jira.Secret") %>"
+                "secret": "<%= p("mattermost.Plugins.Jira.Secret") %>"
             }
         <%- end -%>
         },
