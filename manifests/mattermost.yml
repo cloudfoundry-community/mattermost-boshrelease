@@ -72,6 +72,6 @@ releases:
   url: https://github.com/cloudfoundry-community/postgres-boshrelease/releases/download/v2.0.0/postgres-2.0.0.tgz
   sha1: dea5cad517c62afaf97a1b31df41ad691928d960
 - name: mattermost
-  version: 6.3.1
-  url: https://github.com/cloudfoundry-community/mattermost-boshrelease/releases/download/v6.3.1/mattermost-6.3.1.tgz
-  sha1: 499341ef618eb314333e9631c17e37aba30256e1
+  version: 6.3.2
+  url: https://github.com/cloudfoundry-community/mattermost-boshrelease/releases/download/v6.3.2/mattermost-6.3.2.tgz
+  sha1: 02c7c3eb68f25a75c16c9d9dbd5249e0ec5e6b9a
