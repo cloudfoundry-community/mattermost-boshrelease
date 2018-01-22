@@ -71,7 +71,8 @@
         "SessionIdleTimeoutInMinutes": <%= p("mattermost.ServiceSettings.SessionIdleTimeoutInMinutes") %>,
         "CloseUnusedDirectMessages": <%= p("mattermost.ServiceSettings.CloseUnusedDirectMessages") %>,
         "EnablePreviewFeatures": <%= p("mattermost.ServiceSettings.EnablePreviewFeatures") %>, 
-        "ExperimentalEnableAuthenticationTransfer": <%= p("mattermost.ServiceSettings.ExperimentalEnableAuthenticationTransfer") %>
+        "ExperimentalEnableAuthenticationTransfer": <%= p("mattermost.ServiceSettings.ExperimentalEnableAuthenticationTransfer") %>,
+        "EnableTutorial": <%= p("mattermost.ServiceSettings.EnableTutorial") %>
     },
     "TeamSettings": {
         "SiteName": "<%= p("mattermost.TeamSettings.SiteName") %>",
@@ -97,7 +98,8 @@
         "UserStatusAwayTimeout": 300,
         "TeammateNameDisplay": "<%= p("mattermost.TeamSettings.TeammateNameDisplay") %>",
         "EnableXToLeaveChannelsFromLHS": <%= p("mattermost.TeamSettings.EnableXToLeaveChannelsFromLHS") %>,
-        "EnableConfirmNotificationsToChannel": <%= p("mattermost.TeamSettings.EnableConfirmNotificationsToChannel")%>
+        "EnableConfirmNotificationsToChannel": <%= p("mattermost.TeamSettings.EnableConfirmNotificationsToChannel")%>,
+        "ExperimentalPrimaryTeam": "<%= p("mattermost.TeamSettings.ExperimentalPrimaryTeam") %>"
     },
 
     "SqlSettings": {
@@ -178,7 +180,10 @@
         "SkipServerCertificateVerification": false,
         "EnableSMTPAuth": <%= p("mattermost.EmailSettings.EnableSMTPAuth") %>,
         "EmailNotificationContentType": "<%= p("mattermost.EmailSettings.EmailNotificationContentType") %>",
-        "UseChannelInEmailNotifications": <%= p("mattermost.EmailSettings.UseChannelInEmailNotifications") %>
+        "UseChannelInEmailNotifications": <%= p("mattermost.EmailSettings.UseChannelInEmailNotifications") %>,
+        "LoginButtonColor": "<%= p("mattermost.EmailSettings.LoginButtonColor") %>",
+        "LoginButtonBorderColor": "<%= p("mattermost.EmailSettings.LoginButtonBorderColor") %>",
+        "LoginButtonTextColor": "<%= p("mattermost.EmailSettings.LoginButtonTextColor") %>"
     },
     "RateLimitSettings": {
         "Enable": <%= p("mattermost.RateLimitSettings.Enable") %>,
@@ -249,7 +254,10 @@
         "QueryTimeout": <%= p("mattermost.LdapSettings.QueryTimeout") %>,
         "MaxPageSize": <%= p("mattermost.LdapSettings.MaxPageSize") %>,
         "LoginFieldName": "<%= p("mattermost.LdapSettings.LoginFieldName") %>",
-        "EnableSyncWithLdap": <%= p("mattermost.LdapSettings.EnableSyncWithLdap")%>
+        "EnableSyncWithLdap": <%= p("mattermost.LdapSettings.EnableSyncWithLdap")%>,
+        "LoginButtonColor": "<%= p("mattermost.LdapSettings.LoginButtonColor") %>",
+        "LoginButtonBorderColor": "<% p("mattermost.LdapSettings.LoginButtonBorderColor") %>",
+        "LoginButtonTextColor": "<% p("mattermost.LdapSettings.LoginButtonTextColor") %>"
     },
     <% end %>
     "ComplianceSettings": {

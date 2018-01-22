@@ -164,6 +164,9 @@ properties:
   mattermost.ServiceSettings.ExperimentalEnableAuthenticationTransfer:
     description: Users can change their sign-in method to any that is enabled on the server
     default: true
+  mattermost.ServiceSettings.EnableTutorial: 
+    default: true
+    description: tutorial is shown to end users after account creation. This setting is experimental and may be replaced or removed in a future release.
    
   mattermost.TeamSettings.SiteName:
     description: Site name; it's not Slack, it is...
@@ -238,6 +241,9 @@ properties:
   mattermost.TeamSettings.EnableConfirmNotificationsToChannel:
     description: Users will be prompted to confirm when posting @channel and @all in channels with over five members.
     default: true
+  mattermost.TeamSettings.ExperimentalPrimaryTeam:
+    default: ""
+    description: to set the primary team of the server. This setting is experimental and may be replaced or removed in a future release.
 
   mattermost.SqlSettings.DriverName:
     description: Either 'postgres' or 'mysql'
@@ -482,6 +488,15 @@ properties:
   mattermost.EmailSettings.UseChannelInEmailNotifications:
     description: whether email notifications contain the channel name in the subject line
     default: false
+  mattermost.EmailSettings.LoginButtonColor:
+    default: ""
+    description: set the style of the email login button for white labelling purposes.
+  mattermost.EmailSettings.LoginButtonBorderColor:
+    default: ""
+    description: set the style of the email login button for white labelling purposes.
+  mattermost.EmailSettings.LoginButtonTextColor:
+    default: ""
+    description: set the style of the email login button for white labelling purposes.
 
   mattermost.LdapSettings.Enable:
     description: Mattermost allows login using AD/LDAP or Active Directory. (true|false)
@@ -543,7 +558,15 @@ properties:
   mattermost.LdapSettings.EnableSyncWithLdap:
     description: when true Mattermost periodically synchronizes SAML user attributes, including user deactivation and removal, with AD/LDAP
     default: false
-
+  mattermost.LdapSettings.LoginButtonColor: 
+    default: ""
+    description: to set the style of the LDAP login button for white labelling purposes.
+  mattermost.LdapSettings.LoginButtonBorderColor: 
+    default: ""
+    description: to set the style of the LDAP login button for white labelling purposes.
+  mattermost.LdapSettings.LoginButtonTextColor:
+    default: ""
+    description: to set the style of the LDAP login button for white labelling purposes.
 
   mattermost.ComplianceSettings.Enable:
     description: (E20) Compliance reporting is enabled in Mattermost. (true|false)
