@@ -1,0 +1,34 @@
+name: mattermost
+version: 6.3.4
+commit_hash: c5430d4
+uncommitted_changes: false
+jobs:
+- name: load_test
+  version: eff3c8e98ba3e08f33622e8282eb724f303687c8
+  fingerprint: eff3c8e98ba3e08f33622e8282eb724f303687c8
+  sha1: af57b60e0eea73abf43e479320821a8ab3b0a5f2
+- name: mattermost
+  version: c4c60211b576c41e44b0d4aa036625889433845b
+  fingerprint: c4c60211b576c41e44b0d4aa036625889433845b
+  sha1: d8019cfcc13aaa8a310a9e9fc10ef650a1c57a95
+packages:
+- name: go
+  version: 51666b9484b0dcc89086d6078f03baa990343da9
+  fingerprint: 51666b9484b0dcc89086d6078f03baa990343da9
+  sha1: 5011eee22930ddb1bc38ac06ff83775cfca00513
+  dependencies: []
+- name: load_test
+  version: 7cf2781c6182d9615a31f18b77e26fe80a9f924c
+  fingerprint: 7cf2781c6182d9615a31f18b77e26fe80a9f924c
+  sha1: 9d596110fc1071e930db5b44a2f175d2ef5fe4de
+  dependencies:
+  - go
+- name: platform
+  version: d26f7b87908fee43864528791edebcffcd909549
+  fingerprint: d26f7b87908fee43864528791edebcffcd909549
+  sha1: 457084cb167cb33711a26aaf956a1a5b3bbcf63c
+  dependencies: []
+license:
+  version: 58e18171adf0bd1258d25ca96dc8b21c35f6eaaa
+  fingerprint: 58e18171adf0bd1258d25ca96dc8b21c35f6eaaa
+  sha1: 79845bbaec471798feedf4f1ee1d0c3178677810
