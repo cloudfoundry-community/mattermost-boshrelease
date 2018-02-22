@@ -167,6 +167,20 @@ properties:
   mattermost.ServiceSettings.EnableTutorial: 
     default: true
     description: tutorial is shown to end users after account creation. This setting is experimental and may be replaced or removed in a future release.
+  mattermost.ServiceSettings.ImageProxyType:
+    description: proxy type such as atmos/camo
+  mattermost.ServiceSettings.ImageProxyOptions: 
+    default: ""
+    description: Additional options for basic image adjustments such as the URL signing key. Contact your image proxy service provider to learn more about what options are supported.
+  mattermost.ServiceSettings.ImageProxyURL:
+    default: ""
+    description: URL of your image proxy server.
+  mattermost.ServiceSettings.ExperimentalGroupUnreadChannels:
+    default: disabled
+    description: show an unread channel section in the webapp sidebar. The setting must first be enabled by the System Admin, by replacing disabled with either default_off or default_on
+  mattermost.ServiceSettings.ExperimentalEnableDefaultChannelLeaveJoinMessages:
+    default: true
+    description: allows disabling of leave/join messages in the default channel, usually Town Square.
    
   mattermost.TeamSettings.SiteName:
     description: Site name; it's not Slack, it is...
@@ -376,6 +390,9 @@ properties:
   mattermost.RateLimitSettings.VaryByHeader:
     description: Vary rate limiting by HTTP header field specified (""|X-Real-IP|X-Forwarded-For|anything you want)
     default: ""
+  mattermost.RateLimitSettings.VaryByUser:
+    default: false
+    description: user-based rate limiting, to rate limit on token and on userID.
 
   mattermost.PrivacySettings.ShowEmailAddress:
     description: Show email address of all users. (true|false)

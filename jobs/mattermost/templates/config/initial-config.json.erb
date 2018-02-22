@@ -72,7 +72,14 @@
         "CloseUnusedDirectMessages": <%= p("mattermost.ServiceSettings.CloseUnusedDirectMessages") %>,
         "EnablePreviewFeatures": <%= p("mattermost.ServiceSettings.EnablePreviewFeatures") %>, 
         "ExperimentalEnableAuthenticationTransfer": <%= p("mattermost.ServiceSettings.ExperimentalEnableAuthenticationTransfer") %>,
-        "EnableTutorial": <%= p("mattermost.ServiceSettings.EnableTutorial") %>
+        "EnableTutorial": <%= p("mattermost.ServiceSettings.EnableTutorial") %>,
+        <% if_p("mattermost.ServiceSettings.ImageProxyType") do |proxyType| %>
+        "ImageProxyType": "<%= p("proxyType") %>",
+        "ImageProxyOptions":" <%= p("mattermost.ServiceSettings.ImageProxyOptions") %>", 
+        "ImageProxyURL": "<%= p("mattermost.ServiceSettings.ImageProxyURL") %>",
+        <% end %>
+        "ExperimentalGroupUnreadChannels": "<%= p("mattermost.ServiceSettings.ExperimentalGroupUnreadChannels") %>",
+        "ExperimentalEnableDefaultChannelLeaveJoinMessages":  <%= p("mattermost.ServiceSettings.ExperimentalEnableDefaultChannelLeaveJoinMessages") %>
     },
     "TeamSettings": {
         "SiteName": "<%= p("mattermost.TeamSettings.SiteName") %>",
@@ -191,7 +198,8 @@
         "MaxBurst": <%= p("mattermost.RateLimitSettings.MaxBurst") %>,
         "MemoryStoreSize": <%= p("mattermost.RateLimitSettings.MemoryStoreSize") %>,
         "VaryByRemoteAddr": <%= p("mattermost.RateLimitSettings.VaryByRemoteAddr") %>,
-        "VaryByHeader": "<%= p("mattermost.RateLimitSettings.VaryByHeader") %>"
+        "VaryByHeader": "<%= p("mattermost.RateLimitSettings.VaryByHeader") %>",
+        "VaryByUser": <%= p("mattermost.RateLimitSettings.VaryByUser") %>
     },
     "PrivacySettings": {
         "ShowEmailAddress": <%= p("mattermost.PrivacySettings.ShowEmailAddress") %>,
