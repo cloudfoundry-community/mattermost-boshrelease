@@ -3,6 +3,8 @@ builds:
     version: 6.3.3
   1d76df4c-612f-42be-424b-9e3fba4c261b:
     version: 6.3.5
+  2d5a208f-cd1a-4aa1-58d8-8a6f968a5a46:
+    version: 6.3.6
   2d6e8ece-f294-47ae-8a62-904dad24c535:
     version: "3"
   33a81ae8-6226-4a62-67f8-52cb3b643432:
