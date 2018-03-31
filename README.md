@@ -23,6 +23,14 @@ bosh deploy manifests/mattermost.yml \
   -v mattermost-siteurl=http://mattermost.system.ourcompany.com
 ```
 
+For faster deployment, use the pre-compiled release:
+
+```plain
+bosh deploy manifests/mattermost.yml \
+  -v mattermost-siteurl=http://mattermost.system.ourcompany.com \
+  -o manifests/operators/use-compiled-releases.yml
+```
+
 If your BOSH does not have Credhub/Config Server, then remember ` --vars-store` to allow generation of passwords and certificates.
 
 Also, without Credhub you will need to explicitly provide a 32-character at-rest encryption key:
