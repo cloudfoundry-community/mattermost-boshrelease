@@ -1,15 +1,15 @@
 - path: /releases/name=mattermost/url
   type: replace
-  value: "https://s3.amazonaws.com/mattermost-boshrelease/compiled-releases/mattermost-6.3.8-ubuntu-trusty-3541.10-20180330-235414-955368042-20180330235425.tgz"
+  value: "https://s3.amazonaws.com/mattermost-boshrelease/compiled-releases/mattermost-6.3.9-ubuntu-trusty-3541.12-20180410-033758-506874231-20180410033811.tgz"
 - path: /releases/name=mattermost/version
   type: replace
-  value: "6.3.8"
+  value: "6.3.9"
 - path: /releases/name=mattermost/sha1
   type: replace
-  value: "299fd94a1f0475a861b902b6af9337dd2fe7e46d"
+  value: "17617ca0a05d4db7326230ab3f630cb1cc1f2b16"
 
 - path: /releases/name=mattermost/stemcell?
   type: replace
   value:
     os: "ubuntu-trusty"
-    version: "3541.10"
+    version: "3541.12"
