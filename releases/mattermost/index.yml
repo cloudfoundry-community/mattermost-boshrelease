@@ -35,6 +35,8 @@ builds:
     version: 6.3.7
   c63bb599-e984-489a-77bf-417900a07991:
     version: 6.3.8
+  ca53bad5-92f4-445a-69e7-965e21cc4084:
+    version: 6.4.0
   cb6331e1-b2e7-483c-4e96-bfeaf4fe7fab:
     version: 6.3.4
   d89aa368-f1c8-4590-b986-d3a822f62edc:
