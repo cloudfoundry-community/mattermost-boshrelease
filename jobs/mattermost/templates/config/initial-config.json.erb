@@ -296,7 +296,9 @@
         "NicknameAttribute": "",
         "LocaleAttribute": "",
         "PositionAttribute": "",
-        "LoginButtonText": "With SAML"
+        "LoginButtonText": "With SAML",
+        "ScopingIDPProviderId": "",
+        "ScopingIDPName": ""
     },
     "NativeAppSettings": {
         "AppDownloadLink": "<%= p("mattermost.NativeAppSettings.AppDownloadLink") %>",
@@ -408,6 +410,11 @@
       "DailyRunTime": "<%= p("mattermost.MessageExportSettings.DailyRunTime") %>",
       "ExportFromTimestamp": "<%= p("mattermost.MessageExportSettings.ExportFromTimestamp") %>",
       "FileLocation": "<%= p("mattermost.MessageExportSettings.FileLocation") %>",
-      "BatchSize": <%= p("mattermost.MessageExportSettings.BatchSize") %>
-  }
+      "BatchSize": <%= p("mattermost.MessageExportSettings.BatchSize") %>,
+      "CustomerType": "<% p("mattermost.MessageExportSettings.CustomerType") %>",
+      "EmailAddress": "<% p("mattermost.MessageExportSettings.EmailAddress") %>"
+    },
+    "DisplaySettings": {
+        "ExperimentalTimeZone": <%= p("mattermost.DisplaySettings.ExperimentalTimeZone") %>
+    }
 }

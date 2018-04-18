@@ -785,3 +785,13 @@ properties:
   mattermost.MessageExportSettings.BatchSize: 
     default: 10000
     description: to set how many new posts are batched together to a compliance export file
+  mattermost.MessageExportSettings.CustomerType:
+     default: A9
+     description: to allow selecting the type of Global Relay customer account the user’s organization has.
+  mattermost.MessageExportSettings.EmailAddress: 
+    default: ""
+    description: The email address your Global Relay server monitors for incoming compliance exports.
+
+  mattermost.DisplaySettings.ExperimentalTimeZone:
+    default: false
+    description: to allow selecting the timezone used for timestamps in the user interface and email notifications
