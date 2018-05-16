@@ -33,6 +33,8 @@ builds:
     version: 6.0.0
   b7167301-5918-431b-7f40-11ccf6b0ef70:
     version: 6.2.1
+  ba32c6e9-3573-4939-4aa2-d06be328a6dd:
+    version: 6.4.4
   ba7ce50e-5eb4-4559-5122-4d95a203bcf7:
     version: 6.4.2
   bcd24702-8910-40c3-58b8-32d08264269d:
