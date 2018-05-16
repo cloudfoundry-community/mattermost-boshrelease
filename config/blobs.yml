@@ -6,7 +6,7 @@ mattermost/load-test-4.9.2.tar.gz:
   size: 5470367
   object_id: d2baf8a8-f302-42a1-616e-923629666689
   sha: f02330d0389bdbb8dde982178a48025e25b0f6c6
-mattermost/mattermost-enterprise-4.9.2-linux-amd64.tar.gz:
-  size: 48137462
-  object_id: 2f72f08f-8e54-496b-7873-ffa928f5f9ae
-  sha: c06f85251e5fb4315baf1d7951826c235ccfd3ac
+mattermost/mattermost-enterprise-4.10.0-linux-amd64.tar.gz:
+  size: 48607318
+  object_id: 535a6bbe-3316-4417-4179-a3c43bfa9c19
+  sha: dc0d1856f11f041a6e83d8512829b8b2ded85288
