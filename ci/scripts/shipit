@@ -81,17 +81,7 @@ echo "v${VERSION}"                         > ${RELEASE_ROOT}/tag
 echo "v${VERSION}"                         > ${RELEASE_ROOT}/name
 mv ${REPO_OUT}/releases/*/*-${VERSION}.tgz   ${RELEASE_ROOT}/artifacts
 mv ${REPO_OUT}/ci/release_notes.md           ${RELEASE_ROOT}/notes.md
-cat >> ${RELEASE_ROOT}/notes.md <<EOF
 
-### Deployment
-\`\`\`yaml
-releases:
-- name:    $RELEASE_NAME
-  version: $VERSION
-  url:     $RELEASE_URL
-  sha1:    $RELEASE_SHA1
-\`\`\`
-EOF
 cat > ${RELEASE_ROOT}/notification <<EOF
 <!here> New ${RELEASE_NAME} v${VERSION} released!
 EOF
