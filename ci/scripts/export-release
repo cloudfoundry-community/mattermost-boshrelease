@@ -57,7 +57,7 @@ EOF
 export BOSH_DEPLOYMENT="compilation-${RELEASE_NAME}"
 
 delete_compilation_deployment() {
-	header "Cleaning up deployment..."
+	echo "Cleaning up deployment..."
 	bosh -n delete-deployment --force
 }
 trap "echo; echo; echo; sleep 10; delete_compilation_deployment" EXIT SIGINT SIGTERM
