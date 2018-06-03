@@ -54,6 +54,7 @@ meta:
     deployment-pr: (( concat meta.name "-testflight-pr" ))
     stemcell:
       cpi: warden-boshlite
+      os: ubuntu-trusty
 
   slack:
     webhook:       (( param "Please specify your Slack Incoming Webhook Integration URL" ))
@@ -410,6 +411,7 @@ jobs:
             BOSH_CLIENT:          (( grab meta.bosh-lite.username ))
             BOSH_CLIENT_SECRET:   (( grab meta.bosh-lite.password ))
             STEMCELL_CPI:         (( grab meta.bosh-lite.stemcell.cpi ))
+            STEMCELL_OS:          (( grab meta.bosh-lite.stemcell.os ))
       - put: compiled-release
         params:
           file: (( concat "compiled-release/compiled-releases/" meta.name "/*.tgz" ))
@@ -522,7 +524,7 @@ resources:
   - name: ubuntu-trusty-stemcell-3586
     type: bosh-io-stemcell
     source:
-      name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+      name: (( concat "bosh-" meta.bosh-lite.stemcell.cpi "-" meta.bosh-lite.stemcell.os "-go_agent" ))
       version_family: 3586.latest
 
   - name: compiled-release
