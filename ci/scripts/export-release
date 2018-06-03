@@ -11,10 +11,14 @@ set -eu
 # stemcell metadata/upload
 #
 
+STEMCELL_CPI=${STEMCELL_CPI:-warden-boshlite}
 STEMCELL_OS=${STEMCELL_OS:-ubuntu-trusty}
 STEMCELL_VERSION=$(cat stemcell/version)
 
-bosh -n upload-stemcell "https://bosh.io/d/stemcells/bosh-warden-boshlite-${STEMCELL_OS}-go_agent?v=${STEMCELL_VERSION}"
+if [[ $(bosh stemcells --json | jq -r ".Tables[0].Rows[] | select(.os == \"${STEMCELL_OS}\") | .version | test(\"${STEMCELL_VERSION}\")" | grep true | uniq) != "true" ]]; then
+  #                        https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-trusty-go_agent?v=3586.7
+  bosh -n upload-stemcell "https://bosh.io/d/stemcells/bosh-${STEMCELL_CPI}-${STEMCELL_OS}-go_agent?v=${STEMCELL_VERSION}"
+fi
 
 #
 # release metadata/upload
@@ -34,7 +38,7 @@ cd ../
 
 cat > manifest.yml <<EOF
 ---
-name: compilation
+name: compilation-${RELEASE_NAME}
 releases:
 - name: "$RELEASE_NAME"
   version: "$RELEASE_VERSION"
@@ -50,9 +54,9 @@ update:
 instance_groups: []
 EOF
 
-bosh -n -d compilation deploy manifest.yml
-bosh -d compilation export-release $RELEASE_NAME/$RELEASE_VERSION $STEMCELL_OS/$STEMCELL_VERSION
+bosh -n -d compilation-${RELEASE_NAME} deploy manifest.yml
+bosh -d compilation-${RELEASE_NAME} export-release $RELEASE_NAME/$RELEASE_VERSION $STEMCELL_OS/$STEMCELL_VERSION
 
-mkdir -p compiled-release/compiled-releases
-mv *.tgz compiled-release/compiled-releases/$( echo *.tgz | sed "s/\.tgz$/-$( date -u +%Y%m%d%H%M%S ).tgz/" )
-sha1sum  compiled-release/compiled-releases/*.tgz
+mkdir -p compiled-release/compiled-releases/$RELEASE_NAME
+mv *.tgz compiled-release/compiled-releases/$RELEASE_NAME/$( echo *.tgz | sed "s/\.tgz$/-$( date -u +%Y%m%d%H%M%S ).tgz/" )
+sha1sum  compiled-release/compiled-releases/$RELEASE_NAME/*.tgz
