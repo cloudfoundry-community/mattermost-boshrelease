@@ -70,12 +70,12 @@
         "AllowedUntrustedInternalConnections": "<%= p("mattermost.ServiceSettings.AllowedUntrustedInternalConnections") %>",
         "SessionIdleTimeoutInMinutes": <%= p("mattermost.ServiceSettings.SessionIdleTimeoutInMinutes") %>,
         "CloseUnusedDirectMessages": <%= p("mattermost.ServiceSettings.CloseUnusedDirectMessages") %>,
-        "EnablePreviewFeatures": <%= p("mattermost.ServiceSettings.EnablePreviewFeatures") %>, 
+        "EnablePreviewFeatures": <%= p("mattermost.ServiceSettings.EnablePreviewFeatures") %>,
         "ExperimentalEnableAuthenticationTransfer": <%= p("mattermost.ServiceSettings.ExperimentalEnableAuthenticationTransfer") %>,
         "EnableTutorial": <%= p("mattermost.ServiceSettings.EnableTutorial") %>,
         <% if_p("mattermost.ServiceSettings.ImageProxyType") do |proxyType| %>
         "ImageProxyType": "<%= p("proxyType") %>",
-        "ImageProxyOptions":" <%= p("mattermost.ServiceSettings.ImageProxyOptions") %>", 
+        "ImageProxyOptions":" <%= p("mattermost.ServiceSettings.ImageProxyOptions") %>",
         "ImageProxyURL": "<%= p("mattermost.ServiceSettings.ImageProxyURL") %>",
         <% end %>
         "ExperimentalGroupUnreadChannels": "<%= p("mattermost.ServiceSettings.ExperimentalGroupUnreadChannels") %>",
@@ -106,7 +106,8 @@
         "TeammateNameDisplay": "<%= p("mattermost.TeamSettings.TeammateNameDisplay") %>",
         "EnableXToLeaveChannelsFromLHS": <%= p("mattermost.TeamSettings.EnableXToLeaveChannelsFromLHS") %>,
         "EnableConfirmNotificationsToChannel": <%= p("mattermost.TeamSettings.EnableConfirmNotificationsToChannel")%>,
-        "ExperimentalPrimaryTeam": "<%= p("mattermost.TeamSettings.ExperimentalPrimaryTeam") %>"
+        "ExperimentalPrimaryTeam": "<%= p("mattermost.TeamSettings.ExperimentalPrimaryTeam") %>",
+        "ExperimentalEnableAutomaticReplies": <%= p("mattermost.TeamSettings.ExperimentalEnableAutomaticReplies") %>
     },
 
     "SqlSettings": {
@@ -125,7 +126,8 @@
         "ConsoleLevel": "<%= p("mattermost.LogSettings.ConsoleLevel") %>",
         "EnableFile": <%= p("mattermost.LogSettings.EnableFile") %>,
         "FileLevel": "<%= p("mattermost.LogSettings.FileLevel") %>",
-        "FileFormat": "<%= p("mattermost.LogSettings.FileFormat") %>",
+        "FileJson": <%= p("mattermost.LogSettings.FileJson") %>,
+        "ConsoleJson": <%= p("mattermost.LogSettings.ConsoleJson") %>,        
         "FileLocation": "<%= p("mattermost.LogSettings.FileLocation") %>",
         "EnableWebhookDebugging": <%= p("mattermost.LogSettings.EnableWebhookDebugging") %>,
         "EnableDiagnostics": <%= p("mattermost.LogSettings.EnableDiagnostics") %>
@@ -375,7 +377,7 @@
     "PluginSettings": {
         "Enable": <%= p("mattermost.PluginSettings.Enable") %>,
         "EnableUploads": <%= p("mattermost.PluginSettings.EnableUploads") %>,
-        "Directory": "/var/vcap/store/mattermost/client/plugins", 
+        "Directory": "/var/vcap/store/mattermost/client/plugins",
         "PluginStates": <%= JSON.pretty_generate(p("mattermost.PluginSettings.PluginStates")) %>,
         "Plugins": {
         <%- if p("mattermost.Plugins.Jira.Enabled") -%>
