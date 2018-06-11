@@ -164,12 +164,12 @@ properties:
   mattermost.ServiceSettings.ExperimentalEnableAuthenticationTransfer:
     description: Users can change their sign-in method to any that is enabled on the server
     default: true
-  mattermost.ServiceSettings.EnableTutorial: 
+  mattermost.ServiceSettings.EnableTutorial:
     default: true
     description: tutorial is shown to end users after account creation. This setting is experimental and may be replaced or removed in a future release.
   mattermost.ServiceSettings.ImageProxyType:
     description: proxy type such as atmos/camo
-  mattermost.ServiceSettings.ImageProxyOptions: 
+  mattermost.ServiceSettings.ImageProxyOptions:
     default: ""
     description: Additional options for basic image adjustments such as the URL signing key. Contact your image proxy service provider to learn more about what options are supported.
   mattermost.ServiceSettings.ImageProxyURL:
@@ -181,7 +181,7 @@ properties:
   mattermost.ServiceSettings.ExperimentalEnableDefaultChannelLeaveJoinMessages:
     default: true
     description: allows disabling of leave/join messages in the default channel, usually Town Square.
-   
+
   mattermost.TeamSettings.SiteName:
     description: Site name; it's not Slack, it is...
     default: Mattermost
@@ -258,6 +258,9 @@ properties:
   mattermost.TeamSettings.ExperimentalPrimaryTeam:
     default: ""
     description: to set the primary team of the server. This setting is experimental and may be replaced or removed in a future release.
+  mattermost.TeamSettings.ExperimentalEnableAutomaticReplies:
+    default: false
+    description: Allows users to enable Automatic Replies in Account Settings > Notifications. Users set a custom message that will be automatically sent in response to Direct Messages.
 
   mattermost.SqlSettings.DriverName:
     description: Either 'postgres' or 'mysql'
@@ -291,9 +294,12 @@ properties:
   mattermost.LogSettings.FileLevel:
     description: Level of detail at which log events are written to log files when EnableFile = true. (true|false)
     default: true
-  mattermost.LogSettings.FileFormat:
-    description: Format of log message output.
-    default: "[%D %T] [%L] (%S) %M"
+  mattermost.LogSettings.FileJson:
+    description: When true, logged events are written in a machine readable JSON format. When false, logged events are written in plain text.
+    default: true
+  mattermost.LogSettings.ConsoleJson:
+    description: When true, logged events are written in a machine readable JSON format. When false, logged events are written in plain text.
+    default: true
   mattermost.LogSettings.FileLocation:
     description: The location of the log files.  The path that you set must exist and Mattermost must have write permissions in it.
     default: "/var/vcap/sys/log/mattermost/"
@@ -496,7 +502,7 @@ properties:
   mattermost.EmailSettings.PushNotificationContents:
     description: Controlls how much detail is provided in push notifications. (generic|full) Generic only sends User and Channel
     default: "generic"
-  mattermost.EmailSettings.EnableSMTPAuth: 
+  mattermost.EmailSettings.EnableSMTPAuth:
     description: support SMTP servers requiring no authentication
     default: true
   mattermost.EmailSettings.EmailNotificationContentType:
@@ -575,10 +581,10 @@ properties:
   mattermost.LdapSettings.EnableSyncWithLdap:
     description: when true Mattermost periodically synchronizes SAML user attributes, including user deactivation and removal, with AD/LDAP
     default: false
-  mattermost.LdapSettings.LoginButtonColor: 
+  mattermost.LdapSettings.LoginButtonColor:
     default: ""
     description: to set the style of the LDAP login button for white labelling purposes.
-  mattermost.LdapSettings.LoginButtonBorderColor: 
+  mattermost.LdapSettings.LoginButtonBorderColor:
     default: ""
     description: to set the style of the LDAP login button for white labelling purposes.
   mattermost.LdapSettings.LoginButtonTextColor:
@@ -737,7 +743,7 @@ properties:
     default: true
   mattermost.PluginSettings.EnableUploads:
     description: Allows system administrators to upload new plugins.  Set to false unless you are uploading a plugin
-    default: false 
+    default: false
   mattermost.PluginSettings.PluginStates:
     description: set whether an installed plugin is active or not
     default: {}
@@ -756,7 +762,7 @@ properties:
 
   mattermost.DataRetentionSettings.EnableMessageDeletion:
     description: Delete messages after `MessageRetentionDays` days
-    default: false  
+    default: false
   mattermost.DataRetentionSettings.MessageRetentionDays:
     description: how many days messages are kept in Mattermost.  The minimum time is one day.
     default: 365
@@ -770,25 +776,25 @@ properties:
     description: Set the start time of the daily scheduled data retention job. Choose a time when fewer people are using your system. Must be a 24-hour time stamp in the form HH:MM.
     default: "02:00"
 
-  mattermost.MessageExportSettings.EnableExport: 
+  mattermost.MessageExportSettings.EnableExport:
     default: false
     description: to enable message export.
-  mattermost.MessageExportSettings.DailyRunTime: 
-    default: "01:00" 
+  mattermost.MessageExportSettings.DailyRunTime:
+    default: "01:00"
     description: to set the time for the daily export job.
-  mattermost.MessageExportSettings.ExportFromTimestamp: 
-    default: 0 
+  mattermost.MessageExportSettings.ExportFromTimestamp:
+    default: 0
     description: to set the timestamp for which posts to include in the message export.
-  mattermost.MessageExportSettings.FileLocation: 
+  mattermost.MessageExportSettings.FileLocation:
     default: "export"
     description: to set the message export location.
-  mattermost.MessageExportSettings.BatchSize: 
+  mattermost.MessageExportSettings.BatchSize:
     default: 10000
     description: to set how many new posts are batched together to a compliance export file
   mattermost.MessageExportSettings.CustomerType:
      default: A9
      description: to allow selecting the type of Global Relay customer account the user’s organization has.
-  mattermost.MessageExportSettings.EmailAddress: 
+  mattermost.MessageExportSettings.EmailAddress:
     default: ""
     description: The email address your Global Relay server monitors for incoming compliance exports.
 
