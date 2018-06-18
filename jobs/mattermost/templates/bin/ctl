@@ -23,7 +23,7 @@ case $1 in
 
     cd /var/vcap/packages/platform
     ulimit -n 49152 # set the open file limit
-    exec chpst -u vcap:vcap platform -c $RUN_DIR/config.json \
+    exec chpst -u vcap:vcap mattermost -c $RUN_DIR/config.json \
          >>$LOG_DIR/$JOB_NAME.stdout.log \
          2>>$LOG_DIR/$JOB_NAME.stderr.log
 
