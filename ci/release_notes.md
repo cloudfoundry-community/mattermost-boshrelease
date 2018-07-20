@@ -1,4 +1,3 @@
-Updates for MM 5.1 compatibility
 ========
 
 Changes to Team Edition and Enterprise Edition:
@@ -33,3 +32,16 @@ Changes to Team Edition and Enterprise Edition:
   * Added "CustomUrlSchemes": [],, to add a list of URL schemes that are used for autolinking in message text.
   * Under "LdapSettings": in config.json:
   * Added "LoginIdAttribute": "", to add an attribute in the AD/LDAP server used to log in to Mattermost.  
+=======
+
+# mattermost
+Bumped https://github.com/starkandwayne/mattermost-releases to v5.0.1
+
+# load-test
+Bumped https://github.com/starkandwayne/mattermost-releases to v5.0.1
+
+# mattermost
+Bumped https://github.com/starkandwayne/mattermost-releases to v5.1.0
+
+# load-test
+Bumped https://github.com/starkandwayne/mattermost-releases to v5.1.0

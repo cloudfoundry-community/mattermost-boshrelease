@@ -3,4 +3,5 @@
   path: /releases/name=mattermost
   value:
     name: mattermost
-    version: latest
+    version: create
+    url: file://.
