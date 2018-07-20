@@ -79,7 +79,9 @@
         "ImageProxyURL": "<%= p("mattermost.ServiceSettings.ImageProxyURL") %>",
         <% end %>
         "ExperimentalGroupUnreadChannels": "<%= p("mattermost.ServiceSettings.ExperimentalGroupUnreadChannels") %>",
-        "ExperimentalEnableDefaultChannelLeaveJoinMessages":  <%= p("mattermost.ServiceSettings.ExperimentalEnableDefaultChannelLeaveJoinMessages") %>
+        "ExperimentalEnableDefaultChannelLeaveJoinMessages":  <%= p("mattermost.ServiceSettings.ExperimentalEnableDefaultChannelLeaveJoinMessages") %>,
+        "EnableAPITeamDeletion": <%= p("mattermost.ServiceSettings.EnableAPITeamDeletion") %>,
+        "ExperimentalEnableHardenedMode": <%= p("mattermost.ServiceSettings.ExperimentalEnableHardenedMode") %>
     },
     "TeamSettings": {
         "SiteName": "<%= p("mattermost.TeamSettings.SiteName") %>",
@@ -107,7 +109,8 @@
         "EnableXToLeaveChannelsFromLHS": <%= p("mattermost.TeamSettings.EnableXToLeaveChannelsFromLHS") %>,
         "EnableConfirmNotificationsToChannel": <%= p("mattermost.TeamSettings.EnableConfirmNotificationsToChannel")%>,
         "ExperimentalPrimaryTeam": "<%= p("mattermost.TeamSettings.ExperimentalPrimaryTeam") %>",
-        "ExperimentalEnableAutomaticReplies": <%= p("mattermost.TeamSettings.ExperimentalEnableAutomaticReplies") %>
+        "ExperimentalEnableAutomaticReplies": <%= p("mattermost.TeamSettings.ExperimentalEnableAutomaticReplies") %>,
+        "ExperimentalHideTownSquareinLHS": <%= p("mattermost.TeamSettings.ExperimentalHideTownSquareinLHS") %>
     },
 
     "SqlSettings": {
@@ -127,7 +130,7 @@
         "EnableFile": <%= p("mattermost.LogSettings.EnableFile") %>,
         "FileLevel": "<%= p("mattermost.LogSettings.FileLevel") %>",
         "FileJson": <%= p("mattermost.LogSettings.FileJson") %>,
-        "ConsoleJson": <%= p("mattermost.LogSettings.ConsoleJson") %>,        
+        "ConsoleJson": <%= p("mattermost.LogSettings.ConsoleJson") %>,
         "FileLocation": "<%= p("mattermost.LogSettings.FileLocation") %>",
         "EnableWebhookDebugging": <%= p("mattermost.LogSettings.EnableWebhookDebugging") %>,
         "EnableDiagnostics": <%= p("mattermost.LogSettings.EnableDiagnostics") %>
@@ -192,7 +195,8 @@
         "UseChannelInEmailNotifications": <%= p("mattermost.EmailSettings.UseChannelInEmailNotifications") %>,
         "LoginButtonColor": "<%= p("mattermost.EmailSettings.LoginButtonColor") %>",
         "LoginButtonBorderColor": "<%= p("mattermost.EmailSettings.LoginButtonBorderColor") %>",
-        "LoginButtonTextColor": "<%= p("mattermost.EmailSettings.LoginButtonTextColor") %>"
+        "LoginButtonTextColor": "<%= p("mattermost.EmailSettings.LoginButtonTextColor") %>",
+        "EnablePreviewModeBanner": <%= p("mattermost.EmailSettings.EnablePreviewModeBanner") %>
     },
     "RateLimitSettings": {
         "Enable": <%= p("mattermost.RateLimitSettings.Enable") %>,
@@ -267,7 +271,8 @@
         "EnableSyncWithLdap": <%= p("mattermost.LdapSettings.EnableSyncWithLdap")%>,
         "LoginButtonColor": "<%= p("mattermost.LdapSettings.LoginButtonColor") %>",
         "LoginButtonBorderColor": "<% p("mattermost.LdapSettings.LoginButtonBorderColor") %>",
-        "LoginButtonTextColor": "<% p("mattermost.LdapSettings.LoginButtonTextColor") %>"
+        "LoginButtonTextColor": "<% p("mattermost.LdapSettings.LoginButtonTextColor") %>",
+        "LoginIdAttribute": "<% p("mattermost.LdapSettings.LoginIdAttribute") %>"
     },
     <% end %>
     "ComplianceSettings": {
@@ -325,7 +330,10 @@
         "UseExperimentalGossip": <%= p("mattermost.ClusterSettings.UseExperimentalGossip") %>,
         "ReadOnlyConfig": true,
         "GossipPort": <%= p("mattermost.ClusterSettings.GossipPort") %>,
-        "StreamingPort": <%= p("mattermost.ClusterSettings.StreamingPort") %>
+        "StreamingPort": <%= p("mattermost.ClusterSettings.StreamingPort") %>,
+        "MaxIdleConns": <%= p("mattermost.ClusterSettings.MaxIdleConns") %>,
+        "MaxIdleConnsPerHost": <%= p("mattermost.ClusterSettings.MaxIdleConnsPerHost") %>,
+        "IdleConnTimeoutMilliseconds": <%= p("mattermost.ClusterSettings.IdleConnTimeoutMilliseconds") %>
     },
     <% end -%>
 
@@ -417,6 +425,7 @@
       "EmailAddress": "<% p("mattermost.MessageExportSettings.EmailAddress") %>"
     },
     "DisplaySettings": {
-        "ExperimentalTimeZone": <%= p("mattermost.DisplaySettings.ExperimentalTimeZone") %>
+        "ExperimentalTimeZone": <%= p("mattermost.DisplaySettings.ExperimentalTimeZone") %>,
+        "CustomUrlSchemes": "<% p("mattermost.DisplaySettings.CustomUrlSchemes") %>"
     }
 }
