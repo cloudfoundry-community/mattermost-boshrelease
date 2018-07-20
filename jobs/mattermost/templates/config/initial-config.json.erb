@@ -81,7 +81,12 @@
         "ExperimentalGroupUnreadChannels": "<%= p("mattermost.ServiceSettings.ExperimentalGroupUnreadChannels") %>",
         "ExperimentalEnableDefaultChannelLeaveJoinMessages":  <%= p("mattermost.ServiceSettings.ExperimentalEnableDefaultChannelLeaveJoinMessages") %>,
         "EnableAPITeamDeletion": <%= p("mattermost.ServiceSettings.EnableAPITeamDeletion") %>,
-        "ExperimentalEnableHardenedMode": <%= p("mattermost.ServiceSettings.ExperimentalEnableHardenedMode") %>
+        "ExperimentalEnableHardenedMode": <%= p("mattermost.ServiceSettings.ExperimentalEnableHardenedMode") %>,
+        "ExperimentalLimitClientConfig": <%= p("mattermost.ServiceSettings.ExperimentalLimitClientConfig") %>,
+        "EnableGifPicker": <%= p("mattermost.ServiceSettings.EnableGifPicker") %>,
+        "GfycatApiKey": "<%= p("mattermost.ServiceSettings.GfycatApiKey") %>",
+        "GfycatApiSecret": "<%= p("mattermost.ServiceSettings.GfycatApiSecret") %>",
+        "EnableEmailInvitations": <%= p("mattermost.ServiceSettings.EnableEmailInvitations") %>
     },
     "TeamSettings": {
         "SiteName": "<%= p("mattermost.TeamSettings.SiteName") %>",
@@ -122,7 +127,8 @@
         "MaxOpenConns": <%= p("mattermost.SqlSettings.MaxOpenConns") %>,
         "Trace": <%= p("mattermost.SqlSettings.Trace") %>,
         "AtRestEncryptKey": "<%= p("mattermost.SqlSettings.AtRestEncryptKey") %>",
-        "QueryTimeout": <%= p("mattermost.SqlSettings.QueryTimeout") %>
+        "QueryTimeout": <%= p("mattermost.SqlSettings.QueryTimeout") %>,
+        "ConnMaxLifetimeMilliseconds": <%= p("mattermost.SqlSettings.ConnMaxLifetimeMilliseconds") %>
     },
     "LogSettings": {
         "EnableConsole": <%= p("mattermost.LogSettings.EnableConsole") %>,
@@ -427,5 +433,9 @@
     "DisplaySettings": {
         "ExperimentalTimeZone": <%= p("mattermost.DisplaySettings.ExperimentalTimeZone") %>,
         "CustomUrlSchemes": "<% p("mattermost.DisplaySettings.CustomUrlSchemes") %>"
-    }
+    },
+    "ExperimentalSettings": {
+    "ClientSideCertEnable": <%= p("mattermost.ExperimentalSettings.ClientSideCertEnable") %>,
+    "ClientSideCertCheck": "<%= p("mattermost.ExperimentalSettings.ClientSideCertCheck") %>"
+},
 }
