@@ -3,6 +3,8 @@
         "ServerURL": "<%= p("ServerURL") %>",
         "WebsocketURL": "<%= p("WebsocketURL") %>",
         "LocalCommands": false,
+        "DriverName": "<%= p("mattermost.SqlSettings.DriverName") %>",
+        "DataSource": "<%= p("mattermost.SqlSettings.DataSource") %>",
         "SSHHostnamePort": "<%= link("cluster_nodes").instances.first.address %>:22",
         "SSHUsername": "vcap",
         "SSHPassword": "",
