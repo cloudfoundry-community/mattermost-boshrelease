@@ -14,6 +14,10 @@ consumes:
     type: mattermost_cluster
 
 properties:
+  mattermost.SqlSettings.DriverName:
+    description: Either 'postgres' or 'mysql'
+  mattermost.SqlSettings.DataSource:
+    description: This is the connection string to the master database.
   ServerURL:
     description: public url your users normal log in to
     default: "http://localhost:8065"
