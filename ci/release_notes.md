@@ -25,3 +25,6 @@ Bumped https://github.com/starkandwayne/mattermost-releases to v5.2.0
 
 # mattermost
 Bumped https://github.com/starkandwayne/mattermost-releases to v5.2.1
+
+# load-test
+Bumped https://github.com/starkandwayne/mattermost-releases to v5.2.1
