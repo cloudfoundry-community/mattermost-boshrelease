@@ -72,9 +72,9 @@ releases:
   url: https://github.com/cloudfoundry-community/postgres-boshrelease/releases/download/v2.0.0/postgres-2.0.0.tgz
   version: 2.0.0
 - name: mattermost
-  sha1: b40bb43540394184efc3ecbfc1936d66d0f82b67
+  sha1: 779bcb1c708179a8b310cc49d2ee6bc62999d1f4
   stemcell:
     os: ubuntu-trusty
     version: "3586.42"
-  url: https://github.com/cloudfoundry-community/mattermost-boshrelease/releases/download/v7.0.2/mattermost-7.0.2.tgz
+  url: https://s3.amazonaws.com/mattermost-boshrelease/compiled-releases/mattermost/mattermost-7.0.2-ubuntu-trusty-3586.42-20180919-004806-017860239-20180919004817.tgz
   version: 7.0.2
