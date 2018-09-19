@@ -14,9 +14,28 @@ consumes:
     type: mattermost_cluster
 
 properties:
+  mattermost.SqlSettings.DriverName:
+    description: Either 'postgres' or 'mysql'
+  mattermost.SqlSettings.DataSource:
+    description: This is the connection string to the master database.
   ServerURL:
     description: public url your users normal log in to
     default: "http://localhost:8065"
+  PProfURL:
+    description: public url your users normal log in to - pprof
+    default: "http://localhost:8067/debug/pprof"
+  WaitForServerStart:
+    description: WaitForServerStart
+    default: false
+  MaxIdleConns:
+    description: MaxIdleConns
+    default: 100
+  MaxIdleConnsPerHost:
+    description: MaxIdleConnsPerHost
+    default: 128
+  IdleConnTimeoutMilliseconds:
+    description: IdleConnTimeoutMilliseconds
+    default: 90000
   WebsocketURL:
     description: public url for websockets, generally the same as ServerURL, but with ws replacing the http
     default: "ws://localhost:8065"
@@ -54,10 +73,99 @@ properties:
   ActionRateMaxVarianceMilliseconds:
     description: This is the maximum variance in action rate for each wait period. So if the action rate was 2000ms and the max variance was 500ms. The min and max action rate would be 1500ms and 2500ms.
     default: 60000
-
+  NumTeamSchemes:
+    description:
+    default: 1
+  NumPosts:
+    description:
+    default: 20000000
+  NumEmoji:
+    description:
+    default: 2000
+  NumPlugins:
+    description:
+    default: 1
   sleep_before_seconds:
     description: for debugging purposes, this will sleep before the load test starts
     default: 0
   sleep_after_seconds:
     description: for debugging purposes, this will sleep before the load test ends
     default: 0
+  PostTimeRange:
+    description:
+    default: 2600000
+  ReplyChance:
+    description:
+    default: 0.3
+  PercentCustomSchemeTeams:
+    description:
+    default: 0.2
+  PercentCustomSchemeChannels:
+    description:
+    default: 0.1
+  ChannelLinkChance:
+    description:
+    default: 0.02
+  LinkPreviewChance:
+    description:
+    default: 0.2
+  CustomEmojiChance:
+    description:
+    default: 0.2
+  NeedsProfilesByUsernameChance:
+    description:
+    default: 0.38
+  NeedsProfilesByIdChance:
+    description:
+    default: 0.22
+  NeedsProfileStatusChance:
+    description:
+    default: 0.80
+  RandomizeEntitySelection:
+    description:
+    default: false
+  CustomReportText:
+    description:
+    default: ''
+  SendReportToMMServer:
+    description:
+    default: false
+  ResultsServerURL:
+    description:
+    default: ''
+  ResultsChannelId:
+    description:
+    default: ''
+  ResultsUsername:
+    description:
+    default: ''
+  ResultsPassword:
+    description:
+    default: ''
+  PProfDelayMinutes:
+    description:
+    default: 15
+  PProfLength:
+    description:
+    default: 240
+  EnableConsole:
+    description:
+    default: true
+  ConsoleLevel:
+    description:
+    default: INFO
+  ConsoleJson:
+    description:
+    default: true
+  EnableFile:
+    description:
+    default: true
+  FileLevel:
+    description:
+    default: INFO
+  FileJson:
+    description:
+    default: true
+  FileLocation:
+    description:
+    default: loadtest.log
