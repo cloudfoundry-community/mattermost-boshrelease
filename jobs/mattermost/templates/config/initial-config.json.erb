@@ -86,7 +86,10 @@
         "EnableGifPicker": <%= p("mattermost.ServiceSettings.EnableGifPicker") %>,
         "GfycatApiKey": "<%= p("mattermost.ServiceSettings.GfycatApiKey") %>",
         "GfycatApiSecret": "<%= p("mattermost.ServiceSettings.GfycatApiSecret") %>",
-        "EnableEmailInvitations": <%= p("mattermost.ServiceSettings.EnableEmailInvitations") %>
+        "EnableEmailInvitations": <%= p("mattermost.ServiceSettings.EnableEmailInvitations") %>,
+        "CorsExposedHeaders": "<%= p("mattermost.ServiceSettings.CorsExposedHeaders") %>",
+        "CorsAllowCredentials": "<%= p("mattermost.ServiceSettings.CorsAllowCredentials") %>",
+        "CorsDebug": "<%= p("mattermost.ServiceSettings.CorsDebug") %>"
     },
     "TeamSettings": {
         "SiteName": "<%= p("mattermost.TeamSettings.SiteName") %>",
@@ -115,7 +118,9 @@
         "EnableConfirmNotificationsToChannel": <%= p("mattermost.TeamSettings.EnableConfirmNotificationsToChannel")%>,
         "ExperimentalPrimaryTeam": "<%= p("mattermost.TeamSettings.ExperimentalPrimaryTeam") %>",
         "ExperimentalEnableAutomaticReplies": <%= p("mattermost.TeamSettings.ExperimentalEnableAutomaticReplies") %>,
-        "ExperimentalHideTownSquareinLHS": <%= p("mattermost.TeamSettings.ExperimentalHideTownSquareinLHS") %>
+        "ExperimentalHideTownSquareinLHS": <%= p("mattermost.TeamSettings.ExperimentalHideTownSquareinLHS") %>,
+        "ViewArchivedChannels": <%= p("mattermost.TeamSettings.ViewArchivedChannels") %>,
+        "ExperimentalDefaultChannels": "<%= p("mattermost.TeamSettings.ExperimentalDefaultChannels") %>"
     },
 
     "SqlSettings": {
@@ -311,7 +316,9 @@
         "PositionAttribute": "",
         "LoginButtonText": "With SAML",
         "ScopingIDPProviderId": "",
-        "ScopingIDPName": ""
+        "ScopingIDPName": "",
+        "EnableSyncWithLdapIncludeAuth": false,
+        "IdAttribute": ""
     },
     "NativeAppSettings": {
         "AppDownloadLink": "<%= p("mattermost.NativeAppSettings.AppDownloadLink") %>",

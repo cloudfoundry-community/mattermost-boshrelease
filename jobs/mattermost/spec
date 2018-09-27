@@ -202,6 +202,15 @@ properties:
   mattermost.ServiceSettings.EnableEmailInvitations:
     default: false
     description: To disable email invitations on the system.
+  mattermost.ServiceSettings.CorsExposedHeaders:
+    default: ""
+    description: Allows you to add a whitelist of headers that will be accessible to the requester.
+  mattermost.ServiceSettings.CorsAllowCredentials:
+    default: false
+    description: Allows requests that pass validation to include the Access-Control-Allow-Credentials header.
+  mattermost.ServiceSettings.CorsDebug:
+    default: false
+    description: Provides ability to print messages to the logs to help when developing an integration that uses CORS.
 
   mattermost.TeamSettings.SiteName:
     description: Site name; it's not Slack, it is...
@@ -285,6 +294,12 @@ properties:
   mattermost.TeamSettings.ExperimentalHideTownSquareinLHS:
     default: false
     description: To hide Town Square in the left-hand sidebar if there are no unread messages in the channel.
+  mattermost.TeamSettings.ViewArchivedChannels:
+    default: true
+    description: Allows users to share permalinks and search for content of channels that have been archived.
+  mattermost.TeamSettings.ExperimentalDefaultChannels:
+    default: ""
+    description: Allow choosing the default channels every user is added to automatically after joining a new team.
 
   mattermost.SqlSettings.DriverName:
     description: Either 'postgres' or 'mysql'
