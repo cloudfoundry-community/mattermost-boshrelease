@@ -1,7 +1,0 @@
----
-name: NAME
-meta:
-  stemcell:
-    name: STEMCELL
-
-director_uuid: PLACEHOLDER-DIRECTOR-UUID
