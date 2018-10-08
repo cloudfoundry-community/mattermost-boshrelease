@@ -4,6 +4,7 @@ meta:
   # fly -t ohio-cf login -c https://ci2.starkandwayne.com -n cfcommunity
   target:  ohio-cf
   url:     https://ci2.starkandwayne.com
+  team:    cfcommunity
 
   # test-errands: load_test
 
