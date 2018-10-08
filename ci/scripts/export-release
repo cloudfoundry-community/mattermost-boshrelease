@@ -12,7 +12,7 @@ set -eu
 #
 
 STEMCELL_CPI=${STEMCELL_CPI:-warden-boshlite}
-STEMCELL_OS=${STEMCELL_OS:-ubuntu-trusty}
+STEMCELL_OS=${STEMCELL_OS:-ubuntu-xenial}
 STEMCELL_VERSION=$(cat stemcell/version)
 
 if [[ $(bosh stemcells --json | jq -r ".Tables[0].Rows[] | select(.os == \"${STEMCELL_OS}\") | .version | test(\"${STEMCELL_VERSION}\")" | grep true | uniq) != "true" ]]; then
