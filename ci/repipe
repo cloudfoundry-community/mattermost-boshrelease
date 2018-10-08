@@ -46,6 +46,7 @@ usage() {
 
 open_pipeline() {
 	url=$(show_pipeline_url)
+    cleanup
 	if [[ -x /usr/bin/open ]]; then
 		exec /usr/bin/open "$url"
 	else
