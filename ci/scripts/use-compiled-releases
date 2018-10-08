@@ -11,7 +11,7 @@ if [[ -z $(git config --global user.name) ]]; then
   git config --global user.name "${GIT_NAME}"
 fi
 
-STEMCELL_OS=${STEMCELL_OS:-ubuntu-trusty}
+STEMCELL_OS=${STEMCELL_OS:-ubuntu-xenial}
 STEMCELL_VERSION=$(cat stemcell/version)
 
 releases=($(ls -d *compiled-release))
