@@ -323,6 +323,9 @@ properties:
   mattermost.SqlSettings.ConnMaxLifetimeMilliseconds:
     description: To configure the maximum lifetime for a connection to the database.
     default: 3600000
+  mattermost.SqlSettings.EnablePublicChannelsMaterialization:
+    description: To increase channel search performance in the channel switcher (CTRL/CMD+K), channel autocomplete (~) and elsewhere in the UI.
+    default: true
 
   mattermost.LogSettings.EnableConsole:
     description: Output log messages to the console based on ConsoleLevel option. The server writes messages to the standard output stream (stdout).
