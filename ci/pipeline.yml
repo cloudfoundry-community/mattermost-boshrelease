@@ -70,7 +70,7 @@ groups:
       - testflight-pr
       - rc
       - shipit
-      - compile-release-97
+      - compile-release-250
       - use-compiled-releases
   - name: versioning
     jobs:
@@ -374,13 +374,13 @@ jobs:
           icon_url: (( grab meta.slack.icon ))
           text:    '(( concat meta.slack.fail_url " " meta.pipeline ": shipit job failed" ))'
 
-  - name: compile-release-97
+  - name: compile-release-250
     plan:
       - aggregate:
         - get: git
         - get: github
           trigger: true
-        - get: ubuntu-xenial-stemcell-97
+        - get: ubuntu-xenial-stemcell-250
           params: {tarball: false}
       - task: export-release
         config:
@@ -392,7 +392,7 @@ jobs:
               tag:        (( grab meta.image.tag ))
           inputs:
             - name: git
-            - name: ubuntu-xenial-stemcell-97
+            - name: ubuntu-xenial-stemcell-250
               path: stemcell
             - name: github
               path: release
@@ -414,13 +414,13 @@ jobs:
       - aggregate:
         - get: git
         - get: github
-          passed: [compile-release-97]
+          passed: [compile-release-250]
           trigger: true
-        - get: ubuntu-xenial-stemcell-97
-          passed: [compile-release-97]
+        - get: ubuntu-xenial-stemcell-250
+          passed: [compile-release-250]
           params: {tarball: false}
         - get: compiled-release
-          passed: [compile-release-97]
+          passed: [compile-release-250]
       - task: use-compiled-releases
         config:
           platform: linux
@@ -431,7 +431,7 @@ jobs:
               tag:        (( grab meta.image.tag ))
           inputs:
             - name: git
-            - name: ubuntu-xenial-stemcell-97
+            - name: ubuntu-xenial-stemcell-250
               path: stemcell
             - name: github
               path: release
@@ -512,11 +512,11 @@ resources:
       access_key_id:     (( grab meta.aws.access_key ))
       secret_access_key: (( grab meta.aws.secret_key ))
 
-  - name: ubuntu-xenial-stemcell-97
+  - name: ubuntu-xenial-stemcell-250
     type: bosh-io-stemcell
     source:
       name: bosh-warden-boshlite-ubuntu-xenial-go_agent
-      version_family: 97.latest
+      version_family: 250.latest
 
   - name: compiled-release
     type: s3

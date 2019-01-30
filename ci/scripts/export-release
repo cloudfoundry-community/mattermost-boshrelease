@@ -16,7 +16,7 @@ STEMCELL_OS=${STEMCELL_OS:-ubuntu-xenial}
 STEMCELL_VERSION=$(cat stemcell/version)
 
 if [[ $(bosh stemcells --json | jq -r ".Tables[0].Rows[] | select(.os == \"${STEMCELL_OS}\") | .version | test(\"${STEMCELL_VERSION}\")" | grep true | uniq) != "true" ]]; then
-  #                        https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-xenial-go_agent?v=97.22
+  #                        https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-trusty-go_agent?v=3586.7
   bosh -n upload-stemcell "https://bosh.io/d/stemcells/bosh-${STEMCELL_CPI}-${STEMCELL_OS}-go_agent?v=${STEMCELL_VERSION}"
 fi
 
