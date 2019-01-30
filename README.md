@@ -47,7 +47,7 @@ system_domain=$(bosh -d $cf_deployment manifest | bosh int - --path /instance_gr
 bosh deploy manifests/mattermost.yml \
   -o manifests/operators/routing.yml \
   -v routing-nats-deployment=${cf_deployment} \
-  -v mattermost-hostname=mattermost.${system_domain}
+  -v mattermost-siteurl=mattermost.${system_domain}
 ```
 
 You could also dynamically look up your system domain:
@@ -61,7 +61,7 @@ bosh deploy manifests/mattermost.yml \
    -v "mattermost-sql-atrestencryptkey=${atrestencryptionkey:?required}" \
   -o manifests/operators/routing.yml \
   -v routing-nats-deployment=${cf_deployment:?required} \
-  -v "mattermost-hostname=mattermost.${system_domain:?required}"
+  -v "mattermost-siteurl=mattermost.${system_domain:?required}"
 
 open https://mattermost.$system_domain
 ```

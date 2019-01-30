@@ -17,7 +17,7 @@
             component: mattermost
           registration_interval: 10s
           uris:
-          - ((mattermost-hostname))
+          - ((mattermost-siteurl))
 
 - type: replace
   path: /releases/-
@@ -29,4 +29,4 @@
 
 - type: replace
   path: /instance_groups/name=mattermost/jobs/name=mattermost/properties/mattermost/ServiceSettings/SiteURL?
-  value: https://((mattermost-hostname))
+  value: https://((mattermost-siteurl))
