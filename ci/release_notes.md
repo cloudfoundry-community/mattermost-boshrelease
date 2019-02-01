@@ -10,3 +10,6 @@ Changes to Team Edition and Enterprise Edition (release v5.4 .. v5.7):
 * The `mattermost-hostname` BOSH variable has been renamed to `mattermost-siteurl` to more closely map to Mattermost configuration naming.
 # mattermost
 Bumped https://github.com/starkandwayne/mattermost-releases to v5.7.1
+
+# load-test
+Bumped https://github.com/starkandwayne/mattermost-releases to v5.7.1
