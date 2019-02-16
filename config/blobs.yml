@@ -6,7 +6,7 @@ mattermost/load-test-5.7.1.tar.gz:
   size: 8548641
   object_id: bb02349c-a315-4375-40d4-b3467a1bf915
   sha: 0aa1ded8e091db0ce613187ddec57be0575d1134
-mattermost/mattermost-enterprise-5.7.1-linux-amd64.tar.gz:
-  size: 102660133
-  object_id: 1839d6e5-9818-443a-79ad-83fe8cd163f9
-  sha: c4c3ef586e71f60e516cbe94418bb05bede03b00
+mattermost/mattermost-enterprise-5.8.0-linux-amd64.tar.gz:
+  size: 98792460
+  object_id: 79587de0-4635-4e9f-5614-5eacf5a58436
+  sha: 2f9c3afb9fa1a3af3d359e779dc615a8c73bb2ca
