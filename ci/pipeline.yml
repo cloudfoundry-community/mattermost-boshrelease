@@ -381,6 +381,7 @@ jobs:
         - get: github
           trigger: true
         - get: ubuntu-xenial-stemcell-250
+          trigger: true
           params: {tarball: false}
       - task: export-release
         config:
