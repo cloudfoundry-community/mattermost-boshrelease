@@ -11,3 +11,6 @@ Changes to Team Edition and Enterprise Edition (release v5.4 .. v5.7):
 
 ## mattermost
 Bumped https://github.com/starkandwayne/mattermost-releases to v5.8.0
+
+# mattermost
+Bumped https://github.com/starkandwayne/mattermost-releases to v5.9.0
