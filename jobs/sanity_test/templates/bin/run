@@ -1,0 +1,15 @@
+#!/bin/bash
+
+exec 2>&1
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+############################################################################
+
+# put your errand steps here...
+
+export siteurl="<%= p('mattermost.ServiceSettings.SiteURL') %>"
+
+set -x
+curl "$siteurl" | grep "To use Mattermost, please enable JavaScript."

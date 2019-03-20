@@ -6,7 +6,7 @@ meta:
   url:     https://ci2.starkandwayne.com
   team:    cfcommunity
 
-  # test-errands: load_test
+  test-errands: sanity_test
 
   initial_version: 5.1.0
 

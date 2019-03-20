@@ -43,6 +43,20 @@ instance_groups:
           AtRestEncryptKey: ((mattermost-sql-atrestencryptkey))
         ServiceSettings:
           SiteURL: ((mattermost-siteurl))
+- name: sanity-test
+  azs: [z1]
+  instances: 1
+  lifecycle: errand
+  vm_type: default
+  stemcell: default
+  networks: [{name: default}]
+  jobs:
+  - release: mattermost
+    name: sanity_test
+    properties:
+      mattermost:
+        ServiceSettings:
+          SiteURL: ((mattermost-siteurl))
 
 variables:
 - name: db-admin-password
