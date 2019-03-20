@@ -14,32 +14,20 @@ meta:
     email:  ((git-commit-email))
     name:   ((git-commit-name))
 
-  bosh-lite:
-    target:   ((bosh-lite-environment))
-    cacert:   ((bosh-lite-ca-cert))
-    username: ((bosh-lite-client))
-    password: ((bosh-lite-client-secret))
-    cf:
-      deployment_name: cf
-      system_domain: ((bosh-lite-cf-system-domain))
+  bosh:
+    target:   ((bosh_environment))
+    cacert:   ((bosh_ca_cert))
+    username: ((bosh_client))
+    password: ((bosh_client_secret))
 
   manifest:
+    operator_file_paths: manifests/operators/dmz_vip.yml
     vars: (( concat
-      "\nmattermost-sql-atrestencryptkey=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-      "\nmattermost-siteurl=mattermost-testflight." meta.bosh-lite.cf.system_domain ))
+      "\nvip=3.18.146.91"
+      "\nmattermost-siteurl=http://3-18-146-91.sslip.io:8605" ))
     vars-pr: (( concat
-      "\nmattermost-sql-atrestencryptkey=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-      "\nmattermost-siteurl=mattermost-testflight-pr." meta.bosh-lite.cf.system_domain ))
-  # manifest:
-  #   operator_file_paths: manifests/operators/routing.yml
-  #   vars: (( concat
-  #     "\nmattermost-sql-atrestencryptkey=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-  #     "\nrouting-nats-deployment=" meta.bosh-lite.cf.deployment_name
-  #     "\nmattermost-siteurl=mattermost-testflight." meta.bosh-lite.cf.system_domain ))
-  #   vars-pr: (( concat
-  #     "\nmattermost-sql-atrestencryptkey=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-  #     "\nrouting-nats-deployment=" meta.bosh-lite.cf.deployment_name
-  #     "\nmattermost-siteurl=mattermost-testflight-pr." meta.bosh-lite.cf.system_domain ))
+      "\nvip=3.18.146.91"
+      "\nmattermost-siteurl=http://3-18-146-91.sslip.io:8605" ))
 
   aws:
     bucket: (( grab meta.pipeline ))
