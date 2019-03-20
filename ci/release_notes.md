@@ -1,5 +1,6 @@
 ## Release updates
 
+* `mattermost-siteurl` variable must start with `https://` or `http://` (see below, it was formerly called `mattermost-hostname`)
 * New `sanity-test` errand that initially just pings the endpoint to confirm it returns non-JavaScript text
 * Bumped https://github.com/starkandwayne/mattermost-releases to v5.9.0
 
