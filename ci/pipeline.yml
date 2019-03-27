@@ -516,7 +516,7 @@ resources:
   - name: ubuntu-xenial-stemcell-250
     type: bosh-io-stemcell
     source:
-      name: bosh-warden-boshlite-ubuntu-xenial-go_agent
+      name: bosh-aws-xen-hvm-ubuntu-xenial-go_agent
       version_family: 250.latest
 
   - name: compiled-release
