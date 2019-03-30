@@ -23,6 +23,10 @@
         "ConnectionSecurity": "<%= p("mattermost.ServiceSettings.ConnectionSecurity") %>",
         "TLSCertFile": "<%= p("mattermost.ServiceSettings.TLSCertFile") %>",
         "TLSKeyFile": "<%= p("mattermost.ServiceSettings.TLSKeyFile") %>",
+        "TLSMinVer": "<%= p("mattermost.ServiceSettings.TLSMinVer") %>",
+        "TLSStrictTransport": <%= p("mattermost.ServiceSettings.TLSStrictTransport") %>,
+        "TLSStrictTransportMaxAge": <%= p("mattermost.ServiceSettings.TLSStrictTransportMaxAge") %>,
+        "TLSOverwriteCiphers": <%= p("mattermost.ServiceSettings.TLSOverwriteCiphers") %>,
         "UseLetsEncrypt": false,
         "LetsEncryptCertificateCacheFile": "./config/letsencrypt.cache",
         "Forward80To443": <%= p("mattermost.ServiceSettings.Forward80To443") %>,
@@ -73,20 +77,14 @@
         "EnablePreviewFeatures": <%= p("mattermost.ServiceSettings.EnablePreviewFeatures") %>,
         "ExperimentalEnableAuthenticationTransfer": <%= p("mattermost.ServiceSettings.ExperimentalEnableAuthenticationTransfer") %>,
         "EnableTutorial": <%= p("mattermost.ServiceSettings.EnableTutorial") %>,
-        <% if_p("mattermost.ServiceSettings.ImageProxyType") do |proxyType| %>
-        "ImageProxyType": "<%= p("proxyType") %>",
-        "ImageProxyOptions":" <%= p("mattermost.ServiceSettings.ImageProxyOptions") %>",
-        "ImageProxyURL": "<%= p("mattermost.ServiceSettings.ImageProxyURL") %>",
-        <% end %>
         "ExperimentalGroupUnreadChannels": "<%= p("mattermost.ServiceSettings.ExperimentalGroupUnreadChannels") %>",
         "ExperimentalEnableDefaultChannelLeaveJoinMessages":  <%= p("mattermost.ServiceSettings.ExperimentalEnableDefaultChannelLeaveJoinMessages") %>,
         "EnableAPITeamDeletion": <%= p("mattermost.ServiceSettings.EnableAPITeamDeletion") %>,
         "ExperimentalEnableHardenedMode": <%= p("mattermost.ServiceSettings.ExperimentalEnableHardenedMode") %>,
-        "ExperimentalLimitClientConfig": <%= p("mattermost.ServiceSettings.ExperimentalLimitClientConfig") %>,
+        "DisableLegacyMFA": <%= p("mattermost.ServiceSettings.DisableLegacyMFA") %>,
         "EnableGifPicker": <%= p("mattermost.ServiceSettings.EnableGifPicker") %>,
         "GfycatApiKey": "<%= p("mattermost.ServiceSettings.GfycatApiKey") %>",
         "GfycatApiSecret": "<%= p("mattermost.ServiceSettings.GfycatApiSecret") %>",
-        "EnableEmailInvitations": <%= p("mattermost.ServiceSettings.EnableEmailInvitations") %>,
         "CorsExposedHeaders": "<%= p("mattermost.ServiceSettings.CorsExposedHeaders") %>",
         "CorsAllowCredentials": "<%= p("mattermost.ServiceSettings.CorsAllowCredentials") %>",
         "CorsDebug": "<%= p("mattermost.ServiceSettings.CorsDebug") %>"
@@ -133,8 +131,7 @@
         "Trace": <%= p("mattermost.SqlSettings.Trace") %>,
         "AtRestEncryptKey": "<%= p("mattermost.SqlSettings.AtRestEncryptKey") %>",
         "QueryTimeout": <%= p("mattermost.SqlSettings.QueryTimeout") %>,
-        "ConnMaxLifetimeMilliseconds": <%= p("mattermost.SqlSettings.ConnMaxLifetimeMilliseconds") %>,
-        "EnablePublicChannelsMaterialization": <%= p("mattermost.SqlSettings.EnablePublicChannelsMaterialization") %>
+        "ConnMaxLifetimeMilliseconds": <%= p("mattermost.SqlSettings.ConnMaxLifetimeMilliseconds") %>
     },
     "LogSettings": {
         "EnableConsole": <%= p("mattermost.LogSettings.EnableConsole") %>,
@@ -205,6 +202,7 @@
         "EnableSMTPAuth": <%= p("mattermost.EmailSettings.EnableSMTPAuth") %>,
         "EmailNotificationContentType": "<%= p("mattermost.EmailSettings.EmailNotificationContentType") %>",
         "UseChannelInEmailNotifications": <%= p("mattermost.EmailSettings.UseChannelInEmailNotifications") %>,
+        "LoginButtonText": "<%= p("mattermost.EmailSettings.LoginButtonText") %>",
         "LoginButtonColor": "<%= p("mattermost.EmailSettings.LoginButtonColor") %>",
         "LoginButtonBorderColor": "<%= p("mattermost.EmailSettings.LoginButtonBorderColor") %>",
         "LoginButtonTextColor": "<%= p("mattermost.EmailSettings.LoginButtonTextColor") %>",
@@ -268,6 +266,9 @@
         "BindUsername": "<%= p("mattermost.LdapSettings.BindUsername") %>",
         "BindPassword": "<%= p("mattermost.LdapSettings.BindPassword") %>",
         "UserFilter": "<%= p("mattermost.LdapSettings.UserFilter") %>",
+        "GroupFilter": "<%= p("mattermost.LdapSettings.GroupFilter") %>",
+        "GroupDisplayNameAttribute": "<%= p("mattermost.LdapSettings.GroupDisplayNameAttribute") %>",
+        "GroupIdAttribute": "<%= p("mattermost.LdapSettings.GroupIdAttribute") %>",
         "FirstNameAttribute": "<%= p("mattermost.LdapSettings.FirstNameAttribute") %>",
         "LastNameAttribute": "<%= p("mattermost.LdapSettings.LastNameAttribute") %>",
         "EmailAttribute": "<%= p("mattermost.LdapSettings.EmailAttribute") %>",
@@ -359,16 +360,6 @@
     "AnalyticsSettings": {
         "MaxUsersForStatistics": 2500
     },
-    "WebrtcSettings": {
-        "Enable": <%= p("mattermost.WebrtcSettings.Enable") %>,
-        "GatewayWebsocketUrl": "<%= p("mattermost.WebrtcSettings.GatewayWebsocketUrl") %>",
-        "GatewayAdminUrl": "<%= p("mattermost.WebrtcSettings.GatewayAdminUrl") %>",
-        "GatewayAdminSecret": "<%= p("mattermost.WebrtcSettings.GatewayAdminSecret") %>",
-        "StunURI": "<%= p("mattermost.WebrtcSettings.StunURI") %>",
-        "TurnURI": "<%= p("mattermost.WebrtcSettings.TurnURI") %>",
-        "TurnUsername": "<%= p("mattermost.WebrtcSettings.TurnUsername") %>",
-        "TurnSharedKey": "<%= p("mattermost.WebrtcSettings.TurnSharedKey") %>"
-    },
     "AnalyticsSettings": {
         "MaxUsersForStatistics": <%= p("mattermost.AnalyticsSettings.MaxUsersForStatistics") %>
     },
@@ -414,6 +405,12 @@
         },
         "ClientDirectory": "/var/vcap/store/mattermost/client/plugins"
     },
+    "ImageProxySettings": {
+        "Enable": <%= p("mattermost.ImageProxySettings.Enable") %>,
+        "ImageProxyType": "<%= p("mattermost.ImageProxySettings.ImageProxyType") %>",
+        "RemoteImageProxyURL": "<%= p("mattermost.ImageProxySettings.RemoteImageProxyURL") %>",
+        "RemoteImageProxySettings": "<%= p("mattermost.ImageProxySettings.RemoteImageProxySettings") %>"
+    },
     "ThemeSettings": {
         "EnableThemeSelection": <%= p("mattermost.ThemeSettings.EnableThemeSelection") %>,
         <%- if_p("mattermost.ThemeSettings.DefaultTheme") do |theme| -%>
@@ -443,7 +440,9 @@
         "CustomUrlSchemes": "<% p("mattermost.DisplaySettings.CustomUrlSchemes") %>"
     },
     "ExperimentalSettings": {
-    "ClientSideCertEnable": <%= p("mattermost.ExperimentalSettings.ClientSideCertEnable") %>,
-    "ClientSideCertCheck": "<%= p("mattermost.ExperimentalSettings.ClientSideCertCheck") %>"
-}
+        "ClientSideCertEnable": <%= p("mattermost.ExperimentalSettings.ClientSideCertEnable") %>,
+        "ClientSideCertCheck": "<%= p("mattermost.ExperimentalSettings.ClientSideCertCheck") %>",
+        "DisablePostMetadata": <%= p("mattermost.ExperimentalSettings.DisablePostMetadata") %>,
+        "LinkMetadataTimeoutMilliseconds": <%= p("mattermost.ExperimentalSettings.LinkMetadataTimeoutMilliseconds") %>
+    }
 }

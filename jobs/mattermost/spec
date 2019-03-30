@@ -2,7 +2,7 @@
 name: mattermost
 
 packages:
-- platform
+  - platform
 
 templates:
   bin/ctl: bin/ctl
@@ -33,7 +33,7 @@ properties:
   mattermost.ServiceSettings.SiteURL:
     description: The URL, including port number and protocol, that users will use to access Mattermost. This field is required in Mattermost v3.8 and later.  REQUIRED to be set
   mattermost.ServiceSettings.ListenAddress:
-    description:  "The address and port to which to bind and listen. Specifying “:8065” will bind to all network interfaces. Specifying 127.0.0.1:8065 will only bind to the network interface having that IP address."
+    description: "The address and port to which to bind and listen. Specifying “:8065” will bind to all network interfaces. Specifying 127.0.0.1:8065 will only bind to the network interface having that IP address."
     default: ":8605"
   mattermost.ServiceSettings.ConnectionSecurity:
     description: "Controls whether MM itself does TLS termination (set to \"TLS\" to get SSL termination) NOTE: TLSCertFile and TLSKeyFile must be set if this setting is \"TLS\""
@@ -42,8 +42,20 @@ properties:
     description: The path to the certificate file to use for TLS connection security.
     default: ""
   mattermost.ServiceSettings.TLSKeyFile:
-    description:  The path to the TLS key file to use for TLS connection security.
+    description: The path to the TLS key file to use for TLS connection security.
     default: ""
+  mattermost.ServiceSettings.TLSMinVer:
+    description: The minimum TLS version used by the Mattermost server. TLS v1.2 is default given insecurities for TLS 1.0 and 1.1. This setting only takes effect if you are using the built-in server binary directly, and not using a reverse proxy layer such as NGINX.
+    default: "1.2"
+  mattermost.ServiceSettings.TLSStrictTransport:
+    description: Adds the Strict Transport Security (HSTS) header to all responses, forcing the browser to request all resources via HTTPS.
+    default: false
+  mattermost.ServiceSettings.TLSStrictTransportMaxAge:
+    description: The time in seconds that the browser remembers a site is only to be accessed using HTTPS. After this period, a site can be accessed using HTTP unless TLSStrictTransport is set to true. Defaults to two years.
+    default: 63072000
+  mattermost.ServiceSettings.TLSOverwriteCiphers:
+    description: Set TLS ciphers overwrites to meet requirements from legacy clients which don’t support modern ciphers, or to limit the types of accepted ciphers. If none specified, the Mattermost server assumes a set of currently considered secure ciphers, and allows overwrites in the edge case. See the ServerTLSSupportedCiphers variable in /model/config.go for the list of ciphers considered secure. This setting only takes effect if you are using the built-in server binary directly, and not using a reverse proxy layer such as NGINX.
+    default: []
   mattermost.ServiceSettings.Forward80To443:
     description: Determines if traffic on 80 is forwarded to 443.  When using a proxy such as NGINX in front of Mattermost this setting is unnecessary and should be set to false.
     default: false
@@ -54,7 +66,7 @@ properties:
     description: Restrict the permission level required to delete messages. Team Admins and System Admins can delete messages only in channels where they are members. Messages can be deleted anytime. (all|team_admin|system_admin)
     default: all
   mattermost.ServiceSettings.AllowEditPost:
-    description:   Set the time limit that users have to edit their messages after posting. (always|never|timelimit)
+    description: Set the time limit that users have to edit their messages after posting. (always|never|timelimit)
     default: always
   mattermost.ServiceSettings.PostEditTimeLimit:
     description: How many seconds does a user have to edit a message after posting it.
@@ -167,14 +179,6 @@ properties:
   mattermost.ServiceSettings.EnableTutorial:
     default: true
     description: tutorial is shown to end users after account creation. This setting is experimental and may be replaced or removed in a future release.
-  mattermost.ServiceSettings.ImageProxyType:
-    description: proxy type such as atmos/camo
-  mattermost.ServiceSettings.ImageProxyOptions:
-    default: ""
-    description: Additional options for basic image adjustments such as the URL signing key. Contact your image proxy service provider to learn more about what options are supported.
-  mattermost.ServiceSettings.ImageProxyURL:
-    default: ""
-    description: URL of your image proxy server.
   mattermost.ServiceSettings.ExperimentalGroupUnreadChannels:
     default: disabled
     description: show an unread channel section in the webapp sidebar. The setting must first be enabled by the System Admin, by replacing disabled with either default_off or default_on
@@ -187,9 +191,12 @@ properties:
   mattermost.ServiceSettings.ExperimentalEnableHardenedMode:
     default: false
     description: Enables a hardened mode for Mattermost that makes user experience trade-offs in the interest of security.
-  mattermost.ServiceSettings.ExperimentalLimitClientConfig:
+  mattermost.ServiceSettings.DisableLegacyMFA:
     default: false
-    description: To limit the number of config settings sent to users prior to login. Supported on mobile apps v1.10 and later.
+    description: "True - Disables the legacy checkMfa endpoint, which is only required for Mattermost Mobile Apps on version 1.16 or earlier when using multi-factor authentication (MFA). Recommended to set to true for additional security hardening. False - Keeps the legacy checkMfa endpoint enabled to support mobile versions 1.16 and earlier. Keeping the endpoint enabld creates an information disclosure about whether a user has set up MFA."
+  mattermost.ServiceSettings.EnableEmailInvitations:
+    default: false
+    description: To disable email invitations on the system.
   mattermost.ServiceSettings.EnableGifPicker:
     default: false
     description: To enable a built-in GIF integration with Gfycat.
@@ -199,9 +206,6 @@ properties:
   mattermost.ServiceSettings.GfycatApiSecret:
     default: 3wLVZPiswc3DnaiaFoLkDvB4X0IV6CpMkj4tf2inJRsBY6-FnkT08zGmppWFgeof
     description: The API secret generated by Gfycat for your API key. When blank, uses the default API secret provided by Gfycat.
-  mattermost.ServiceSettings.EnableEmailInvitations:
-    default: false
-    description: To disable email invitations on the system.
   mattermost.ServiceSettings.CorsExposedHeaders:
     default: ""
     description: Allows you to add a whitelist of headers that will be accessible to the requester.
@@ -323,9 +327,6 @@ properties:
   mattermost.SqlSettings.ConnMaxLifetimeMilliseconds:
     description: To configure the maximum lifetime for a connection to the database.
     default: 3600000
-  mattermost.SqlSettings.EnablePublicChannelsMaterialization:
-    description: To increase channel search performance in the channel switcher (CTRL/CMD+K), channel autocomplete (~) and elsewhere in the UI.
-    default: true
 
   mattermost.LogSettings.EnableConsole:
     description: Output log messages to the console based on ConsoleLevel option. The server writes messages to the standard output stream (stdout).
@@ -543,7 +544,7 @@ properties:
     default: false
   mattermost.EmailSettings.PushNotificationServer:
     description: Location of Mattermost Push Notification Service (MPNS), which re-sends push notifications from Mattermost to services like Apple Push Notification Service (APNS) and Google Cloud Messaging (GCM).
-    default: ""
+    default: "https://push-test.mattermost.com"
   mattermost.EmailSettings.PushNotificationContents:
     description: Controlls how much detail is provided in push notifications. (generic|full) Generic only sends User and Channel
     default: "generic"
@@ -556,6 +557,9 @@ properties:
   mattermost.EmailSettings.UseChannelInEmailNotifications:
     description: whether email notifications contain the channel name in the subject line
     default: false
+  mattermost.EmailSettings.LoginButtonText:
+    default: (Optional) The text that appears in the login button on the login page. Defaults to SAML.
+    description: "SAML"
   mattermost.EmailSettings.LoginButtonColor:
     default: ""
     description: set the style of the email login button for white labelling purposes.
@@ -589,6 +593,15 @@ properties:
     description: Password of the user given in Bind Username. This field is required, and anonymous bind is not currently supported.
   mattermost.LdapSettings.UserFilter:
     description: (Optional) Enter an AD/LDAP Filter to use when searching for user objects.
+    default: ""
+  mattermost.LdapSettings.GroupFilter:
+    description: (Optional) Enter an AD/LDAP Filter to use when searching for group objects (accepts general syntax). Only the groups selected by the query will be able accessible to Mattermost. This filter is defaulted to `(|(objectClass=group)(objectClass=groupOfNames)(objectClass=groupOfUniqueNames))` when blank.
+    default: ""
+  mattermost.LdapSettings.GroupDisplayNameAttribute:
+    description: (Optional) Enter an AD/LDAP Group Display name attribute used to populate Mattermost Group names.
+    default: ""
+  mattermost.LdapSettings.GroupIdAttribute:
+    description: (Required) Enter an AD/LDAP Group ID attribute to use as a unique identifier for Groups. This should be an AD/LDAP value that does not change.
     default: ""
   mattermost.LdapSettings.FirstNameAttribute:
     description: (Optional) The attribute in the AD/LDAP server that will be used to populate the first name of users in Mattermost.  When set, users will not be able to edit their First Name, since it is synchronized with the LDAP server. When blank, users can set their own First Name in Account Settings.
@@ -712,31 +725,6 @@ properties:
     description: The address the Mattermost server will listen on to expose performance metrics.
     default: ":8067"
 
-  mattermost.WebrtcSettings.Enable:
-    description: Mattermost will allow making one-on-one video calls on Chrome, Firefox and Mattermost Desktop Apps on a server running in SSL mode.
-    default: false
-  mattermost.WebrtcSettings.GatewayWebsocketUrl:
-    description: "This is the websocket used to signal and establish communication between the peers. Enter wss://<mattermost-webrtc-gateway-url>:<port>. Make sure you use WS or WSS in your URL depending on your server configuration."
-    default: ""
-  mattermost.WebrtcSettings.GatewayAdminUrl:
-    description: "Mattermost WebRTC uses this URL to obtain valid tokens for each peer to establish the connection. Enter https://<mattermost-webrtc-gateway-url>:<port>/admin. Make sure you use HTTP or HTTPS in your URL depending on your server configuration."
-    default: ""
-  mattermost.WebrtcSettings.GatewayAdminSecret:
-    description: Enter your admin secret password to access the Gateway Admin URL.
-    default: ""
-  mattermost.WebrtcSettings.StunURI:
-    description: "Enter your STUN URI as stun:<your-stun-url>:<port>. STUN is a standardized network protocol to allow an end host to assist devices to access its public IP address if it is located behind a NAT."
-    default: ""
-  mattermost.WebrtcSettings.TurnURI:
-    description: "Enter your TURN URI as turn:<your-turn-url>:<port>. TURN is a standardized network protocol to allow an end host to assist devices to establish a connection by using a relay public IP address if it is located behind a symmetric NAT."
-    default: ""
-  mattermost.WebrtcSettings.TurnUsername:
-    description: Enter your TURN Server Username.
-    default: ""
-  mattermost.WebrtcSettings.TurnSharedKey:
-    description: Enter your TURN Server Shared Key. This is used to created dynamic passwords to establish the connection. Each password is valid for a short period of time.
-    default: ""
-
   mattermost.AnalyticsSettings.MaxUsersForStatistics:
     description: Sets the maximum number of users on the server before statistics for total posts, total hashtag posts, total file posts, posts per day, and active users with posts per day are disabled.
     default: 2500
@@ -767,7 +755,7 @@ properties:
     default: true
   mattermost.ElasticsearchSettings.PostIndexReplicas:
     description: how many replicas to use for each post index
-    default: 1 # we can always re-build the index if it is lost
+    default: 1  # we can always re-build the index if it is lost
   mattermost.ElasticsearchSettings.PostIndexShards:
     description: how many shards to use for each post index
     default: 1
@@ -807,6 +795,19 @@ properties:
   mattermost.PluginSettings.PluginStates:
     description: set whether an installed plugin is active or not
     default: {}
+
+  mattermost.ImageProxySettings.Enable:
+    description: When true, enables an image proxy for loading external images. The image proxy is used by the Mattermost apps to prevent them from connecting directly to remote servers. This anonymizes their connections and prevents them from accessing insecure content.
+    default: true
+  mattermost.ImageProxySettings.ImageProxyType:
+    description: The type of image proxy used by Mattermost. There are two options - 1) local - The Mattermost server itself acts as the image proxy. This is the default option. 2) atmos/camo - An external atmos/camo image proxy is used.
+    default: "local"
+  mattermost.ImageProxySettings.RemoteImageProxyURL:
+    description: The URL of the atmos/camo proxy. This setting is not needed when using the local image proxy.
+    default: ""
+  mattermost.ImageProxySettings.RemoteImageProxySettings:
+    description: The URL signing key passed to an atmos/camo image proxy. This setting is not needed when using the local image proxy.
+    default: ""
 
   mattermost.ThemeSettings.EnableThemeSelection:
     description: Enables the Display > Theme tab in Account Settings so users can select their theme.
@@ -852,8 +853,8 @@ properties:
     default: 10000
     description: to set how many new posts are batched together to a compliance export file
   mattermost.MessageExportSettings.CustomerType:
-     default: A9
-     description: to allow selecting the type of Global Relay customer account the user’s organization has.
+    default: A9
+    description: to allow selecting the type of Global Relay customer account the user’s organization has.
   mattermost.MessageExportSettings.EmailAddress:
     default: ""
     description: The email address your Global Relay server monitors for incoming compliance exports.
@@ -871,3 +872,9 @@ properties:
   mattermost.ExperimentalSettings.ClientSideCertCheck:
     default: "secondary"
     description: To control whether email and password are required following client-side certification.
+  mattermost.ExperimentalSettings.DisablePostMetadata:
+    default: false
+    description: "True: Disabling post metadata is only recommended if you are experiencing a significant decrease in performance around channel and post load times. False: Load channels with more accurate scroll positioning by loading post metadata."
+  mattermost.ExperimentalSettings.LinkMetadataTimeoutMilliseconds:
+    default: 5000
+    description: "Adds a configurable timeout for requests made to return link metadata. If the metadata is not returned before this timeout expires, the message will post without requiring metadata. This timeout covers the failure cases of broken URLs and bad content types on slow network connections."
