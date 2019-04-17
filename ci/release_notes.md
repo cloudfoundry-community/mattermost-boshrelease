@@ -10,3 +10,6 @@
   * Added "EnablePublicChannelsMaterialization": true, to increase channel search performance in the channel switcher (CTRL/CMD+K), channel autocomplete (~) and elsewhere in the UI.
 * The `mattermost-hostname` BOSH variable has been renamed to `mattermost-siteurl` to more closely map to Mattermost configuration naming.
 
+
+# mattermost
+Bumped https://github.com/starkandwayne/mattermost-releases to v5.10.0
