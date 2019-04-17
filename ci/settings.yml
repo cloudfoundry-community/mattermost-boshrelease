@@ -23,11 +23,11 @@ meta:
   manifest:
     operator_file_paths: manifests/operators/dmz_vip.yml
     vars: (( concat
-      "\nvip=3.18.146.91"
-      "\nmattermost-siteurl=http://3-18-146-91.sslip.io:8605" ))
+      "\nvip=3.19.96.28"
+      "\nmattermost-siteurl=http://3-19-96-28.sslip.io:8605" ))
     vars-pr: (( concat
-      "\nvip=3.18.146.91"
-      "\nmattermost-siteurl=http://3-18-146-91.sslip.io:8605" ))
+      "\nvip=3.19.96.28"
+      "\nmattermost-siteurl=http://3-19-96-28.sslip.io:8605" ))
 
   aws:
     bucket: (( grab meta.pipeline ))
